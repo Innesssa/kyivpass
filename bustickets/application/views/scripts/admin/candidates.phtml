@@ -1,0 +1,123 @@
+<?php
+if(!$this->isAjax){
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="well">
+	<div class="filter projects">
+			<span> Filter By: </span>
+			<select name="status" class="myfilter">
+				<option value="">Offer Status</option>
+                <option value="invite">Offer pending</option>
+                <option value="hired">Hired</option>
+			</select><a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        <input type="hidden" class="myfilter" name="sort" value=""/>
+        <input type="hidden" class="myfilter" name="order" value=""/>
+       </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<table class="table table-striped media tablesorter">
+    <thead>
+    <tr>
+        <th colspan="2">Developer</th>
+        <th colspan="2">Owner</th>
+        <th style="width:10%"></th>
+    </tr>
+    <tr>
+        <th id="id_sort_pname" class="header">Project</th>
+        <th id="id_sort_status" class="header">Status</th>
+        <th id="id_sort_oname" class="header" colspan="2">Owner Name</th>
+        <th style="width:10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?=$this->partialLoop('partials4adm/candidates.phtml', $this->aCandidats)?>
+    </tbody>
+</table>
+<script>var jSearchData=<?=$this->aFilter?>;</script>
+
+<div class="pagination">
+<ul>
+<?php
+    if(!empty($this->aCandidats)){
+        if($this->page>1){?>
+            <li><a href="/admin/candidates/page/<?=$this->page-1?>/<?=$this->filters?>" class="prev a_paginator">&laquo;</a></li>
+        <? }
+        $k=5;
+        $iStart=$this->page-5;
+        if($iStart>$this->iPages) $iStart=$iPages-10;
+        if($iStart<1)       $iStart=1;
+        $iter=0;
+        while($iter<10){?>
+         <li class="<?=($iStart==$this->page) ? ' active' : ''?>"><a class="a_paginator" href="/admin/candidates/page/<?=$iStart?>/<?=$this->filters?>"><?=$iStart?></a></li>
+         <?
+         $iter++;
+         $iStart++;
+         if($iStart>$this->iPages) break;
+        }
+        if($this->page<$this->iPages){?>
+            <li><a href="/admin/candidates/page/<?=$this->page+1?>/<?=$this->filters?>" class="next a_paginator">&raquo;</a></li>
+        <? }
+   }?>
+<ul>
+</div>
+<?//=$this->paginationControl($this->paginator)?>
+<div class="clearfix"></div>
+<?php if(!$this->isAjax){?></div>
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+	  <div id="id_form"></div>
+          
+  </div>
+    
+    
+  <div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Close</button></div>
+</div>
+<script>
+    // filter
+    $('#id_apply_filter').click(function(){
+    var data = {};
+    $('.myfilter').each(function(){data[$(this).attr('name')]=$(this).val();});
+    loadContent('/admin/candidates/',data,'#id_ajax_content','html');
+    return false;
+    });
+</script>
+<? } else{?><script>reload();</script><?} ?>
+<script>
+    $(document).ready(function(){
+        // highlight table headers
+        if(jSearchData.sort.length>0){
+            if(jSearchData.order.length>0){
+                $('#id_sort_'+jSearchData.sort).addClass('headerSort'+(jSearchData.order=='desc'?'Up':'Down'));
+            }
+        }
+        // update table headers
+        $('.tablesorter .header').on('click',function(){
+            var order = 'asc';
+            var sort = $(this).attr('id').split('_')[2];
+
+            if($(this).hasClass('headerSortUp')){
+                $(this).removeClass('headerSortUp').addClass('headerSortDown');
+                order = 'asc';
+            } else if($(this).hasClass('headerSortDown')){
+                $(this).removeClass('headerSortDown').addClass('headerSortUp');
+                order = 'desc';
+            } else {
+                $(this).addClass('headerSortDown');
+            }
+            $('.myfilter[name="sort"]').val(sort);
+            $('.myfilter[name="order"]').val(order);
+
+            var data = {};
+            $('.myfilter').each(function(){data[$(this).attr('name')]=$(this).val();});
+            loadContent('/admin/candidates/',data,'#id_ajax_content','html');
+            return false;
+        });
+        $('.a_paginator').click(function(){ loadContent($(this).attr('href'),jSearchData,'#id_ajax_content','html');return false; });
+
+    });
+</script>

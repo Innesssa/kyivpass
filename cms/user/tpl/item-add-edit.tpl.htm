@@ -1,0 +1,250 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left" style="padding-left:15px;">
+            <a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?><?if($display!=""){?>&display=<?=$display?><?}?>" onClick="parent.location.href='<?=str_replace('&display=tab','',$_SESSION['refresh_page'])?>'">
+                <img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку записей" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" />
+            </a>
+        </td>
+<?if(UserItem::userCanSee($_SESSION['user_level'],7)){?>
+        <td align="center" style="padding-left:7px;">
+            <a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new<?if($display!=""){?>&display=<?=$display?><?}?>">
+                <img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить новую запись" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" />
+            </a>
+        </td>
+<?}?>
+        <td align="center" style="padding-left:7px;">
+            <a href="javascript:void(0)" onclick="addEdit.submit();">
+                <img src="design/ico_save.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" />
+            </a>
+        </td>
+        <td align="center" width="95%" style="padding-left:7px;">
+<?if($cmd=="update"||$_GET['save']=="ok"){?>
+            <b style="color:forestgreen;font-size:13px;">Данные сохранены!</b><br><?=date("H:i:s d-m-Y")?>
+<?}?>       
+            &nbsp; 
+        </td>
+        <td class="heading1" align="right" valign="bottom">
+            <nobr><span style="color:#e7e7e7;font-size:24px;"><?=MOD_NAME?></span></nobr><br />
+            <nobr><span style="color:#444;">Карточка пользователя  : </span>
+<?if($_GET['id']=='new'){?>Новый<?}else{?><?=$item_data['login']!=''?$item_data['login']:$item_data['surname']."&nbsp;".$item_data['name']?><?}?></nobr>
+        </td>
+    </tr>
+</table>
+<?if(UserItem::userSelf($_SESSION['user_id'],$item_data['id'])){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$item_data['id']?>&field=pass" style="float:right;color:#fff;padding:10px'">
+    <div style="padding:5px;background-color:#d91219" class="r5">Поменять пароль</div>
+</a>
+<br /><br />
+<!--
+<fieldset class="pole">
+<legend>&nbsp;&nbsp;Login :&nbsp;&nbsp;</legend>
+<input name="login" value="<?=$item_data['login']?>" type="text" style="width:98%">
+</fieldset>
+-->
+<?}?>
+<div align="center">
+    <div style="padding:0px 12px 12px 20px;max-width:890px;min-height:500px;" align="left">
+        <form name="addEdit" method="post" action="<?=SITE_URL?>/cms/?<?=getenv("QUERY_STRING")?>">  	
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td width="365">
+                        <fieldset class="pole">
+                            <legend>&nbsp;&nbsp;Имя :&nbsp;&nbsp;</legend>
+                            <input type="text" name="name" id="name" maxlength="250" style="padding:5px 7px;width:96%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$item_data['name']?>" />
+                        </fieldset>
+                    </td>
+                    <td style="padding-left:7px;">
+                        <fieldset class="pole">
+                            <legend>&nbsp;&nbsp;Фамилия :&nbsp;&nbsp;</legend>
+                            <input type="text" name="surname" id="surname" maxlength="250" style="padding:5px 7px;width:97%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$item_data['surname']?>" />
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="cmd" value="<?=$item_data['id']!=''?'update':'insert'?>" />
+            <input type="hidden" name="pos" value="<?=$item_data['pos']?>" />
+            <input type="hidden" name="connect" value="<?=$item_data['connect']?>" />
+            <table style="width:100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td valign="top" style="width:350px;padding-right:0px;">
+                        <fieldset class="pole">
+                            <legend>&nbsp;Фото :&nbsp;</legend>
+<?
+$img1="/image/".$mod."/".$type."/".$item_data['id']."/1.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_450x450.png";
+?>
+                            <div style="margin-bottom:7px;">
+                                <a href="javascript:onWhiteSlimbox('/cms/<?=$mod?>/magic/load_prod_image.php?img=/image/<?=$mod?>/<?=$type?>/<?=$id?>/1.png&prodid=<?=$id?>&numer=1')" title="Редактировать изображение #1">
+                                    <img id="prodimg1" alt="" src="<?=$img1?>?<?=time()?>" width="350" height="350" border="0" />
+                                </a>
+                            </div>
+                        </fieldset>
+                    </td>
+                    <td valign="top" style="padding-left:7px;">
+<?if($_GET['id'] == "new"){?>
+                        <fieldset class="pole" style="margin-bottom:7px;">
+                            <legend>&nbsp;<span style="color:#d91219">*</span>&nbsp;Логин :&nbsp;&nbsp;</legend>
+                            <input name="login" type="text" style="width:97%" />
+                        </fieldset>
+                        
+                        <fieldset class="pole" style="margin-bottom:7px;">
+                            <legend>&nbsp;<span style="color:#d91219">*</span>&nbsp;Пароль :&nbsp;&nbsp;</legend>
+                            <input name="password" type="password" style="width:97%" />
+                        </fieldset>                        
+
+                        <fieldset class="pole" style="margin-bottom:7px;">
+                            <legend>&nbsp;<span style="color:#d91219">*</span>&nbsp;Пароль еще раз :&nbsp;&nbsp;</legend>
+                            <input name="password_1" type="password" style="width:97%" />
+                        </fieldset>
+<?}?>
+
+<?
+$pid=explode(";",substr($item_data["connect"],1,-1));
+if($pid[0]!=''){$parent_tag=$pid[0];}
+?>
+                        <fieldset class="pole" style="margin-bottom:10px;">
+                            <legend>&nbsp;&nbsp;Категория :&nbsp;&nbsp;</legend>
+                            <select name="connect[]" style="color:#5A7EDC;width:99%;padding:2px 2px;height:25px;font-weight:bold;line-height:20px;font-size:14px;font-family:verdana;margin:3px 0px 12px 0px;">
+                                <option value="null" selected> --- Выберите категорию</option>
+<?foreach ($tag_list2 as $key=>$val){?>
+                                <option value="<?=$val['id']?>"<?if ($tag==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+                            </select>
+                        </fieldset>
+                        <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:1px;">
+                            <tr>
+                                <td>
+                                    <fieldset class="pole">
+                                        <legend>&nbsp;&nbsp;Должность :&nbsp;&nbsp;</legend>
+                                        <input name="job" value="<?=$item_data['job']?>" type="text" style="width:96%" />
+                                    </fieldset>
+                                </td>
+                                <td style="padding-left:7px;" width="1">
+<?if($_SESSION['user_level'] == 9){?>
+                                    <fieldset class="pole">
+                                        <legend>&nbsp;&nbsp;Доступ&nbsp;:&nbsp;&nbsp;</legend>
+                                        <input name="level" value="<?=$item_data['level']?>" type="text" style="width:80%" />
+                                    </fieldset>
+<?}else{?>
+                                    <input type="hidden" name="level" value="<?=$item_data['level']?>"/> 
+<?}?>  
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:1px;">
+                            <tr>
+                                <td width="50%">
+                                    <fieldset class="pole">
+                                        <legend>&nbsp;&nbsp;Телефон :&nbsp;&nbsp;</legend>
+                                        <input name="phone" value="<?=$item_data['phone']?>" type="text" style="width:95%" />
+                                    </fieldset>
+                                </td>
+                                <td style="padding-left:7px;">
+                                    <fieldset class="pole">
+                                        <legend>&nbsp;&nbsp;Е-mail :&nbsp;&nbsp;</legend>
+                                        <input name="email" value="<?=$item_data['email']?>" type="text" style="width:95%" />
+                                    </fieldset>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <fieldset class="pole" style="margin-bottom:7px;">
+                            <legend>&nbsp;&nbsp;Организация :&nbsp;&nbsp;</legend>
+                            <input name="organization" value="<?=$item_data['organization']?>" type="text" style="width:97%" />
+                        </fieldset>
+
+                        <fieldset class="pole">
+                            <legend>&nbsp;&nbsp;Адрес :&nbsp;&nbsp;</legend>
+                            <textarea name="address" style="padding:7px;height:40px;width:96.5%;"><?=$item_data['address']?></textarea>
+                        </fieldset>
+
+<?if(!UserItem::userSelf($_SESSION['user_id'],$item_data['id'])){?>
+<?if ($item_data['ban']==1){$user_color = "background-color: #f67584;";}?>
+                        <fieldset class="pole">
+                            <legend>&nbsp;БАН :&nbsp;</legend>
+                            <div style="margin-bottom:0px;<?=$user_color?>"><label><input name="ban" type="checkbox"<?if ($item_data['ban']==1||$com=='add'){?> checked="checked"<?}?> value="1" />
+                                &nbsp;Забанить&nbsp;</label>
+                            </div> 
+                        </fieldset>
+<?}?>
+                    </td>
+                </tr>
+            </table>
+            <div style="height:25px;"></div>
+            <table style="width:98%;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="left" style="width:50%;padding-left:15px;">
+<?if(!UserItem::userSelf($_SESSION['user_id'],$item_data['id'])){?>
+                        <a href="?mod=<?=$mod?>&com=delete&id=<?=$item_data['id']?>
+                            <?if($display!=""){?>&display=<?=$display?><?}?>" onclick="if (confirm('Вы уверены что хотите удалить запись?')) location=this.href; return false;">
+                            <img src="design/icon-delete.gif" style="cursor: pointer;" title="Удалить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" />
+                        </a>
+<?}?>
+                    </td>
+                    <td align="right">
+                        <a href="javascript:void(0)" onclick="addEdit.submit();">
+                            <img src="design/ico_save.gif" style="cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="height:35px;"></div>
+<!-- Деяния юзера -->
+<?$user_action = UserItem::getUserDo($item_data['id'])?>
+<?if(count($user_action)>0){?>
+            <fieldset class="pole">
+                <legend>&nbsp;Деяния от <?=$item_data['login']!=''?$item_data['login']:$item_data['surname']."&nbsp;".$item_data['name']?> :&nbsp;</legend>
+                <div style="max-height:3600px;overflow:auto;">
+<?foreach($user_action as $key=>$val){?>
+<?$user_do = UserItem::userDecodingQuery(trim($val['action']));?>
+<?$user_do = trim($val['action']);?>
+                    <fieldset class="pole">
+                        <legend>&nbsp;&nbsp;<span style="color:blue"><?=$val['date']?></span>&nbsp;&nbsp;</legend>
+                        <div style="padding:0px 4px 4px 4px;font-size:11px;line-height:15px;">
+                            <div><?=$user_do?></div>
+<?if(UserItem::userCanSee($_SESSION['user_level'],9)){?>	
+                            <div style="color:red;"><?=trim($val['action'])?></div>
+<?}?>
+                        </div>
+                    </fieldset>
+                <div style="height:2px;"></div>
+<?}}?>
+            </fieldset>
+<!-- /Деяния юзера -->
+
+
+
+<!--
+<fieldset class="pole">
+<legend>&nbsp;Краткое описание :&nbsp;</legend>
+<textarea name="desc_short" style="padding:7px;height:40px;width:98%;"><?=$item_data['desc_short']?></textarea>
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Seo Link :&nbsp;</legend>
+<input name="seolink" value="<?//=$item_data['seolink']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Title :&nbsp;</legend>
+<input name="meta_t" value="<?=$item_data['meta_t']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Keywords :&nbsp;</legend>
+<input name="meta_k" value="<?=$item_data['meta_k']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Description :&nbsp;</legend>
+<textarea name="meta_d" style="padding:7px;height:40px;width:98%;"><?=$item_data['meta_d']?></textarea>
+</fieldset>
+-->
+
+        </form>	
+    </div>
+</div>
+<br /><br /><br />

@@ -1,0 +1,42 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<!--<div class="form-inline">-->
+<!--	<label>Term to Re-apply (days): </label> <input type="text" class="input" name="termreapply" value="--><?//=$this->termreapply?><!--" /> <input type="button" class="btn submit" id="id_btn_reapply" value="set" />-->
+<!--</div>-->
+ <table class="table table-striped media">
+  <?=$this->partialLoop('partials4adm/candidats.phtml', $this->aCandidats)?>
+</table>
+<!-- div class="pagination pagination-centered">
+  <ul>
+    <li class="disabled"><a href="#">«</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">»</a></li>
+ </ul>
+</div -->
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+   <div class="modal-body">
+	  <div id="id_form"></div>
+          
+  </div>
+  <div class="modal-footer">
+   <button class="btn" id="id_btn_apply"  >Approve</button>
+   <button class="btn" id="id_btn_reject" >Reject</button>   
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>    
+  </div>
+</div>
+
+<script>
+var iTermreapply = <?=$this->termreapply?>;
+var aCompanies = new Array();<?=$this->partialLoop('partials4adm/array_companies.phtml', $this->aCompanies)?>  
+var aSkills    = new Array();<?=$this->partialLoop('partials4adm/array_skills.phtml', $this->aSkills)?>  
+</script>

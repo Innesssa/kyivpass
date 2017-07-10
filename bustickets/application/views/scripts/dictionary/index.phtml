@@ -1,0 +1,35 @@
+<h3><?=(count($this->breadcrums)) ? $this->partialLoop('partials/breadcrums.phtml',$this->breadcrums):""?> <?=$this->sTitle?></h3>
+
+<?=$this->sErrorMessage?>
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <td colspan="8">
+                    <div class="btn-group" style="vertical-align:bottom;">
+                        <a id="id_edit_item_0_<?=(int)$this->par_id?>_<?=$this->dictype?>" class="btn btn-primary edit" href="#myModal" role="button" data-toggle="modal" >Додати новий запис</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <?
+        if(count($this->diclist)){ ?>
+        <table id="id_table_items" class="table table-hover tablesorter">
+            <thead>
+            <tr>
+                <th>ID&nbsp;&nbsp;</th>
+                <th>Назва&nbsp;&nbsp;</th>
+                <th>Опис&nbsp;&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>містить&nbsp;&nbsp;</th>
+                <th>Належить&nbsp;&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?=$this->partialLoop('dictionary/items/dicitems.phtml', $this->diclist)?>
+            </tbody>
+        </table>
+        <? } //if(count($this->diclist)){ ?>
+    </div>
+</div>

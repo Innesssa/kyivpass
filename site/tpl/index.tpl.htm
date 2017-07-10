@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<title><?=$meta["title"]?></title>
+<meta name="description" content="<?=$meta["description"]?>" />
+<meta name="keywords" content="<?=$meta["keywords"]?>" />
+ <link rel="stylesheet" href="/design/font/Minion-Cyrillic-Bold/Minion-Cyrillic-Bold.css" type="text/css" charset="utf-8" />
+<link media="all" href="/design/css/site-main.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript" src="/design/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/design/js/jquery.jcarousellite.js"></script>
+
+<!-- img_slimbox -->
+<script type="text/javascript" src="/lib/slimbox/js/slimbox2.js"></script>
+<link rel="stylesheet" href="/lib/slimbox/css/slimbox2.css" type="text/css" media="screen" />
+<!-- /img_slimbox -->
+
+<!-- mod_message -->
+<link rel="stylesheet" href="/site/message/design/style.css">
+<script src="/site/message/design/feedback.js"></script>
+<!-- /mod_message -->
+
+<!-- mod_banner -->
+<link rel="stylesheet" href="/site/banner/design/bxslider/jquery.bxslider.css">
+<script src="/site/banner/design/bxslider/jquery.bxslider.min.js"></script>
+<!-- /mod_banner -->
+
+<script type="text/javascript" src="/design/js/debug.js"></script>
+
+
+<!-- search_live -->
+<link rel="stylesheet" href="<?=PATH_SITE_DESIGN?>/search_live/jquery-ui.css">
+<script src="<?=PATH_SITE_DESIGN?>/search_live/jquery-ui.js"></script>
+
+<script>
+  $(function() {
+    var availableTags = [
+"Пример",
+"Пример"
+<?
+/*
+$key_words = Search::getKeyWordsForLiveSearch();
+if($key_words != NULL)
+{
+    foreach($key_words as $key=>$word)
+    {
+	    echo '"'.$word['caption_full'].'",';	
+	}	
+}
+*/
+?>
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>
+<!-- /search_live -->
+<style>
+
+  .nav_main{
+    padding:5px 10px;
+    color:#000;
+  }
+  a.nav_main{
+    color:#000;
+    text-decoration: none;
+  }
+/********  btn  *********/
+a.btn{
+    font-weight: 900;
+    font-size:100%;
+    color: white;
+    text-decoration: none;
+    padding: .6em 1em calc(.6em + 3px);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;;
+    background: #2155AB;
+    box-shadow: -1px -3px #003b71 inset;
+    transition: 0.3s;
+} 
+a.btn:hover{
+    background: #0066b0; 
+}
+a.btn:active {
+   background: #2155AB;
+   box-shadow: 0 3px #003b71 inset;
+}
+a.btn_blue {
+    font-weight: 900;
+    font-size:16px;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;;
+    background: #2155AB;
+    box-shadow: -1px -3px #003b71 inset;
+    transition: 0.3s;
+	border: solid 1px #031873;
+	background: #2155AB; /*цвет фона кнопки для браузеров без поддержки CSS3*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#0066b1), to(#002d5c)); /* для Webkit браузеров */
+	background: -moz-linear-gradient(top,  #0066b1,  #002d5c); /* для Firefox */
+        background-image: -o-linear-gradient(top,  #0066b1,  #002d5c); /* для Opera 11 */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0066b1', endColorstr='#002d5c'); /* фильтр для IE */
+}
+a.btn_blue:hover {
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#002d5c), to(#002d5c));
+	background: -moz-linear-gradient(top,  #002d5c,  #0066b1);
+        background-image: -o-linear-gradient(top,  #002d5c,  #0066b1);/* для Opera 11 */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#002d5c', endColorstr='#0066b1');
+}
+a.btn_blue:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#0066b1), to(#002d5c));
+	background: -moz-linear-gradient(top,  #0066b1,  #002d5c);
+        background-image: -o-linear-gradient(top,  #0066b1,  #002d5c);/* для Opera 11 */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0066b1', endColorstr='#002d5c');
+        box-shadow: 0 3px #003b71 inset;
+}
+/******** /btn  *********/
+
+
+</style>
+<!-- UTicket.ua -->
+<script type="text/javascript" src="https://uticket.ua/utframe/widget"></script>
+<script>t2t.setUniqId('UT-571a0c11e8410')</script>
+<!-- /UTicket.ua -->
+</head>
+<body>
+
+<?//=$_SESSION['lang']?>
+<div id="body" align="center">
+
+<?
+if($_SESSION['lang']=="en"){
+    $rozklad="Timetable";
+    $bron="Ticket booking";
+    $deviz_1="INTERNATIONAL INTERCITY <br /> REGIONAL COMMUTER TRANSPORTATION";
+    $deviz_2="CENTRAL BUS STATION «KYIV» <br /> BUS KYIV AND KYIV REGION";
+    $capt="SE «KYIVPASSERVICE»";
+}
+else{$rozklad="Розклад";
+    $bron="Бронювання";
+    $deviz_1="МІЖНАРОДНІ МІЖМІСЬКІ<br />ОБЛАСНІ ПРИМІСЬКІ ПЕРЕВЕЗЕННЯ";
+    $deviz_2="ЦЕНТРАЛЬНИЙ АВТОВОКЗАЛ «КИЇВ»<br />АВТОСТАНЦІЇ КИЄВА ТА КИЇВСЬКОЇ ОБЛАСТІ";
+    $capt="ДП «КИЇВПАССЕРВІС»";
+}
+?>
+<div style="width:1020px;">
+ 
+ <table style="width: 100%;height:200px;background-image:url('/design/img/shapka.jpg');background-position:top left;background-repeat:no-repeat;" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="400" align="left" valign="top"> 
+		<div style="margin-left:144px;margin-top:95px;margin-right:-55px;color:#012F8E;font-size:13px;line-height:19px;" align="center"><h3><?=$deviz_1?></h3></div>
+		</td>
+		<td width="220" align="center" valign="top">
+		<div align="center" style="margin-top:18px;"><a href="/"><img src="/design/img/logo.png" /></a></div>
+		<table align="center" style="margin-top:15px;color:#012F8E;font-size:21px;margin-left:-200px;margin-right:-200px;"><tr>
+		<td style="background-image:url('/design/img/left-akcent.png');background-position:left center;background-repeat:no-repeat;width:120px;">&nbsp;</td>
+		<td><h3 style="margin:1px 7px;"><?=$capt?></h3></td>
+		<td style="background-image:url('/design/img/right-akcent.png');background-position:right center;background-repeat:no-repeat;width:120px;">&nbsp;</td>
+		</tr></table>
+		</td>
+		<td width="400" align="right" valign="top">
+		<div style="margin-right:40px;margin-top:31px;"><?include "site/lang/tpl/lang_switch.tpl.htm";?></div>
+		<div align="center" style="margin-top:40px;margin-left:-135px;color:#012F8E;font-size:13px;line-height:19px;"><h3><?=$deviz_2?></h3></div>
+        <div align="right" style="margin-top:35px;">
+            <a href="/" class="btn_blue"><?=$rozklad?></a>              
+            <a href="http://ticket.bus.com.ua/order/300100" class="btn_blue" target="_blank"><?=$bron?></a>
+		</div>
+		</td>
+	</tr>
+</table>
+<!--
+<div style="width:1020px;height:36px;background-image:url('/design/img/akcent.png');background-position:top center;background-repeat:no-repeat;color:#012F8E;font-size:21px;">
+    <div style="float:center"><?=$capt?></div>
+    <div style="float:rightpadding-right:1px;">
+            <a href="/" class="btn_blue"><?=$rozklad?></a>              
+            <a href="#" class="btn_blue" target="_blank"><?=$bron?></a>
+    </div>
+</div>
+-->
+
+</div>
+
+ 
+
+<div>
+    <div class="left" style="width:35%;height:7px;background-color:#004d98;background-image:url('/design/img/planka-gradient-blue.png');background-position:left center;background-repeat:repeat-x;"></div>
+    <div class="left" style="width:30%;height:7px;background-color:#f0e269;background-image:url('/design/img/planka-gradient-yellow.png');background-position:left center;background-repeat:repeat-x;"></div>
+    <div class="left" style="width:35%;height:7px;background-color:#004d98;background-image:url('/design/img/planka-gradient-blue.png');background-position:left center;background-repeat:repeat-x;"></div>
+<div class="both br_5"></div>
+</div>
+
+<?include "site/main/tpl/art-main-menu.tpl.htm";?>
+<?=Banner::BigBan();?>
+
+<!-- UTicket.ua -->
+<script>t2t.showWidget({transId : 1, theme: '1', lang: 'ua'});</script>
+<!-- /UTicket.ua -->
+
+<table style="width:1020px;vertical-align:top;margin-top:4px;margin-bottom:2px;min-height:500px;">
+    <tr>
+
+<?include "site/main/tpl/art-left-menu.tpl.htm";?>
+
+ <td style="padding-top:0px;" valign="top"><?=$c_cont?></td>
+
+    </tr>
+</table>
+
+<div>
+    <div class="left" style="width:35%;height:7px;background-color:#004d98;background-image:url('/design/img/planka-gradient-blue.png');background-position:left center;background-repeat:repeat-x;"></div>
+    <div class="left" style="width:30%;height:7px;background-color:#f0e269;background-image:url('/design/img/planka-gradient-yellow.png');background-position:left center;background-repeat:repeat-x;"></div>
+    <div class="left" style="width:35%;height:7px;background-color:#004d98;background-image:url('/design/img/planka-gradient-blue.png');background-position:left center;background-repeat:repeat-x;"></div>
+<div class="both br_5"></div>
+</div>
+
+<table style="text-align:left;">
+    <tr>
+        <td style="width:30%;padding:15px;border-right:1px solid #ccc;vertical-align:top;">
+            <div style="padding:5px;"><a href="http://www.mtu.gov.ua/" target="_blank">Міністерство Інфраструктури</a></div>
+            <div style="padding:5px;"><a href="http://www.uti.gov.ua/" target="_blank">Укртрансінспекція</a></div>
+        </td>
+        <td style="width:40%;padding:15px;border-right:1px solid #ccc;vertical-align:top;">
+            <div style="padding:5px;"><a href="https://www.facebook.com/pages/%D0%9A%D0%B8%D1%97%D0%B2%D0%BF%D0%B0%D1%81%D1%81%D0%B5%D1%80%D0%B2%D1%96%D1%81/319746561555907" target="_blank">Facebook</a></div>
+        </td>
+        <td style="width:30%;padding:15px;vertical-align:top;">
+            <div style="padding:5px;"><a href="/art/zvorotniy-zvyazok">Зворотній зв'язок</a></div>
+        </td>
+    </tr>
+</table>
+
+<div align="center" style="padding:20px 20px 10px 20px;"><a href="/">© <?=$capt?> <?=date("Y")?></a></div>
+
+<div align="center" style="padding:5px 20px 20px 20px;">
+<!-- MyCounter v.2.0 -->
+<script type="text/javascript"><!--
+my_id = 149797;
+my_width = 88;
+my_height = 61;
+my_alt = "MyCounter - счётчик и статистика";
+//--></script>
+<script type="text/javascript"
+  src="https://get.mycounter.ua/counter2.0.js">
+</script><noscript>
+<a target="_blank" href="http://mycounter.ua/"><img
+src="https://get.mycounter.ua/counter.php?id=149797"
+title="MyCounter - счётчик и статистика"
+alt="MyCounter - счётчик и статистика"
+width="88" height="61" border="0" /></a></noscript>
+<!--/ MyCounter -->
+</div>
+
+
+<?include "site/message/tpl/form_feedback.tpl.htm";?>
+
+<div id="debug" style="height:1px;position:absolute;z-index:77;top:5px;right:5px;" align="right"><?=$GLOBALS['DEBUG']?></div>
+<div id="debug_sql" style="height:1px;position:absolute;z-index:77;top:5px;left:5px;" align="left"><?=$GLOBALS['DEBUG_SQL']?></div>
+</div>
+</body>
+
+</html>

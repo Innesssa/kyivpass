@@ -1,0 +1,31 @@
+nav:
+  dashboard:
+    label: "Головна"
+    controller: index
+    action: index
+
+
+  disp:
+           label: 'Диспетчер АРМ'
+           uri: '#'
+           pages:
+             race:
+                 label: 'Рейси'
+                 controller: races
+                 action: index
+             schedule:
+                 label: 'Розклад'
+                 controller: schedule
+                 action: index
+              busout:
+                 label: 'Рейси оформлення'
+                 controller: routes
+                 action: busout
+              tickets:
+                 label: 'Квитки/Cтанції'
+                 controller: tickets
+                 action: index
+
+  logout:
+      label: 'Вийти'
+      controller:  logout

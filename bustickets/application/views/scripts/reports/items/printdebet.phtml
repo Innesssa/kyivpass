@@ -1,0 +1,57 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Надходження по стат'ях</h1>
+
+<h3>Об'єкт(и) - <?=$this->stations->title."\n"?></h3>
+
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<? /*trace( $this->adServices) */ ?>
+<table border="1" class="STYLE">
+    <tr align="center"><th>Статя доходів</th><th>Сума без ПДВ</th><th>ПДВ</th><th>Сума з ПДВ</th><th>Кіл-ть</th></tr>
+
+    <?=$this->partialLoop('reports/items/printdebetitem.phtml', $this->adServices)?>
+    <tr><td align="left">ПОПЕРЕДНІЙ ПРОДАЖ</td>
+        <td align="right"><?=sprintf("%8.2f",$this->prepaid['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->prepaid['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->prepaid['col2']*1.0+$this->prepaid['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->prepaid['num'])?></td>
+    </tr>
+    <tr><td align="left">СТАНЦІЙНИЙ ЗБІР</td>
+        <td align="right"><?=sprintf("%8.2f",$this->station['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->station['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->station['col2']*1.0+$this->station['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->station['num'])?></td>
+    </tr>
+    <tr><td align="left">СТРАХОВИЙ ЗБІР</td>
+        <td align="right"><?=sprintf("%8.2f",$this->insurer['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->insurer['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->insurer['col2']*1.0+$this->insurer['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->insurer['num'])?></td>
+    </tr>
+    <tr><td align="left">ТАРИФ ОРГ.</td>
+        <td align="right"><?=sprintf("%8.2f",$this->org['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->org['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->org['col2']*1.0+$this->org['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->org['num'])?></td>
+    </tr>
+    <tr><td align="left">ТАРИФ ПЕР.НЕПЛ.</td>
+        <td align="right"><?=sprintf("%8.2f",$this->conv['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->conv['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->conv['col2']*1.0+$this->conv['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->conv['num'])?></td>
+    </tr>
+    <tr><td align="left">ТАРИФ Утрим.</td>
+        <td align="right"><?=sprintf("%8.2f",$this->deduckation['col1'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->deduckation['col2'])?></td>
+        <td align="right"><?=sprintf("%8.2f",$this->deduckation['col2']*1.0+$this->deduckation['col1']*1.0)?></td>
+        <td align="right"><?=sprintf("%6d",$this->deduckation['num'])?></td>
+    </tr>
+    <tr><th align="left">Всього:</th>
+        <th align="right"><?=sprintf("%8.2f",$this->partialLoop()->view->totalPrice+$this->conv['col1']+$this->deduckation['col1']+$this->org['col1']+$this->insurer['col1']+$this->station['col1']+$this->prepaid['col1'])?></th>
+        <th align="right"><?=sprintf("%8.2f",$this->partialLoop()->view->totalVat+$this->deduckation['col2']+$this->conv['col2']+$this->org['col2']+$this->insurer['col2']+$this->station['col2']+$this->prepaid['col2'])?></th>
+        <th align="right"><?=sprintf("%8.2f",$this->partialLoop()->view->totalAmount+$this->deduckation['col1']+$this->deduckation['col2']+$this->conv['col2']+$this->conv['col1']+$this->org['col2']+$this->org['col1']+$this->insurer['col2']+$this->insurer['col1']+$this->station['col2']+$this->station['col1']+$this->prepaid['col2']+$this->prepaid['col1'])?></th>
+        <th align="right"><?=sprintf("%6d",$this->partialLoop()->view->totalCount+$this->deduckation['num']+$this->conv['num']+$this->org['num']+$this->insurer['num']+$this->station['num']+$this->prepaid['num'])?></th>
+    </tr>
+</table>

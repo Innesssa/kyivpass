@@ -1,0 +1,18 @@
+<div class="inner_pad_map">
+<h3>cms://<?=getenv("HTTP_HOST")?></h3>
+</div>
+
+<div onmouseover="thisOver(this.style);" onmouseout="thisOut(this.style);" class="menu2">
+<a class="header" href="?mod=article&type=category&com=view">Статьи</a></div>
+
+<table style="margin:2px 0px 10px 0px;">
+<?foreach ($category as $key=>$val){?>
+<tr><td class="menu2 menu1 title" style="padding:2px 3px 3px 3px;border:none;">
+<img src="design/ico_folder.gif" alt="Показать все статьи секции" width="19" height="19" vspace="0" border="0" hspace="5" align="left">
+<a href="?mod=article&type=article&com=view&category_id=<?=$val['id']?>" title="Открыть папку">
+<span style="padding:1px 4px;font-size:12px;line-height: 15px;font-family:tahoma;<?if($category_id==$val['id']&& $mod=='article'){?>background-color:#f7f7f7;font-weight:bold;<?}?>"<?if ($val['enabled']!=1){?> class="orangered"<?}?>><?=$val['caption']?></span>
+</a>
+</td></tr>
+<?}?>
+</table>
+

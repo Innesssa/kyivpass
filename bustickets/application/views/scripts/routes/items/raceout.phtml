@@ -1,0 +1,38 @@
+<?
+$class = "race-opened";
+switch($this->rcstatus){
+    case "sent":        $class = "race-sent";   break;
+    case "forbidden":   $class = "race-forbidden";   break;
+    case "received":     $class = "race-received";   break;
+    case "failed":      $class = "race-failed";   break;
+    default    :        $class = "race-opened"; break;
+
+
+}
+?><tr id="id_row_<?=$this->id?>" class="<?=$class?>">
+    <td class="code"><?=$this->code?></td>
+    <td>
+        <table>
+            <tr>
+                <td class="blocked"><?=sprintf("%02d",($this->paid_places-$this->bpaid_places))/*продано - красный фон*/?></td>
+                <td class="reserve"><?=sprintf("%02d",$this->order_places)/*бронь - желтый фон*/?></td>
+                <td class="free"><?=sprintf("%02d",($this->places-$this->order_places-$this->paid_places+$this->bpaid_places))/*свободно - зеленый фон*/?></td>
+                <td class="total"><?=sprintf("%02d",$this->places)/*всего - светлосерый фон*/?></td>
+            </tr>
+        </table>
+    </td>
+    <td><?=(!empty($this->tm_received))? $this->tm_received : "--"?></td>
+    <td <? if($this->tm_sent!="--") {?>class="total"<?}?>><?=$this->tm_sent?></td>
+    <td><?=$this->tm_finish?></td>
+    <td><?=$this->vcplantitle.( !empty($this->vcfacttitle) ? ("/".$this->vcfacttitle) : ""  )?></td>
+    <td><?=$this->govnumber?></td>
+    <td><?=!empty($this->rcstatus) ? Application_Model_Races::$_aTypes[$this->rcstatus] : "Відкритий" ?></td>
+    <td class="title"><?=$this->title?></td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_open_item_<?=$this->id?>_<?=$this->rcid?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="відправити маршрут" alt="відправити маршрут"><i class="icon-ok-circle"></i></a>
+            <a id="id_print_item_<?=$this->id?>_<?=$this->rcid?>" class="btn btn-mini edit"  title="примірник маршруту" alt="примірник маршруту"><i class="icon-print"></i></a>
+            <? if(!empty($this->rcid) && $this->partialLoop()->view->oSession->perm_title=='admin') { ?><a id="id_history_item_<?=$this->rcid?>_<?=$this->rcid?>" class="btn btn-mini edit"  href="#myModal" role="button" data-toggle="modal" title="історія змін" alt="історія змін"><i class="icon-info-sign"></i></a><? } ?>
+        </div>
+    </td>
+</tr>

@@ -1,0 +1,14 @@
+<tr id="id_tariff_<?=$this->id?>">
+    <td><?=$this->id?></td>
+    <td><?=$this->description?></td>
+    <td><?=$this->servicetype_name?></td>
+    <td><?=$this->tarifflisttype_name?></td>
+    <td><?=$this->calculatetype_name?></td>
+    <td><?=sprintf("%.2f",$this->priceperkm)?></td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_tariff_item_<?=$this->routeid?>_<?=$this->id?>" class="btn btn-mini edit"  href="javascript:void(0);" alt="редагувати"><i class="icon-pencil"></i></a>
+            <a id="id_del_tariff_<?=$this->routeid?>_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);" alt="видалити"><i class="icon-remove" ></i></a>
+        </div>
+    </td>
+</tr>

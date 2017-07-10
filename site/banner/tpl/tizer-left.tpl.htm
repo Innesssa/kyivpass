@@ -1,0 +1,9 @@
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/banner/item/".$val['id']."/1.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<div align="center" style="margin:10px 0px;"><a href="#<?=$img1?>"><img alt="" src="<?=$img1?>" /></a></div>
+<?$i++;}}?>

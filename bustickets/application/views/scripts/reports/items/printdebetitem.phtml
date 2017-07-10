@@ -1,0 +1,10 @@
+<tr><td align="left"><?=$this->title?></td>
+    <td align="right"><?=sprintf("%8.2f",$this->prices)?></td>
+    <td align="right"><?=sprintf("%8.2f",$this->vats)?></td>
+    <td align="right"><?=sprintf("%8.2f",$this->total)?></td>
+    <td align="right"><?=sprintf("%6d",$this->cnt)?></td>
+</tr><?
+$this->partialLoop()->view->totalPrice+=$this->prices;
+$this->partialLoop()->view->totalVat+=$this->vats;
+$this->partialLoop()->view->totalAmount+=$this->total;
+$this->partialLoop()->view->totalCount+=$this->cnt;

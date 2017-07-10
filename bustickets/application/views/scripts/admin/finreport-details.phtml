@@ -1,0 +1,64 @@
+<div>
+    <table class="table table-hover table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th style="width:120px" class="status">Day</th>
+            <th style="width:120px" class="status">Report total</th>
+            <th style="width:120px" class="status">Tickets Total</th>
+            <th style="width:120px"></th>
+        </tr>
+        </thead>
+        <?
+        $reportTotal = $ticketsTotal = 0;
+        foreach ($this->report as $date => $info) {
+            $ticketsTotal += $info['totals']['tickets'];
+            $reportTotal += $info['totals']['report'];
+            echo '<tr class="shortdata" data-day="'.$date.'">';
+            echo '<td><b>' . $date . '</b></td>'
+                . '<td>' . round($info['totals']['report'], 6) . '</td>'
+                . '<td>' . $info['totals']['tickets'] . '</td>'
+                . '<td>' . (round($info['totals']['tickets'], 4) == round($info['totals']['report'], 4) ? '<span class="badge badge-success">ok' : '<span class="badge badge-warning">diff') . '</span></td>'
+                . '</tr>';
+            if (count($info['report']) || count($info['tickets'])) echo '<tr id="additional_'.$date.'" style="display:none;"><td colspan="10" style="padding: 10px 0 0 100px">';
+            if (count($info['report'])) {
+                echo '<table class="table table-hover table-bordered table-condensed">';
+                foreach ($info['report'] as $row) {
+                    echo '<tr><td>' . $row['provider_id'] . '</td>';
+                    echo '<td>' . $row['notes'] . '</td>';
+                    echo '<td style="width: 70px;"><b>' . round($row['hours'], 4) . '</td>';
+                    echo '<td style="width: 70px;"><b>' . round($row['orig_amount'], 6) . '</td>';
+                    echo '</tr>';
+                }
+            }
+            if (count($info['tickets'])) {
+                echo '<table class="table table-hover table-bordered table-condensed">';
+                foreach ($info['tickets'] as $row) {
+                    echo '<tr><td>' . $row['provider_id'] . '</td>';
+                    echo '<td>' . $row['notes'] . '</td>';
+                    echo '<td style="width: 70px;"><b>' . round($row['hours'], 4) . '</td>';
+                    echo '<td style="width: 70px;"><b>' . round($row['orig_amount'], 6) . '</td>';
+                    echo '</tr>';
+                }
+            }
+            if (count($info['report']) || count($info['tickets']))  echo '</table></td></tr>';
+        }
+        ?>
+        <tr>
+            <td>Grand Total:</td>
+            <td><b><?=round($reportTotal, 4)?></b></td>
+            <td><b><?=$ticketsTotal?></b></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('.shortdata').bind('click', function(){
+            var day = $(this).data('day');
+            if ($('#additional_' + day).css("display") == 'none') $('#additional_' + day).css("display", 'table-row');
+            else $('#additional_' + day).css("display", 'none');
+        });
+    });
+</script>

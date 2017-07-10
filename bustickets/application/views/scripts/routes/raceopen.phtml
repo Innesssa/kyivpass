@@ -1,0 +1,14 @@
+<h4><?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? } ?>
+<?=$this->form?>
+<script>
+    <?if($this->form->status->getValue()!="failed"){?>$('#fail_type').parent().parent().hide();<?}?>
+    $( ".datepicker" ).datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true
+    });
+</script>

@@ -1,0 +1,185 @@
+nav:
+  dashboard:
+       label: "Головна"
+       controller: index
+       action: index
+  tech:
+       label: 'АРМ "Технолог"  '
+       uri: '#'
+       pages:
+         disproutes:
+            label: 'Maршрути'
+            controller: routes
+            action: index
+         shedule:
+            label: 'Розклад'
+            controller: schedule
+            action: index
+         techusers:
+            label: 'Користувачі'
+            controller: users
+            action: index
+  disp:
+       label: 'АРМ "Диспетчер" '
+       uri: '#'
+       pages:
+         busout:
+           label: 'Рейси оформлення'
+           controller: routes
+           action: busout
+
+  bucharea:
+       label: 'АРМ "Бухгалтер" '
+       uri: '#'
+       pages:
+         buhgalteria:
+            label: 'Бугалтерія'
+            controller: buhgalteria
+            action: index
+         organization:
+            label: 'Юридичні особи'
+            controller: organization
+            action: index
+         buchreport:
+           label: 'Звіти '
+           uri: '#'
+           pages:
+             reportstk:
+               label: 'Звіт рейси'
+               controller: reports
+               action: tickets
+             reportsks:
+               label: 'Звіт про роботу касирів'
+               controller: reports
+               action: kassa
+         reportstk:
+            label: 'Звіт рейси'
+            controller: reports
+            action: tickets
+         reportsks:
+            label: 'Звіт про роботу касирів'
+            controller: reports
+            action: kassa
+
+  kassa:
+       label: 'АРМ "Касир" '
+       uri: '#'
+       pages:
+         buytickets:
+            label: 'Квитки продаж'
+            controller: tickets
+            action: index
+         backticket:
+            label: 'Повернення квитка'
+            controller: tickets
+            action: backticket
+         operations:
+            label: 'Касові операції'
+            controller: kassa
+            action: index
+  dictionary:
+      label: 'Довідники'
+      uri: '#'
+      pages:
+         regions:
+            label: 'Територіальні одиниці'
+            controller: dictionary
+            action: index
+            params:
+               type: country
+         points:
+            label: 'Зупинки та станції'
+            controller: points
+         position:
+            label: 'Посади'
+            controller: dictionary
+            action: index
+            params:
+               type: position
+         vehicle:
+            label: 'Транспортні засоби'
+            controller: dictionary
+            action: index
+            params:
+               type: vehicletype
+          benefits:
+             label: 'Перелік пільг'
+             controller: benefits
+          reserves:
+             label: 'Типи бронювання'
+             controller: dictionary
+             action: reserves
+         stationrate:
+            label: 'Типи рейсів'
+            controller: dictionary
+            action: index
+               params:
+                 type: stationrate
+         stationrate:
+            label: 'Причини відміни рейсів'
+            controller: dictionary
+            action: index
+               params:
+                 type: cancelreason
+         servicetype:
+            label: 'Станційні послуги'
+            controller: dictionary
+            action: index
+               params:
+                 type: servicetype
+         insurerrate:
+            label: 'Страхові ставки'
+            controller: dictionary
+            action: index
+            params:
+               type: insurerrate
+          conveyors:
+            label: 'Перевізники'
+            controller: conveyors
+            action: index
+         orgTypes:
+            label: 'Типи юр.осіб'
+            controller: dictionary
+            action: index
+            params:
+               type: orgtypes
+         services:
+            label: 'Типи послуг'
+            controller: dictionary
+            action: index
+            params:
+               type: services
+         tariffmatrix:
+             label: 'Тарифна сітка квитка'
+             controller: tariff
+  adminarea:
+      label: 'Додатки (керування системою)'
+      uri: '#'
+      pages:
+        controllers:
+          label: Controllers
+          controller: admin
+          action: controllers-list
+        actions:
+          label: Actions
+          controller: admin
+          action: actions-list
+        roles:
+          label: Roles
+           controller: admin
+           action: roles-list
+        permissions:
+          label: Permissions
+          controller: admin
+          action: permissions-list
+       settingss:
+           label: Settings
+           controller: admin
+           action: settings-list
+  monitoring:
+    label: 'Мониторінг'
+    controller: admin
+    action: monitor
+  logout:
+      label: 'Вийти'
+      controller:  logout

@@ -1,0 +1,3 @@
+/*  Управление скролом body в div для скрола slimboxa */
+html,body{margin:0px;padding:0px;height:100%;overflow:hidden;}
+div#body{width:100%;height:100%;overflow:auto;}

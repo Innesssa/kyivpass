@@ -1,0 +1,12 @@
+.edit .middle - input text
+.edit .date   - input text for date dd/mm/YYYY
+.edit .large   - input text for large text
+
+.select .middle - for dropdown select
+.select .box .from - multiselect
+.select .box .to - multiselect
+
+
+
+.btn .btn-primary - for  button
+.textbox .middle  - for textarea

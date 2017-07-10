@@ -1,0 +1,14 @@
+<tr id="id_item_<?=$this->id?>">
+    <td><?=$this->id?></td>
+    <td><b><small><?php echo $this->title_print ?></small></b></td>
+    <td><b><small><?php echo $this->title_full ?></small></b></td>
+    <td><?=$this->recoup_name?></td>
+    <td><?=sprintf("%d",$this->benefit_perc)."%"?></td>
+    <td><span data-toggle="tooltip" title="<?=htmlspecialchars(str_replace("\r"," ",str_replace("\n"," ",$this->description)),ENT_QUOTES)?>" class="label label-important with-tooltip"><i class="icon icon-question-sign icon-white"></i></span></td>
+    <td class="actions">
+       <div class="btn-group">
+            <a id="id_edit_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>
+            <a id="id_del_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);"><i class="icon-remove"></i></a>
+        </div>
+    </td>
+</tr>

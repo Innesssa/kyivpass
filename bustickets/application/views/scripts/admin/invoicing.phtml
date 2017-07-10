@@ -1,0 +1,109 @@
+<?php
+if (!$this->isAjax) {
+    echo $this->partial('partials4adm/messages.phtml');
+    ?>
+    <div class="well">
+        <form id="id_frm_filter" method="post" action="/admin/invoicing/" class="form-horizontal" style="margin: 0;">
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="internal">Suppliers/Customers:</label>
+
+                    <div class="controls">
+                        <select class="myfilter" name="filter[isinternal]" id="internal">
+                            <option value="">All</option>
+                            <option  <?= (!empty($this->aFilter['isinternal']) && $this->aFilter['isinternal'] == '1') ? " selected" : "" ?>
+                                value="1">Suppliers
+                            </option>
+                            <option  <?= (!empty($this->aFilter['isinternal']) && $this->aFilter['isinternal'] == '0') ? " selected" : "" ?>
+                                value="0">Customers
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="type_pay">Pay Type:</label>
+
+                    <div class="controls">
+                        <select class="myfilter" name="filter[type_pay]" id="type_pay">
+                            <option value="">All</option>
+                            <option <?= (!empty($this->aFilter['type_pay']) && $this->aFilter['type_pay'] == 'payg') ? " selected" : "" ?>
+                                value="payg">Payg
+                            </option>
+                            <option <?= (!empty($this->aFilter['type_pay']) && $this->aFilter['type_pay'] == 'fixed') ? " selected" : "" ?>
+                                value="fixed">Fixed
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="pm">Pay Method:</label>
+
+                    <div class="controls">
+                        <select class="myfilter" name="filter[cardid]" id="cardid">
+                            <option value="">All</option>
+                            <option  <?= (!empty($this->aFilter['cardid']) && $this->aFilter['cardid'] == '-100') ? " selected" : "" ?>
+                                value="-100">Invoice Me
+                            </option>
+                            <option  <?= (!empty($this->aFilter['cardid']) && $this->aFilter['cardid'] > '0') ? " selected" : "" ?>
+                                value="1">CCard
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="id_pnme">By Project:</label>
+
+                    <div class="controls">
+                        <input class="myfilter" type="text" id="id_pnme" name="filter[prj]"
+                               value="<?= (!empty($this->aFilter['prj'])) ? htmlspecialchars($this->aFilter['prj'], ENT_QUOTES) : "" ?>">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="id_onme">By User:</label>
+
+                    <div class="controls">
+                        <input class="myfilter" type="text" id="id_onme" name="filter[owner]"
+                               value="<?= (!empty($this->aFilter['owner'])) ? htmlspecialchars($this->aFilter['owner'], ENT_QUOTES) : "" ?>">
+                    </div>
+                </div>
+                <div class="form-actions" style="margin-bottom: 0; padding-bottom: 0;">
+                    <a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div id="id_ajax_content">
+<? } ?>
+    <div class="table">
+        <table id="id_table_platforms" class="tablesorter">
+            <thead>
+            <tr>
+                <th data-field-name="id" class="header" style="width:25px">ID</th>
+                <th style="width:120px">Invoicing period</th>
+                <th data-field-name="isinternal" class="header" style="width:25px">To</th>
+                <th data-field-name="type_pay" class="header" style="width:25px">TYPE</th>
+                <th data-field-name="pname" class="header">Name</th>
+                <th style="width:25px">Totals</th>
+                <th style="width:25px"></th>
+            </tr>
+            </thead>
+            <tbody><?= $this->partialLoop('partials4adm/invoicing.phtml', $this->paginator) ?></tbody>
+        </table>
+    </div>
+    <script>govsource.pageConfig.searchData =<?=is_array($this->aFilter) ? json_encode($this->aFilter) : $this->aFilter?>;
+    </script>
+<?= $this->paginationControl($this->paginator) ?>
+    <div class="clearfix"></div>
+<?php if (!$this->isAjax) { ?>
+    </div>
+    <!-- Modal -->
+    <?= $this->partial('partials4adm/modal.phtml'); ?>
+    <!-- End Modal-->
+
+<? } else { ?>
+    <script>
+        govsource.AdminInvoices.bindEvents();
+        //        $('.ajaxpaginator').click(function(){ loadContent($(this).attr('href'),jSearchData,'#id_ajax_content','html');return false; });
+    </script><? } ?>

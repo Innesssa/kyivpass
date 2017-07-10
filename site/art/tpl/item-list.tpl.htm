@@ -1,0 +1,73 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<style>
+.wrap_catalog{
+    padding:0px; margin:7px auto;
+    width:720px; min-height:100px;
+    text-align:center;
+
+}
+.wrap_catalog_sell{
+height:215px;
+    float:left;
+    background-color:#fff;
+    margin:0px 11px 11px 0px;
+    border:0px solid orangered;
+    padding:4px 0px 7px 0px;
+}
+.wrap_catalog_sell:hover{
+     -webkit-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     -moz-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+}
+.buy{display:none;}
+
+.wrap_catalog_sell:hover td .buy{
+    display:block;
+}
+.wrap_catalog_sell:hover td .price{
+    display:block;
+}
+.wrap_catalog_sell:hover a{
+    text-decoration:none;
+}
+.view_grid{
+    width:228px;   
+}
+.view_list{
+    width:99%;
+    text-align:left;
+    padding-left:10px;
+}
+.price span {
+background-color: #f5f5f5;
+border-left: 2px solid #7b7b7b;
+padding: 5px;
+font: bold 25px Arial;
+}
+.price span font {
+font-size: 12px;
+vertical-align: super;
+}
+</style>
+<div class="corn polosa" align="left">
+<a href="../<?=$all_tag_list[str_replace(";","",$tag2_data['connect'])]['seolink']?>"><?=stripslashes($all_tag_list[str_replace(";","",$tag2_data['connect'])]['caption'])?></a> » <?=$tag2_data['caption']?>
+</div>
+<div class="wrap_catalog">
+<?if($item_list!=NULL){?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1=ART_ITEM_IMG_PATH."/".$val["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<div class="wrap_catalog_sell view_grid" align="center"><div style="margin-bottom:12px;height:200px;overflow:hidden;">
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<img src="<?=$img1?>" width="224" style="margin-bottom:7px;" />
+</a>
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<?=$val["caption"]?></a>
+</div>
+</div>
+<?}}?>
+</div>
+
+<br><br><br><br>

@@ -1,0 +1,25 @@
+<div style="width:1020px;height:295px;background-color:#eee;margin-top:5px;margin-bottom:30px">
+        <ul class="bxslider" style="height:inherit">
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/banner/item/".$val['id']."/1.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+ <li><img alt="" src="<?=$img1?>" /></li>
+<?$i++;}}?>
+ </ul>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+  mode: 'fade',
+  auto: true
+  });
+});
+</script>
+
+
+

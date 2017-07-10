@@ -1,0 +1,10 @@
+<?
+$img1="/image/shop/item/".$item_data['id']."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<table cellpadding="0" cellspacing="0" style="float:left;margin:7px 0px;" id="shop_item_<?=$item_data['id']?>"><tr><td valign="top">
+<img src="<?=$img1?>" width="240" border="0" align="left" />
+<img src="/design/icon/Delete1_32x32.png" border="0" onClick="delCompanion(<?=$item_data['id']?>)" width="32" style="margin:12px 0px 0px -45px;cursor:pointer"/>
+<input type="checkbox" value="<?=$item_data['id']?>" name="companion[]" id="gcheck_<?=$item_data['id']?>" style="display:none;" checked="checked">
+<div style="padding:3px;margin:7px 0px;width:240px;" align="center"><?=$item_data['caption']?></div>
+</td></tr></table>

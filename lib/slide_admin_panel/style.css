@@ -1,0 +1,26 @@
+#slide_admin_panel {
+	background: #eee;
+	height: 100%;
+	display: none;
+}
+.slide_admin_panel {
+	margin: 0;
+	padding: 0;
+	border-top: solid 1px #d91219;
+
+}
+.btn_slide_admin_panel {
+	text-align: center;
+	width: 144px;
+	height: 31px;
+	padding: 10px 10px 0 0;
+	margin: 0 auto;
+	display: block;
+	font: bold 120%/100% Arial, Helvetica, sans-serif;
+	color: #fff;
+	text-decoration: none;
+	background: url(/lib/slide_admin_panel/admin_button.png) no-repeat left top;
+}
+.active {
+	background-position: 0px;
+}

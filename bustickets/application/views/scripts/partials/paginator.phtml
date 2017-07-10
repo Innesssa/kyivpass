@@ -1,0 +1,16 @@
+<?php if ($this->pageCount>1) { ?>
+    <div class="pagination">
+        <ul>
+            <?php if (isset($this->previous)) { ?><li><a class="ajaxpaginator" href="<?= $this->url(array('page' => $this->previous)); ?>">&lt;</a></li><?php }
+
+            foreach ($this->pagesInRange as $page) {
+                if ($page != $this->current) { ?><li><a class="ajaxpaginator" href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a></li><?php }
+                else { ?><li class="active"><a class="ajaxpaginator" href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a></li><?php }
+
+            }
+            if (isset($this->next)) { ?>
+                <li><a class="ajaxpaginator" href="<?= $this->url(array('page' => $this->next)); ?>">&gt;</a></li><?php } ?>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+<?php } ?>

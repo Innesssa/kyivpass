@@ -1,0 +1,69 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Звіт за місяць</h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <td>Им'я</td>
+    <td>Табельний №</td>
+    <td>Поп. Залишок</td>
+    <td>Тар. Пер</td>
+    <td>Тар. Орг</td>
+    <td>Страх. збiр.</td>
+    <td>Станц. збiр.</td>
+    <? if($this->partialLoop()->view->isShowLuggage) {?>
+        <td>Багаж.</td><? /*Багаж.*/?>
+    <? } ?>
+    <td>Предв.</td>
+    <td>Броня</td>
+    <td>Замовле</td>
+    <td>Утрим. Тар</td>
+    <td>+Посл. З</td>
+    <td>+Кам. схв.</td>
+    <td>Всього дод.</td>
+    <td>Внес.З підз</td>
+    <td>Виручка</td>
+    <td>В т.ч. ПДВ</td>
+    <td>Вид.в підзв.</td>
+    <td>Вид. інкасатору</td>
+    <td>Всього</td>
+    <td>Кінц. Залишок</td>
+    <td>Білетів</td>
+    <td>Пас.</td>
+</tr>
+<tr align="right"><td colspan="23" align="left"><b><?=$this->station->title."\n"?></b></td>
+<?=$this->partialLoop('reports/items/printmonthitem.phtml', $this->rs)?>
+<tr align="right"><td colspan="2" align="left"><b>Всього:</b></td>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total_oamount)?></td>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total2)?></td><? /* conv. */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total3)?></td><? /* stat. */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total4)?></td><? /* Страх. збiр. */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total5)?></td><? /* Станц. збiр. */?>
+        <? if($this->partialLoop()->view->isShowLuggage) {?>
+            <td><?=sprintf("%7.2f",$this->total13)?></td><? /*Багаж.*/?>
+        <? } ?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total6)?></td><? /* Предв. */?>
+        <td>0.00</td><? /*Броня*/?>
+        <td>0.00</td><? /*Замовле*/?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total6_5)?></td><? /*Утрим.Тар*/?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total7)?></td><? /* +Посл. З */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total8)?></td><? /* +Кам. схв. */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total8_5)?></td><? /* Всього дод. */?>
+        <td><?=sprintf("%7.2f",0)?></td><? /* Внес.З підз */?>
+        <td><?=sprintf("%7.2f",((float)$this->total6_5+(float)$this->total2+(float)$this->total3+(float)$this->total4+(float)$this->total5+(float)$this->total6+(float)$this->total8_5 + (float)$this->total13))?></td><? /* Виручка */?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total9)?></td>
+        <td>0.00</td><? /*Вид.в підзв.*/?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total_inkas)?></td>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total_all)?></td><? /*Всього ?*/?>
+        <td><?=sprintf("%7.2f",$this->partialLoop()->view->total_camount)?></td>
+        <td><?=sprintf("%5d",$this->partialLoop()->view->totalplaces)?></td>
+        <td><?=sprintf("%4d",0)?></td>
+    </tr>
+</tr>
+</table>
+</pre>

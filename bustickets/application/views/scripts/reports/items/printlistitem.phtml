@@ -1,0 +1,23 @@
+<tr align="right">
+    <td><?=$this->conv_code?></td>
+    <td><?=$this->conv_title?></td>
+    <td><?=$this->code?></td>
+    <td><?=sprintf("%8.2f",$this->col1)?></td><? /*Проїзд*/ ?>
+    <td><?=sprintf("%8.2f",$this->col2)?></td><? /*Тариф*/ ?>
+    <td><?=sprintf("%8.2f",$this->col3)?></td><? /*Тар. орг.*/ ?>
+    <td><?=sprintf("%8.2f",$this->col4)?></td><? /*Cтр. З.*/ ?>
+    <td><?=sprintf("%8.2f",$this->col5)?></td><? /*К расч.*/ ?>
+    <td><?=$this->places?></td><? /*Билетів*/ ?>
+    <td><?=$this->luggage_num?></td><? /*Багажа*/ ?>
+    <td><?=sprintf("%8.2f",0)?></td><? /*Пос.*/ ?>
+</tr>
+<?
+$this->partialLoop()->view->totalplaces+=(int)$this->places;
+$this->partialLoop()->view->totalluggage+=(int)$this->luggage_num;
+$this->partialLoop()->view->total1+=(float)$this->col1;
+$this->partialLoop()->view->total2+=(float)$this->col2;
+$this->partialLoop()->view->total3+=(float)$this->col3;
+$this->partialLoop()->view->total4+=(float)$this->col4;
+$this->partialLoop()->view->total5+=(float)$this->col5;
+
+

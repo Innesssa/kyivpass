@@ -1,0 +1,294 @@
+
+*{
+    padding:0px;margin:0px;
+}
+
+
+html{
+    font-size: 100%;
+}
+
+body{
+    text-align: center;vertical-align: top;
+    margin: 0px; padding: 0px;
+    font-family: /*Minion,*/ Times New Roman, Tahoma, Arial, sans-serif;
+    font-size:16px;
+    color:#444;
+}
+
+    
+img {
+    border: 0px;
+}
+div{
+    border: 0px;
+}
+
+li {
+    list-style-type: none; /* Убираем маркеры */
+   }
+
+/* ******************************************************* */
+.wrap_nav_main{
+    width:100%;height:35px;background-color:#004d98;
+}
+
+.desc p, .desc p{ 
+color:black;
+text-indent:0px;
+  /*  text-align: justify; */
+    margin-bottom: 12px;
+}
+.polosa{
+background: url("/design/img/title-bg.png") repeat 0 0 transparent;
+}
+
+.polosa2{
+background: url("/design/img/foot-bg.png") repeat 0 0 transparent;
+}
+
+.polosa3{
+background: url("/design/img/menu-bg.png") repeat 0 0 transparent;
+}
+
+.logo {
+background: url("/design/img/logo.png") no-repeat 0 0 transparent;
+width: 213px;
+height: 213px;
+}
+.corn {
+line-height: 30px;
+border-left: 3px solid #F0E269;
+padding-left: 10px;
+margin-top:4px;
+margin-left:9px;
+margin-bottom:7px;
+}
+
+hr{
+border: 0;
+border-top: 1px solid #F1F1F1;	
+border-bottom: 1px solid #F7F7F7;
+margin: auto;
+}
+
+#masthead {
+height:100px;
+margin: 20px 0px 15px 0px;
+}
+
+#container {
+	position: relative;
+	width: 1020px;
+	border:0px dotted orangered;
+	display: table;
+}
+
+#left_col {
+	width: 240px;
+	float:left;
+}
+
+#page_content {
+	width: 780px;
+	margin-left: 240px;
+	min-height: 520px; 
+	text-align:left;
+}
+
+#footer {
+margin: 15px 0px 20px 0px;
+padding: 7px 0px;
+text-align:left;
+font: normal 12px Mignon-Bold,Arial, Tahoma, Verdana;
+color:#000;
+line-height:17px;
+}
+#footer .linkarea a{
+line-height:25px;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+input, textarea, img{
+    border: 0;
+}
+input[type="text"]{
+    background: url("/design/img/input-bg.png") no-repeat 0 0 transparent;
+}
+    .search input[type="text"]{
+       	color: #7B7B7B;
+	    font: 15px Mignon-Bold,Arial;
+	    height: 25px;
+	    padding-left: 10px;
+	    width: 199px;
+    }
+    .search input[type="submit"]{
+    	background: url("/design/img/search-button.png") no-repeat 0 0 transparent;
+    	width:25px;
+    	height:23px;
+    	cursor:pointer
+    }
+input[type="text"][name="skoka"] {
+margin-top:3px;
+height:15px;
+padding: 10px;
+width: 20px;
+}
+input[type="submit"][name="incart"] {
+
+text-align:left;
+padding: 4px 7px 4px 15px;
+width: 137px;
+color: #ffffff;
+background-color: #ff0000;
+cursor:pointer;
+}
+ol.list, ul.list {
+	list-style: none;
+}
+
+    .user-menu li{
+        margin:10px 0 0 35px;
+    }
+    .user-menu a{
+        display: block;
+        padding-left: 38px;
+        height:19px;
+    }
+    .user-menu a.cart{
+        background: url("/design/img/user-menu-cart.png") no-repeat 0 -4px transparent;
+    }.user-menu a.cart:hover,.user-menu a.cart:active{
+        background: url("/design/img/user-menu-cart-active.png") no-repeat 0 -4px transparent;
+    }
+    .user-menu a.cart strong{
+         color:#111;
+    }    
+     .user-menu a.cart:hover strong{
+         color:inherit;
+    }       
+    .user-menu a.pay{
+        background: url("/design/img/user-menu-pay.png") no-repeat -5px -4px transparent;
+    }.user-menu a.pay:hover,.user-menu a.pay:active{
+        background: url("/design/img/user-menu-pay-active.png") no-repeat -5px -4px transparent;
+    }
+    .user-menu a.delivery{
+        background: url("/design/img/user-menu-delivery.png") no-repeat -1px -4px transparent;
+    }.user-menu a.delivery:hover, .user-menu a.delivery:active{
+        background: url("/design/img/user-menu-delivery-active.png") no-repeat -1px -4px transparent;
+    }
+    
+    .catalog{
+	margin-left:13px
+}
+
+.catalog > *{
+	margin-top:20px
+}
+.catalog a{
+vertical-align:middle;
+line-height:35px;
+	padding-left:50px;
+}
+.catalog a span{
+vertical-align:middle;
+	color:#ca3b41
+}
+.catalog .view{
+	display:block;
+	vertical-align:middle;
+	background: url("/design/img/catalog_view.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}.catalog .view:hover,.catalog .view:active{
+	display:block;
+	background: url("/design/img/catalog_view-active.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}
+.catalog .download{
+vertical-align:middle;
+	display:block;
+	background: url("/design/img/catalog_download.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}
+.catalog .download:hover, .catalog .download:active{
+	display:block;
+	background: url("/design/img/catalog_download-active.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}
+span.bold, span.bold * {
+    font-weight: bold;
+}
+span.red {
+    color:#ca3b41;
+}
+</style>
+<style>
+.wrap_catalog{
+    padding:0px; margin:10px auto;
+    width:780px; min-height:100px;
+    text-align:center;
+
+}
+.wrap_catalog_sell{
+height:295px;
+    float:left;
+    background-color:#fff;
+    margin:0px 11px 11px 0px;
+    border:0px solid orangered;
+    padding:4px 0px 7px 0px;
+}
+.wrap_catalog_sell:hover{
+     -webkit-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     -moz-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+}
+.buy{display:none;}
+
+.wrap_catalog_sell:hover td .buy{
+    display:block;
+}
+.wrap_catalog_sell:hover td .price{
+    display:block;
+}
+.wrap_catalog_sell:hover a{
+    text-decoration:none;
+}
+.view_grid{
+    width:245px;   
+}
+.view_list{
+    width:99%;
+    text-align:left;
+    padding-left:10px;
+}
+.price span {
+background-color: #f5f5f5;
+border-left: 2px solid #7b7b7b;
+padding: 5px;
+font: bold 25px Arial;
+}
+.price span font {
+font-size: 12px;
+vertical-align: super;
+}
+.bestprice{
+background: url("/design/img/mark-best-price.png") no-repeat 3px 1px #fff;
+color: #2bc21f;
+font: bold 14px Mignon-Bold,Arial;
+text-decoration: none;
+padding: 3px 7px 3px 27px;
+line-height: 25px;
+}
+.sale{
+background: url("/design/img/mark-sales.png") no-repeat 3px 1px #fff;
+color: #c21f26;
+font: bold 14px Mignon-Bold,Arial;
+text-decoration: none;
+padding: 3px 7px 3px 27px;
+line-height: 25px;}
+.cartprice font{font-size:85%;}

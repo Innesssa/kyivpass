@@ -1,0 +1,211 @@
+body {
+    padding: 0px; margin: 0px; 
+    font-size:13px; font-family:Verdana, Tahoma, Helvetica, Calibri, Geneva, BernhardFashion BT, Arial, "Trebuchet MS", sans-serif; color:#000; 
+    background-position: left top;background-image: url('/index_files/bg-site.jpg'); background-repeat: repeat-x; background-color: #2e4d6a;
+}
+.wrap { max-width:1020px; min-width:1020px; width:1020px; background-color:#fff; margin:0 auto; text-align:left}
+/*==  Ear ==*/
+.ear_left_admin{
+    padding: 0px;                                               
+    padding-bottom: 0px;
+    width: 70px; height: auto;
+    font-family: Arial; font-size: 10px;
+    background-image:url('/site/design/img/ear_left.jpg'); background-repeat: no-repeat; background-color:#fff;
+    line-height: 1; 
+    top: 30px; right: 1px; 
+    text-align: left;
+    position: fixed; 
+    
+    
+}
+/*==  Ear ==*/
+.red_string_1{
+    padding-left:3px;padding-top:3px;padding-bottom:3px;
+-moz-border-radius-topleft: 5px;
+-webkit-border-top-left-radius: 5px;
+    background-image: url("/site/design/img/red_string_10.png"); background-color: #D6D9B2; background-position: left center; background-repeat: no-repeat;
+    font-size:10px; font-weight: 900; color:#d91219;
+    border:1px solid #d91219; /*border-top:1px solid #000;*/
+    height:auto;
+}
+.wrap_head_top_bar{
+    background-color:#fff;
+    border-bottom:1px solid #ccc;
+    position:fixed;
+    width:100%;
+}
+.head_top_bar{
+    text-align:right;
+    padding-right:5px;
+    background-color:#fff;
+    width:15%;
+    border:0px;
+}
+.grey{color:grey}
+
+.bg_grey{background:#F7F7F7;}
+.bg_white{background:#FFFFFF;}
+.bg_sky{background-color:#EEF4FF;}
+
+.navigation{
+	font-family:Verdana;
+font-size:11px;
+color:#fff;
+letter-spacing: 0px;
+	text-transform: none;
+}
+a.navigation:hover{
+	text-decoration: none;
+}
+	.title a{
+	color:#111;
+	text-decoration:none;
+	}
+	.title a:hover{
+	color:#333;
+	text-decoration:underline;
+	}
+	a.grey{color:grey}	
+	form{
+	margin:0px;
+	padding:0px;
+	}
+	.error {
+color:#FF0000;
+font-weight:bold;
+font-family:verdana;
+font-size:12px;
+}
+	div.error {
+border:dashed 1px #FF0000;
+padding:4px;
+margin-bottom:3px;
+}
+	.good {
+color:forestgreen;
+}
+	div.good {
+border:dashed 1px forestgreen;
+}
+	.adminform {
+font-family: Verdana;
+font-size:12px;
+width:98.5%;
+padding:3px 3px
+}
+.adminarea {
+font-family: Verdana;
+font-size:12px;
+width:99%;
+height:60px;
+}
+
+
+	.row1 td{
+	font-size: 11px;
+	font-family: verdana;
+	color: #000000;
+	height:10px;
+	padding:2px 7px 1px 7px;
+	}
+	td.title{
+	padding-left:15px;
+	}
+	TABLE.list-table .row2 TD, TABLE.list-table .row1 TD {
+	border: 0px solid #E8E8E8;
+}
+	TABLE.collapse {
+border-collapse: collapse
+	}
+	TABLE.uniform {
+	border: 0px solid #c7c7c7;
+	}
+	TABLE.uniform TD {
+	padding: 3px 4px;
+	background: #F7F7F7;
+
+}
+	TABLE .head TD {
+	padding: 4px 8px;
+	color: white;
+	font: bold 11px verdana;
+	border: 0px solid #234364;
+
+}
+	.heading1 {
+padding:0px 7px 0px 7px;
+font-family: Verdana;
+font-size:18px;
+font-weight:bold;
+color:#5A7EDC;
+line-height:30px;
+}
+
+A.header {
+	text-decoration: none;
+	font-size: 11px;
+	font-family: verdana;
+	color: #000000;
+	font-weight: bold;
+}
+A.header:hover {
+	text-decoration: underline;
+}
+#masthead {	border: 1px solid #009900;
+	height: 30px;
+	padding: 3px;
+}
+
+#top_nav {
+}
+
+#container {
+	position: relative;
+	width: 100%;
+}
+
+#left_col {
+	width: 220px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	padding: 0px;
+}
+
+#page_content {	
+border-left: 1px solid #587AAE;
+border-top: none;
+border-bottom: none;
+	margin-left: 220px;
+	height: 1000px;
+	padding: 7px;
+}
+
+#footer {	border: 1px solid #009900;
+	height: 50px;
+	padding: 3px;
+}
+.menu2 {
+	border-collapse: collapse;
+}
+.menu2{
+		padding: 4px 4px 4px 7px;
+		margin: 2px 0px;
+}
+
+.menu2{
+	border: 0px solid #587AAE;
+	padding-left: 12px;
+	background-color: #efefef;
+}
+.menu1{
+	border: 1px solid #fff;
+	padding-left: 12px;
+	background-color: #fff;
+}
+.orangered{color:orangered}
+	.sel{
+background:#ECFFD5;	
+	}
+.list-table td {vertical-align: middle;}

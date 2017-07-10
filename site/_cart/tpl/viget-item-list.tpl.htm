@@ -1,0 +1,25 @@
+<?
+$sp=explode(".",$stoit);
+$sp[1]=substr($sp[1]."00",0,2);
+$stoit="<strong>".$sp[0].".<font style='font-size:85%'>".$sp[1]."</font></strong>";
+if($count_item==0){?>
+<a class="cart" href="#/cart/buy" title="Корзина пуста">Корзина</a> 
+<?}else{?>
+<a class="cart" href="/cart/buy" title="<?=$count_item?> товаров на сумму <?=$stoit?> грн">Корзина (<?=$count_item?>) <?=$stoit?> грн</a> 
+
+<div style="display:none;">
+<input id="cartcount" type="hidden" value="<?=$count_item?>">
+<input id="paymoney" type="hidden" value="<?=$stoit?>">
+<script>
+var pm=$("#paymoney").val();
+var cc=$("#cartcount").val();
+$("#moneypay").html(pm);
+$("#countcart").html(cc);
+</script>
+<?if($_SESSION["shop_item"]!=NULL){foreach($_SESSION["shop_item"] as $key=>$val){?>
+<input id="vhm_<?=$key?>" type="hidden" value="<?=$val["hm"]?>">
+<?}}?>
+</div>
+
+<?//var_dump($shop_item['id'])?>
+<?}?>

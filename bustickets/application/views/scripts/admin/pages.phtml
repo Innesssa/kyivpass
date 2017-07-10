@@ -1,0 +1,64 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?><div class="row">
+	<div class="span9">
+		<table class="table">
+                        <tr class="<?=($this->is_publish!=1) ? "warning" : ""?>">
+                                <td><div class="btn-group"> 
+                                        <a id="id_edit_0" class="btn btn-primary edit" href="javascript:void(0);" >New Page</a>
+                                    </div></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="width:90px"></td>
+                       </tr>
+            </table>
+        <table id="id_table_pages" class="table tablesorter">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Parent</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="width:90px"></th>
+                </tr>
+            </thead>
+            <tbody>
+			    <?=$this->partialLoop('partials4adm/pages.phtml', $this->aPages)?>
+            </tbody>
+		</table>		
+	</div>
+	<!-- div class="span3">
+		<h5>Select filters</h5>
+		<select id="ID_FilterSelect" onchange="setfilter();" class="input" name="cat">
+                        <option selected='selected' label="all" value="">All</option>
+                        <?php foreach($this->aCats as $key=>$val) { ?><option <?php if($key==$this->selCat) {?>selected='selected'<?} ?> label="<?=$val?>" value="<?=$key?>"><?=$val?></option><?php } ?>
+		</select>
+		<br/>
+		in_nav
+                is_publish
+                is_tips
+	</div -->
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+	<iframe frameborder="0" scrolling="no" height="1500" width="100%" id="id_farme" src=""></iframe>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <!-- button class="btn btn-primary">Save changes</button -->
+  </div>
+</div>
+<script>reload();</script>
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('#id_table_pages').tablesorter({headers: { 4: { sorter: false} }});
+        $('#id_table_pages tr').tooltip({
+            html: true,
+            animation: false
+        });
+    });
+</script>

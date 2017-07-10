@@ -1,0 +1,36 @@
+<?SYS::varDump($tag_list1,__FILE__,__LINE__,'tag_list1');?>
+<?SYS::varDump($tag_list2,__FILE__,__LINE__,'tag_list2');?>
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<!-- -->
+<div class="all">
+<?if($tag_list1!=NULL){$id=$_GET['id'];?>
+<?foreach($tag_list1 as $key=>$val){?>
+    
+<ul class="menu" style="text-align:left;">
+    <li style="padding-right:10px">
+        <a class="" href="/shop/catalog/<?=$val['seolink']?>/list/<?=$val['id']?>.html" style="text-decoration:none">
+            <span class="inl"></span>
+            <span class="inl-block"><?=$val['caption']?></span>
+        </a>
+        <ul class="" style="border:1px solid #ccc;border-style:outset;background-color:#fff;background-image: url('/site/design/img/menu/<?=$val['img']?>'); background-repeat:no-repeat;background-position: right bottom; height: 455px; width: 500px; display: none;">
+            <li class="label"><?=$val['caption']?></li>
+<?
+$connect_tag=explode(";",substr($val['connect'], 1, -1));$i2=1;
+if($connect_tag[0]!=''){foreach($connect_tag as $key2=>$child_id){
+$val2=$tag_list2[$child_id];
+$id=$_GET['id'];
+?>	
+             <li>
+                <a href="/shop/catalog/<?=$val['seolink']?>/<?=$val2['id']?>-15-1/<?=$val2['seolink']?>.html" style="text-decoration:none">
+                    <span class="inl"></span>
+                    <span class="inl-block"><?=$val2['caption']?></span>
+                </a>
+            </li>
+<?}}?>	
+           
+        </ul>
+    </li>
+</ul>
+<?}}?>
+</div>
+<!-- -->

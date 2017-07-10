@@ -1,0 +1,56 @@
+
+<div align="center">
+<div style="padding:0px 12px 0px 12px;width:763px;min-height:400px;">
+<?if($tag1_list!=NULL){$id=$_GET['id'];?>
+<?$i=1;?>
+<?foreach($tag1_list as $key=>$val){?>
+
+<table class="list-table r5" width="100%" cellpadding="0" cellspacing="0" style="background-color:#EEEFFF;border:1px solid #EEEFFF;margin-bottom:12px;">
+
+<tr id="th-<?=$val['id']?>" class="row1<?if ($id==$val['id']){?> sel<?}else{?><?if($i==1){$i=0;?> bg_sky<?}else{?> bg_sky<?}}?>" valign="center" onmouseover="this.style.background='<?if ($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background=''">
+<td width="95%" class="title" style="padding:7px;"><img src="/design/icon/Folder1_32x32.png" alt="Показать все статьи секции" width="20" vspace="0" border="0" hspace="5" align="left" style="margin-right:6px;">
+
+<b style="font-size:13px;line-height: 19px;color:<?=$val['show']!=1?'orangered':'#365C90'?>;"><?=$val['caption']?></b>
+
+</td>
+<td style="padding-right:25px;">
+
+</td>
+<td class="options" style="width:40px;">
+
+</td>
+<td class="options" align="center" style="width:40px;">
+
+</td>
+</tr>
+
+<?
+$connect_tag=explode(";",substr($val['connect'], 1, -1));$i2=1;
+if($connect_tag[0]!=''){foreach($connect_tag as $key2=>$child_id){
+$val2=$tag2_list[$child_id];
+$id=$_GET['id'];
+?>
+<tr id="tr-<?=$val2['id']?>" class="row1<?if ($id==$val2['id']){?> sel<?}else{?><?if($i2==2){?> bg_grey<?}else{?> bg_white<?}}?>" valign="center" onmouseover="this.style.background='<?if ($id!=$val2['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background=''">
+<td class="title" style="padding:7px 7px 7px 30px;"><img src="/design/icon/Folder2_32x32.png" alt="Показать все" width="20" vspace="0" border="0" hspace="5" align="left" style="margin-right:6px;">
+<a href="?mod=<?=$mod?>&type=item&com=list&tag=<?=$val2['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Открыть категорию">
+<b style="font-size:12px;line-height: 20px;"<?if ($val2['show']!=1){?> class="orangered"<?}?>><?=$val2['caption']?></b>
+</a>
+</td>
+<td style=""></td>
+<td class="options">
+
+</td>
+<td class="options" align="center">
+
+</td>
+</tr>
+<?if($i2==2){$i2=0;}?>
+<?$i2++;?>
+<?}}?>
+</table>
+<?$i++;?>
+<?}}?>
+
+</div></div>
+
+

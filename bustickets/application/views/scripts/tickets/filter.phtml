@@ -1,0 +1,22 @@
+<script>
+    $("stationstart").focus(function() { $(this).select() });
+
+</script>
+
+<div class="table" >
+    <table id="id_table_feedback">
+        <thead>
+        <tr>
+            <th id="id_sort_date" class="header" style="width:50px">№</th>
+            <th style="width:50px">Відпр.</th>
+            <th style="width:50px">Приб.</th>
+            <th style="width:300px">Маршрут</th>
+            <th style="width:100px">ТЗ</th>
+            <th style="width:100px">Ціна</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody><?=$this->partialLoop('tickets/part/routes.phtml', $this->aListRoutes)?></tbody>
+    </table>
+</div>
+<div class="clearfix"></div>

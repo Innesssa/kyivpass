@@ -1,0 +1,37 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Звіт за місяць</h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <td>Код</td>
+    <!-- td>АТП</td -->
+    <?
+    foreach ($this->td_failtype as $key=>$val){
+        ?><td><?=$key?></td><?
+    }
+    ?>
+</tr>
+<tr align="right"><th align="left"><b><?=$this->station->title."\n"?></b></th></tr>
+<?=$this->partialLoop('reports/items/printfailedracesitem.phtml', $this->aRaces)?>
+ <tr align="right">
+        <td  align="left"><b>Всього:</b></td><?
+        foreach($this->td_failtype as $key=>$val){
+            ?><td><?=(!empty($this->td_Local_sum[$key])  ) ? $this->td_Local_sum[$key] : 0?></td><?
+
+        }?>
+  </tr>
+  <tr align="right">
+        <td  align="left"><b>Всього:</b></td><?
+        foreach($this->td_failtype as $key=>$val){
+            ?><td><?=(!empty($this->td_Total_sum[$key])  ) ? $this->td_Total_sum[$key] : 0?></td><?
+
+        }?>
+  </tr>
+</table>
+</pre>

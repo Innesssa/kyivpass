@@ -1,0 +1,20 @@
+<tr id="id_row_<?=$this->id?>">
+    <td class="title"><?=$this->stationid?></td>
+    <td class="title"><?=$this->pos?></td>
+    <td><?=$this->timeperiod?></td>
+    <td><?=$this->holdtime?></td>
+    <td><?=$this->distantion?></td>
+    <td><?=$this->price?></td>
+    <td><?=$this->pricezone?></td>
+    <td><?=$this->description?></td>
+    <td>
+        <span data-toggle="tooltip" title="<?=htmlspecialchars(str_replace("\r"," ",str_replace("\n"," ",$this->description)),ENT_QUOTES)?>" class="label label-important with-tooltip"><i class="icon icon-question-sign icon-white"></i></span>
+    </td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_edit_item_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" alt="маршрут"><i class="icon-pencil"></i></a>
+            <!-- <a id="id_schema_item_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" alt="схема"><i class="icon-road"></i></a> -->
+            <a id="id_del_item_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);"><i class="icon-remove" alt="видалити"></i></a>
+        </div>
+    </td>
+</tr>

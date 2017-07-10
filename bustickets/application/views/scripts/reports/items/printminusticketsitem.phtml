@@ -1,0 +1,52 @@
+<?
+
+if(!empty($this->partialLoop()->view->m_type) && $this->route_title!=$this->partialLoop()->view->m_type){
+    ?>
+    <tr>
+    <td  align="left"><b>Всього:</b></td>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totAll)?></td>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totStat)?></td><?/*Тариф Пер.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totConv)?></td><?/*Тариф Орг.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totInsh)?></td><?/*Страх збір.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totStat)?></td><?/*Станц. збір*/?>
+    <td><?=$this->partialLoop()->view->m_totNum?></td>
+    </tr>
+<?
+}
+if($this->route_title!=$this->partialLoop()->view->m_type) {
+
+
+
+    $this->partialLoop()->view->m_totAll=0;
+    $this->partialLoop()->view->m_totStat=0;
+    $this->partialLoop()->view->m_totConv=0;
+    $this->partialLoop()->view->m_totInsh=0;
+    $this->partialLoop()->view->m_totStat=0;
+    $this->partialLoop()->view->m_totNum=0;
+    ?><tr><th colspan="7" align="left"><?=$this->route_title?></th></tr><?
+}
+$this->partialLoop()->view->m_type=$this->route_title
+?>
+    <tr>
+    <td><?=$this->benefits_title?></td>
+    <td><?=sprintf("%.2f",$this->sm_stat_tariff+$this->sm_conv_tariff - $this->sm_stat_tariff_with_benefits - $this->sm_conv_tariff_with_benefits)?></td>
+    <td><?=sprintf("%.2f",$this->sm_conv_tariff - $this->sm_conv_tariff_with_benefits)?></td><?/*Тариф Пер.*/?>
+    <td><?=sprintf("%.2f",$this->sm_stat_tariff-$this->sm_stat_tariff_with_benefits)?></td><?/*Тариф Орг.*/?>
+    <td><?=sprintf("%.2f",$this->sm_insurer_tariff-$this->sm_insurer_tariff_with_benefits)?></td><?/*Страх збір.*/?>
+    <td><?=sprintf("%.2f",$this->sm_station_tax_tariff-$this->sm_station_tax_tariff_with_benefits)?></td><?/*Станц. збір.*/?>
+
+    <td><?=$this->num?></td>
+    </tr><?
+    $this->partialLoop()->view->m_totAll+=$this->sm_stat_tariff+$this->sm_conv_tariff - $this->sm_stat_tariff_with_benefits - $this->sm_conv_tariff_with_benefits;
+    $this->partialLoop()->view->m_totStat+=$this->sm_conv_tariff - $this->sm_conv_tariff_with_benefits;
+    $this->partialLoop()->view->m_totConv+=$this->sm_stat_tariff-$this->sm_stat_tariff_with_benefits;
+    $this->partialLoop()->view->m_totInsh+=$this->sm_insurer_tariff-$this->sm_insurer_tariff_with_benefits;
+    $this->partialLoop()->view->m_totStat+=$this->sm_station_tax_tariff-$this->sm_station_tax_tariff_with_benefits;
+    $this->partialLoop()->view->m_totNum+=$this->num;
+
+    $this->partialLoop()->view->totAll+=$this->sm_stat_tariff+$this->sm_conv_tariff - $this->sm_stat_tariff_with_benefits - $this->sm_conv_tariff_with_benefits;;
+    $this->partialLoop()->view->totStat+=$this->sm_conv_tariff - $this->sm_conv_tariff_with_benefits;
+    $this->partialLoop()->view->totConv+=$this->sm_stat_tariff-$this->sm_stat_tariff_with_benefits;
+    $this->partialLoop()->view->totInsh+=$this->sm_insurer_tariff-$this->sm_insurer_tariff_with_benefits;
+    $this->partialLoop()->view->totStat+=$this->sm_station_tax_tariff-$this->sm_station_tax_tariff_with_benefits;
+    $this->partialLoop()->view->totNum+=$this->num;

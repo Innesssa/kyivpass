@@ -1,0 +1,79 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<?
+if(strlen($item_data['caption']) > 100){
+    $string = strip_tags($item_data['caption']);
+    $string = substr($string, 0, 100);
+    $string = rtrim($string, "!,.-:;+");
+    $string = substr($string, 0, strrpos($string, ' '));
+    $string = $string." ...";
+}
+else{
+    $string = $item_data['caption'];
+}
+?>
+
+
+<div class="corn polosa3" align="left">
+<a href="../<?=$all_tag_list[str_replace(";","",$item_data['connect'])]['seolink']?>"><?=stripslashes($all_tag_list[str_replace(";","",$item_data['connect'])]['caption'])?></a> » <?=$string?>
+</div>
+
+<style>
+.desc li{margin-left:20px;margin-bottom:7px;}
+.art {line-height:18px;text-align:justify;padding:10px;}
+</style>
+<div class="art" style="padding-top:7px;">
+
+
+
+<!--
+
+<?
+$img1=ART_ITEM_IMG_PATH."/".$item_data['id']."/1m.png";
+$img2=ART_ITEM_IMG_PATH."/".$item_data['id']."/2s.png";
+$img3=ART_ITEM_IMG_PATH."/".$item_data['id']."/3s.png";
+$img4=ART_ITEM_IMG_PATH."/".$item_data['id']."/4s.png";
+$img5=ART_ITEM_IMG_PATH."/".$item_data['id']."/5s.png";
+
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img2))$img2="";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img3))$img3="";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img4))$img4="";
+?>
+<table style="float:left;width:356px;margin-right:12px;" cellpadding="0" cellspacing="0"><tr><td>
+<div class="image">
+<a href="<?=str_replace("m.png",".png",$img1)?>" title="Кликните для увеличения" rel="lightbox[yoo-gallery-<?=$item_data['id']?>]">
+<img id="prodimg1" alt="" src="<?=$img1?>" width="350" height="" border="1" /></a>
+</div>
+<div class="image" style="margin:7px 0px;width:356px;" align="center">
+<?if($img2!=""){?><a href="<?=str_replace("s.png",".png",$img2)?>" title="Кликните для увеличения" rel="lightbox[yoo-gallery-<?=$item_data['id']?>]"><img id="prodimg2" src="<?=$img2?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+<?if($img3!=""){?><a href="<?=str_replace("s.png",".png",$img3)?>" title="Кликните для увеличения" rel="lightbox[yoo-gallery-<?=$item_data['id']?>]"><img id="prodimg3" src="<?=$img3?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+<?if($img4!=""){?><a href="<?=str_replace("s.png",".png",$img4)?>" title="Кликните для увеличения" rel="lightbox[yoo-gallery-<?=$item_data['id']?>]"><img id="prodimg4" src="<?=$img4?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+</div>
+</td></tr></table>
+-->
+<div align="center">
+<h1 style="font: 18px Arial;color: #004D98;margin:15px 0px;">
+<?=$item_data['caption']?>
+</h1>
+<div>
+<div class="desc" style="color: black;margin-bottom:25px;">
+<div style="color: black;margin-bottom:15px;text-align:justify;">
+<?=$item_data["desc_full"]?>
+</div></div>
+
+	
+</div>
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+<br><br><br><br>
+

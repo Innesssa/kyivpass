@@ -1,0 +1,13 @@
+<?php
+ if($this->vallstatus){
+   ?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button> <b>After reload API status may be incorrect.</b> <a href="/admin/api/">Refresh current status for All API Systems</a> .<br /></div><?php     
+ }
+ echo $this->partialLoop('partials4adm/errors.phtml', $this->aStatus);
+ if(count($this->aStatus)==0){?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button>API Systems works normaly<br /></div><?php  }
+ 
+?><div class="row">	
+    <div class="span9">
+		<table class="table">
+                        <?=$this->partialLoop('partials4adm/apireload.phtml',$this->aSystems)?>                        
+                </table>         
+  </div>

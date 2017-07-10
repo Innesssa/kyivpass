@@ -1,0 +1,11 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<div class="corn polosa">
+<a href="/">Главная</a> » Магазин
+</div>
+<?if($tag1_list!=NULL){?>
+<?foreach($tag1_list as $key=>$val){?>
+<div align="left">
+<li style="line-height:25px;"><a href="/<?=$GLOBALS["mod"]?>/<?=$val["seolink"]?>"><?=$val["caption"]?></a></li>
+</div>
+<?}}?>
+<br><br><br><br>

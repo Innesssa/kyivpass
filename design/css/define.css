@@ -1,0 +1,34 @@
+.br_1{
+    height: 1px;
+}
+.br_2{
+    height: 2px;
+}
+.br_5{
+    height: 5px;
+}
+.br_10{
+    height: 10px;
+}
+.br_15{
+    height: 15px;
+}
+.br_20{
+    height: 20px;
+}
+.br_50{
+    height: 50px;
+}
+.both{
+    clear: both;
+}
+.left{
+    float:left;
+}
+.right{
+    float: right;
+}
+.error{
+    color:#d91219;
+    font-size:14px;font-weight: 900;
+}

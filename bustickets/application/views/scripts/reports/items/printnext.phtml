@@ -1,0 +1,38 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Перехідні суми (у період) </h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <th>#</th>
+    <th>Дата відправлення</th>
+    <th>По відомості</th>
+    <th>Тар. пер.</th>
+    <th>Тар. орг.</th>
+    <th>Cтрах. Сбір</th>
+    <th>Cтан. Сбір.</th>
+    <th>Ком. всього</th>
+    <th>Готівка</th>
+    <th>Чеків</th>
+    <th>ПДВ орг.</th>
+</tr>
+<?=$this->partialLoop('reports/items/printnextitem.phtml', $this->rs)?>
+    <tr align="right">
+    <td colspan="2" align="left">Всього:</td>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal1)?></td><? /*по відомості*/?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal2)?></td><? /*Тар. пер.*/ ?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal3)?></td><? /*Тар. орг.*/ ?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal4)?></td><? /*Cтрах. Сбір*/ ?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal5)?></td><? /*Cтан. Сбір.*/ ?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal6)?></td><? /*Ком. всього*/ ?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal1+$this->partialLoop()->view->total4+$this->partialLoop()->view->total5+$this->partialLoop()->view->total6)?></td><? /*Готівка*/ ?>
+    <td><?=sprintf("%3d",$this->partialLoop()->view->atotalplaces)?></td><?/*Чеків*/?>
+    <td><?=sprintf("%8.2f",$this->partialLoop()->view->atotal7)?></td><?/*ПДВ орг.*/?>
+    </tr>
+</table>
+</pre>

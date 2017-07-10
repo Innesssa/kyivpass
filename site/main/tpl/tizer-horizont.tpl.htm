@@ -1,0 +1,134 @@
+<div class="corn polosa" style="padding:7px 7px 7px 21px;">
+<a href="/main/best-proposition">Лучшее предложение</a>
+</div>
+
+
+
+
+<div class="wrap_catalog" style="min-height:300px;display:table;">
+
+<script type="text/javascript">// <![CDATA[
+$(function() {
+     $(".anyClass").jCarouselLite({
+         btnNext: ".next",
+         btnPrev: ".prev",
+         auto: 5000,    // время задержки прокрутки в милисекундах
+         speed: 1000   // скорость вращения (чем ниже число тем выше скорость и наоборот)  
+     }); });
+// ]]></script>
+
+<style>
+.next {
+display:block;
+position: absolute;
+z-index:3;
+width: 35px;
+height: 40px;
+cursor: pointer;
+background: transparent url(/design/img/prev-horizontal-pos.png) no-repeat -25px 8px;
+background-color:white;
+
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topright: 5px;
+border-top-right-radius: 5px;
+
+-webkit-border-bottom-right-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+border-bottom-right-radius: 5px;
+
+}
+.next:hover {
+background: transparent url(/design/img/prev-horizontal-pos.png) no-repeat 5px 8px;
+background-color:white;
+}
+.prev {
+display:block;
+z-index:3;
+position: absolute;
+width: 35px;
+height: 40px;
+cursor: pointer;
+background: transparent url(/design/img/next-horizontal-pos.png) no-repeat -27px 8px;
+background-color:white;
+margin-left:-40px;
+
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+border-top-left-radius: 5px;
+
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-left-radius: 5px;
+
+}
+.prev:hover {
+background: transparent url(/design/img/next-horizontal-pos.png) no-repeat 5px 8px;
+background-color:white;
+}
+</style>
+
+<table cellspacing="0" cellpadding="0" width="700"><tr>
+
+<td width="1">
+<span class="next"></span>
+</td><td style="padding-left:4px;">
+
+<div class="anyClass">
+<ul>
+
+<?
+$item_list=$best_prop;
+if($item_list!=NULL){?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$val["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+$tag1_list=Shop::tagListShowLevel(1);
+$tag2_list=Shop::tagListShowLevel(2);
+
+?>
+<li>
+<div class="wrap_catalog_sell view_grid" align="center"><div style="margin-bottom:12px;height:200px;overflow:hidden;">
+<?if($val['good_price']==1){?>
+<div style="margin-bottom:-25px;position:relative;z-index:2;" align="center">
+<span class="bestprice r5">Хорошая цена</a>
+</div>
+<?}else if($val['sell_out']==1){?>
+<div style="margin-bottom:-25px;position:relative;z-index:2;">
+<span class="sale r5">Распродажа</span>
+</div>
+<?}?>
+<a href="/shop/<?=$tag1_list[str_replace(";","",$tag2_list[str_replace(";","",$val['connect'])]['connect'])]['seolink']?>/<?=$tag2_list[str_replace(";","",$val['connect'])]['seolink']?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<img src="<?=$img1?>" width="240" style="margin-bottom:7px;" />
+</a>
+<div style="padding:0px 10px;">
+<a href="/shop/<?=$tag1_list[str_replace(";","",$tag2_list[str_replace(";","",$val['connect'])]['connect'])]['seolink']?>/<?=$tag2_list[str_replace(";","",$val['connect'])]['seolink']?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<?=$val["caption"]?></a></div>
+
+</div>
+<?
+$price_roznica = Price::getPrice($val['postavschik'],$val['price_roznica'],$val['price_diler'],$val['ddp']);
+$dp=explode(".",$price_roznica);?>
+<table width="90%" class="price"><tr><td style="height:70px;margin-bottom:12px;" valign="bottom" align="center">
+<div style="margin-bottom:12px;">Цена: 
+<?if($price_roznica!=0){?>
+<span><?=$dp[0]?>.<font><?=$dp[1]?></font></span> <?=CURRENCY?>
+<?}else{?>
+<span style="font-size:17px;line-height:25px;padding:7px;">По запросу</span> 
+<?}?>
+</div><div class="buy">
+<input name="incart" type="submit" value="В корзину" style="text-align:center;padding-left:0;" onClick="inCart2(<?=$val["id"]?>,1)">
+</div>
+</td></tr></table></div>
+</li>
+<?}}?>
+</ul>
+</div>
+
+</td><td width="1">
+<span class="prev"></span>
+</td>
+
+</tr></table>
+
+</div>

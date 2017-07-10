@@ -1,0 +1,172 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?><?if($display!=""){?>&display=<?=$display?><?}?>" onClick="parent.location.href='<?=str_replace('&display=tab','',$_SESSION['refresh_page'])?>'"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку записей" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить новую запись" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?$id=$_GET['id'];if($id!=""&&$id!="new"){?></td><td align="center" style="padding-left:7px;">
+<a href="<?=SITE_URL."/".$parent_data['seo']."/".$art_data["id"]."-".$art_data["seo"].".html"?>" title="Посмотреть на сайте"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?}?>
+</td><td align="center" style="padding-left:7px;">
+<a href="javascript:void(0)" onclick="addEdit.submit();"><img src="design/ico_save.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" width="95%" style="padding-left:7px;">
+<?if($cmd=="update"||$_GET['save']=="ok"){?><b style="color:forestgreen;font-size:13px;">Данные сохранены!</b><br><?=date("H:i:s d-m-Y")?><?}?>&nbsp; 
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=GALLERY_NAME?></span></nobr><br>
+<nobr><span style="color:#444;">Карточка записи : </span># <?=$item_data['id']!=''?$item_data['id']:'NEW'?></nobr>
+</tr>
+</table>
+
+
+
+<style>
+fieldset.pole{
+padding:7px;
+margin:0px 0px 11px 0px;
+border:1px solid #DBFFC1;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+legend{
+font-size:11px;
+font-weight:bold;
+padding:0px;
+margin:0px;
+}
+</style>
+
+<div style="padding:0px 12px 12px 20px;">
+
+<?//var_dump($item_data)?>
+ <form name="addEdit" method="post" action="<?=SITE_URL?>/cms/?<?=getenv("QUERY_STRING")?>">  	
+
+<fieldset class="pole">
+<legend>&nbsp;Название :&nbsp;</legend>
+<input type="text" name="caption" id="caption" maxlength="250" style="padding-left:5px;width:98%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$item_data['caption']?>">
+</fieldset>
+
+<input type="hidden" name="cmd" value="<?=$item_data['id']!=''?'update':'insert'?>">
+<input type="hidden" name="pos" value="<?=$item_data['pos']?>">
+
+<table style="width:100%" cellpadding="0" cellspacing="0"><tr><td valign="top" style="width:450px;padding-right:0px;">
+<?
+$img1="/image/gallery/item/".$item_data['id']."/1.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<fieldset class="pole">
+<legend>&nbsp;Фото :&nbsp;</legend>
+
+<a href="javascript:onWhiteSlimbox('/cms/gallery/magic/load_item_image.php?img=/image/gallery/item/<?=$item_data['id']?>/1.png&prodid=<?=$item_data['id']!=''?$item_data['id']:'new'?>&numer=1')">
+	    <img id="prodimg1" alt="" src="<?=$img1?>?<?=time()?>" width="450" border="0" /></a>
+</fieldset>
+
+
+</td><td valign="top" style="padding-left:7px;">
+
+
+<?
+$ta=explode(";",substr($item_data['connect'],1,-1));
+$ot=$ta[0]!=''?$ta[0]:$tag;
+$tt1=$ta[1]!=''?$ta[1]:$tag;
+$tt2=$ta[2];
+$tt3=$ta[3];
+?>
+
+<fieldset class="pole">
+<legend>&nbsp;Отраслевой тег :&nbsp;</legend>
+<select name="connect[]" style="width:98%;padding:0px 0px;height: 20px">
+<option value="null" selected> --- Выберите отраслевой тег</option>
+<?foreach ($tag_list1 as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($ot==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Товарные теги :&nbsp;</legend>
+<div style="margin-bottom:1px;">
+<select name="connect[]" style="width:98%;padding:0px 0px;height: 20px">
+<option value="null" selected> --- Выберите товарный тег 1</option>
+<?foreach ($tag_list2 as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($tt1==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</div>
+<div style="margin-bottom:1px;">
+<select name="connect[]" style="width:98%;padding:0px 0px;height: 20px">
+<option value="null" selected> --- Выберите товарный тег 2</option>
+<?foreach ($tag_list2 as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($tt2==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</div>
+<div style="margin-bottom:1px;">
+<select name="connect[]" style="width:98%;padding:0px 0px;height: 20px">
+<option value="null" selected> --- Выберите товарный тег 3</option>
+<?foreach ($tag_list2 as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($tt3==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</div>
+</fieldset>
+
+
+ <fieldset class="pole">
+<legend>&nbsp;Отображать в блоках :&nbsp;</legend>
+ <div style="margin-bottom:7px;"><label><input type="checkbox"<?if($item_data["hit"]==1){?> checked=""<?}?> value="1" name="hit">&nbsp;1 блок - Главная&nbsp;&nbsp;&nbsp;</label></div>
+</fieldset>
+
+ <fieldset class="pole">
+<legend>&nbsp;Видимость :&nbsp;</legend>
+<div style="margin-bottom:4px;"><label><input name="show" type="checkbox"<?if ($item_data['show']==1||$com=='add'){?> checked="checked"<?}?> value="1" />&nbsp;Показывать на сайте&nbsp;</label></div> 
+</fieldset>
+
+</td></tr></table>
+
+<fieldset class="pole">
+<legend>&nbsp;Описание :&nbsp;</legend>
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+//include(SITE_PATH."/lib/ckfinder/ckfinder.php") ;
+
+$sBasePath =SITE_URL.'/lib/fckeditor/';
+$oFCKeditor = new FCKeditor('desc_full') ;
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor->Config['EditorAreaCSS'] = SITE_URL.'/cms/design/fckeditor.css';
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $item_data['desc_full'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '200' ;
+$oFCKeditor->ToolbarSet = 'Basic';
+//CKFinder::SetupFCKeditor($oFCKeditor,'/cms/lib/ckfinder/');
+$oFCKeditor->Create() ;
+?>   
+</fieldset>
+
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Title :&nbsp;</legend>
+<input name="meta_t" value="<?=$item_data['meta_t']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Keywords :&nbsp;</legend>
+<input name="meta_k" value="<?=$item_data['meta_k']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Description :&nbsp;</legend>
+<textarea name="meta_d" style="height:70px;width:98%"><?=$item_data['meta_d']?></textarea>
+</fieldset>
+</form>	
+
+<br>
+<div align="right">
+<input name ="save" type="image" src="design/ico_save.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" onclick="addEdit.submit();" class="r10" />&nbsp;&nbsp;&nbsp;
+</div>
+<br>
+
+</div>
+
+<br>

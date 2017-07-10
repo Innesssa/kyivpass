@@ -1,0 +1,24 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="well">
+    <div class="form-inline">
+        <input id="id_url" type="text" placeholder="Contractor profile URL" width="85%" style="min-width:85%;"/>
+        <a id="bring_contractor" href="javascript:void(0);"  class="btn">Save</a>
+    </div>
+</div>
+<table id="id_table_addcontractor" class="table tablesorter">
+    <thead>
+        <tr><th></th><th>URL</th><th></th></tr>
+    </thead>
+    <tbody>
+        <?=$this->partialLoop('partials4adm/addcontractor.phtml', $this->devlog)?>
+    </tbody>
+</table>
+<script>
+    $(document).ready(function(){
+        $('#id_table_addcontractor').tablesorter({headers: { 0: { sorter: false},2: { sorter: false} }});
+    });
+	$('.required').tooltip({title: 'this field is required'});
+</script>

@@ -1,0 +1,22 @@
+<tr id="id_row_<?=$this->id?>">
+    <td class="code"><?=$this->code?></td>
+    <td class="title"><?=$this->title?></td>
+    <td><?=$this->conveyor_name?></td>
+    <td><?=$this->insurer_name?></td>
+    <td><?=$this->vehicle_name?></td>
+    <td>
+        <span data-toggle="tooltip" title="<?=htmlspecialchars(str_replace("\r"," ",str_replace("\n"," ",$this->description)),ENT_QUOTES)?>" class="label label-important with-tooltip"><i class="icon icon-question-sign icon-white"></i></span>
+    </td>
+    <td class="actions">
+        <div class="btn-group">
+
+            <a id="id_show_item_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="переглянути маршрут" alt="переглянути маршрут"><i class="icon-list"></i></a>
+            <a id="id_edit_item_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="редагувати маршрут" alt="редагувати маршрут"><i class="icon-pencil"></i></a>
+            <a id="id_prices_item_<?=$this->id?>" class="btn btn-mini delete" href="#myModal" role="button" data-toggle="modal" alt="тарифи" title="тарифи" ><i class="icon-calendar" ></i></a>
+            <? /* <a id="id_race_item_<?=$this->id?>" class="btn btn-mini delete" href="#myModal" role="button" data-toggle="modal" alt="рейси" title="рейси" ><i class="icon-time" ></i></a> */?>
+            <a id="id_del_item_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);" alt="видалити" title="видалити" ><i class="icon-remove" ></i></a>
+
+        </div>
+
+    </td>
+</tr>

@@ -1,0 +1,37 @@
+<?php
+if(!$this->isAjax){
+echo $this->partial('partials4adm/messages.phtml');
+?>
+<div id="id_ajax_content"><? } ?>
+    <div class="well controls">
+        <a class="btn btn-info add" data-id="<?= $this->id ?>"  href="#myModal" role="button" data-toggle="modal"
+           title="Add new group"><i class="icon-plus-sign"></i> Add organization</a>
+    </div>
+    <div class="filter form-inline">
+        <form action="/admin/organizations" id="form-filter">
+            <label for="plugin_field"><span> Filter By: </span></label>
+            <a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+        </form>
+    </div>
+<div class="table">
+		<table id="id_table_organizations" class="tablesorter">
+			<thead>
+				<tr>
+					<th data-field-name="id" class="header" style="width:25px">#</th>
+                    <th data-field-name="title" class="status header" style="width:400px">Title</th>
+                    <th  style="width:100px">Commands</th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/organizations.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+<script>govsource.pageConfig.searchData=<?=$this->aFilter?>;</script>
+<?=$this->paginationControl($this->paginator)?>	
+<div class="clearfix"></div> 
+<?php if(!$this->isAjax){?></div>
+<!-- Modal -->
+<?= $this->partial('partials4adm/modal.phtml'); ?>
+<!-- End Modal-->
+<? } else { ?><script>govsource.AdminOrganizations.bindEvents();</script><? } ?>

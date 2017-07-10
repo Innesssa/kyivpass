@@ -1,0 +1,161 @@
+<style>
+.img_more, .img_less {
+background-position: 0 -510px;
+width: 20px;
+height: 22px;
+display: inline-block;
+margin: 0 2px;
+background-image: url("/design/img/sprite_small.png");
+background-repeat: no-repeat;
+line-height: 25px;
+}
+.img_more {
+background-position: 0 -534px;
+}
+.img_more :hover, .img_less:hover {
+text-decoration: none;
+}
+</style>
+
+
+<div class="corn polosa">
+<a href="/cart/buy">Моя корзина</a> » Список покупок
+</div>
+
+
+<table style="width: 100%;margin:12px 0px 12px 0px;" cellpadding="0" cellspacing="0">
+<?$item_list=$_SESSION['shop_item'];
+if($item_list!=NULL){?>
+<?foreach($item_list as $key=>$val){?>
+<tr id="cartItem_<?=$val['item']['id']?>">
+<td width="165">
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$val['item']["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<a href="/shop/cart/look/<?=$val['item']["id"]?>-<?=$val['item']["seolink"]?>" title="Подробнее">
+<img src="<?=$img1?>" style="margin-right:7px;" width="150" align="left" /></a>
+</td><td>
+<div style="margin-bottom:12px;">
+<a href="/shop/cart/look/<?=$val['item']["id"]?>-<?=$val['item']["seolink"]?>" title="Подробнее">
+<?=trim($val['item']['caption'])?></a></div>
+
+<div style="color: #494949;margin-bottom:7px;">
+Артикул:
+<?
+$param_connectus=explode(";",substr($val['item']["param_connect"],1,-1));
+
+$param_item_r=Shop::paramItemData($param_connectus[0]);
+$param_item_l=Shop::paramItemData($param_connectus[1]);
+?>
+<span style="" id="article"><?=$param_item_l['value1']!=''?$param_item_l['value1'].'-':''?><?=$val['item']["article"]?><?=$param_item_r['value1']!=''?'-'.$param_item_r['value1']:''?></span>
+</div>
+
+<div style="color: #494949;margin-bottom:7px;">
+Упаковка:
+<span style=""><?=$val['item']["package"]?></span>
+</div>
+
+</td><td width="130" align="center">
+
+<a href="javascript:void(0)" onClick="inCartBuy('<?=$val['item']["id"]?>',-1)"><span class="img_less">&nbsp;</span></a>
+<input style="width:30px;margin-top:4px;" id="cart_<?=$val['item']["id"]?>" name="cart_<?=$val['item']["id"]?>" onchange="inCartBuy2('<?=$val['item']["id"]?>', this.value);" type="text" value="<?=$val["hm"]?>">
+<a href="javascript:void(0)" onClick="inCartBuy('<?=$val['item']["id"]?>',1)"><span class="img_more">&nbsp;</span></a>
+<br>
+<a class="del_z" href="javascript:inCartDel('<?=$val['item']['id']?>')" id="del_btn" style="background-image: url('/design/img/sprite_small.png');background-position: 0px -319px;background-repeat: no-repeat; padding:0px 0px 2px 15px;line-height:14px;font-size:11px;" onclick="if (confirm('Вы действительно хотите удалить выбраный товар из корзины?')) location=this.href; return false;">
+<span>Удалить</span></a>
+</td><td align="left" width="125">
+<?$price_roznica = Price::getPrice($val['item']['postavschik'],$val['item']['price_roznica'],$val['item']['price_diler'],$val['item']['ddp']);
+$dp=explode(".",$price_roznica);
+
+$cena=Price::getPrice($val['item']['postavschik'],$val['item']['price_roznica'],$val['item']['price_diler'],$val['item']['ddp']);
+$ocena=$cena*$val['hm'];
+$stoit=$stoit+$ocena;
+$count_item=$count_item+$val['hm'];
+
+?>
+
+<input id="buyprice_<?=$val['item']['id']?>" type="hidden" value="<?=$price_roznica?>">
+<div style="margin-bottom:12px;">Цена:
+<?if($price_roznica!=0){
+$itemstoit=$price_roznica*$val["hm"];
+$sp=explode(".",$itemstoit);
+$sp[1]=substr($sp[1]."00",0,2);
+$itemstoit="".$sp[0].".<font style='font-size:85%'>".$sp[1]."</font>";?>
+<span style="color:#494949;font-weight:bold" class="cartprice" id="fullprice_<?=$val['item']['id']?>"><?=$itemstoit?></span> <?=CURRENCY?>
+<?}else{?>
+<span style="color:#494949;font-weight:bold" id="fullprice_<?=$val['item']['id']?>">По запросу</span> 
+<?}?>
+</div>
+<div class="buy">
+<input name="incart" type="submit" value="В корзину">
+</div>
+
+</td>
+</tr>
+
+
+
+
+<?}}?>
+</table>
+<hr>
+<table style="width: 100%;margin-top:0px;" cellpadding="0" cellspacing="0"><tr>
+<td align="right" style="padding:12px 20px 0px 20px;" valign="top">
+<div style="margin-bottom:10px;color:black;"><b>Оформление заказа</b></div>
+<form method="post" action="/cart/ok" onsubmit="return Validator(this);">
+<div>
+<table cellpadding="0" cellspacing="0"><tr><td>
+<span style="color: #d91219;vertical-align: top">*&nbsp;</span><input type="text" id="z_name" name="z_name" placeholder="Ваше имя" style="width:150px;" value="">
+</td><td>&nbsp;
+&nbsp;&nbsp;<input type="text" name="z_company" placeholder="Компания" value="">
+</td></tr>
+<tr><td>
+<span style="color: #d91219;vertical-align: top">*&nbsp;</span><input type="text" id="z_mail" name="z_mail" placeholder="Электронная@почта" style="width:150px;" value="">
+</td><td>&nbsp;
+<span style="color: #d91219;vertical-align: top">*&nbsp;</span><input type="text" id="z_phone" name="z_phone" placeholder="Телефон" value="">
+</td></tr></table>
+</div>
+<div>
+<input  style="background-color:#C21F26" name="z_button" type="submit" value="Отправить заказ">
+</div>	
+<script>
+function Validator(f){
+
+if($("#z_name").val()==""){
+$("#z_name").focus();
+$("#z_name").attr("placeholder","Заполните Ваше имя");
+return false;
+}
+else if($("#z_mail").val()==""){
+$("#z_mail").focus();
+$("#z_mail").attr("placeholder","Заполните Электро@Почту");
+return false;
+}
+else if($("#z_phone").val()==""){
+$("#z_phone").focus();
+$("#z_phone").attr("placeholder","Заполните Телефон");
+return false;
+}
+else{return true;}
+}
+</script>
+	</form>
+
+
+
+</td>
+
+<td style="background-color:#F7F7F7;padding:12px 20px 10px 20px;" width="300" valign="top">
+
+<div style="margin-bottom:10px;color:black;"><b>Обзор корзины</b></div>
+<div style="margin-bottom:10px;color:black;">Количество товаров: <strong id="countcart"><?=$count_item?></strong></div>
+<div style="margin-bottom:10px;color:black;">Предварительная стоимость:	<span id="moneypay"><?=$stoit?></span> <?=CURRENCY?></div>
+
+
+</td>
+</tr></table>
+
+<br><br>
+<?//var_dump($_SESSION['shop_item'])?>
+<br><br>

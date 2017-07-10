@@ -1,0 +1,8 @@
+<?php
+    $content = '<table>';
+    foreach($this->user as $param=>$val){
+        $content.='<tr><td><b>'.$param.'</b></td><td>'.$val.'</td></tr>';
+    }
+    $content.= '</table>';
+?>
+<div><?=$content?></div>

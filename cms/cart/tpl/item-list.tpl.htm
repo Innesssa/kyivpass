@@ -1,0 +1,223 @@
+<?SYS::varDump($item_list,__FILE__,__LINE__,'item_list');?>
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<style>
+.price span {
+background-color: #f5f5f5;
+border-left: 2px solid #7b7b7b;
+padding: 5px;
+font: bold 25px Arial;
+color:#7B7B7B;
+}
+.price span font {
+font-size: 12px;
+vertical-align: super;
+}
+.wrap_catalog_sell{
+  border: 2px solid #fff;
+}
+.wrap_catalog_sell:hover{
+  border: 2px dashed #95CF24;
+  box-shadow:
+    0 0 0 1px #95CF24,
+    inset 0 0 0 1px #95CF24;}
+    
+</style>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=tag&com=list<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку тегов" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new&display=<?=$display?>"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить запись с этим тегом" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new')"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить запись с этим тегом" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?}?>
+</td><td align="center" style="padding-left:7px;"><!--
+<a href="<?=SITE_URL."/art/".$tag_list[substr($tag_list[$tag]["connect"],1,-1)]["seolink"]."/".$tag_list[$tag]["seolink"].""?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+--></td><td align="center" width="95%" style="padding-left:7px;">
+
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=CART_NAME?></span></nobr><br>
+<nobr><span style="color:#444;"></span><?=$tag_list[$tag]['caption']?></nobr>
+</tr>
+</table>
+
+
+<div align="center">
+<div style="padding:0px 0px 0px 12px;width:763px;min-height:500px;">
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/".$mod."/".$type."/".$val['id']."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+if ($val['show']!=1){$item_color = " #FFF1F1";}else{$item_color = "#F1FFE6";}
+?>
+<table style="background-color:<?=$item_color?>;margin:0px 12px 7px 0px;width:98%;height:150px" cellpadding="0" cellspacing="1" class="wrap_catalog_sell r7"><tr>
+<td align="left" style="padding:10px 12px 12px 20px;height:125px;overflow:hidden;" valign="top">
+<div style="position:relative;margin:1px 5px 5px 0px;height:1px;" >
+<img src="/design/icon/Cart_32x32.png" border="0" width="32" /></div>
+<div style="margin-bottom:10px;padding-left:40px;">
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Редактировать">
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>')" title="Редактировать">
+<?}?>
+<span style="line-height:17px;color:#466AC8;font-size:13px;font-weight:bold;">Заказ # <?=$val['id']?> :: <?=Time::formatMonth($val['date'])?> <span style="font-size:11px;"><?=Time::formatGetTime($val['date'])?></span></a>
+&nbsp;&nbsp;&nbsp;<span style="font-size:11px;"> Статус заказа: </span><b><?=$tag_list[$tag]['caption']?></b>
+</div>
+<div style="margin-bottom:7px;">
+<span style="font-size:11px;">Имя:</span> <b><?=$val["desc_short"]?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:11px;"> Телефон:</span> <b><?=$val['caption']?></b>
+</div>
+<div style="margin-bottom:7px;">
+<span style="font-size:11px;">Комментарий: <b><?=$val["desc_full"]?></b></span> 
+</div>
+
+<?
+unset($citem_data);
+$citem=explode(";",substr($val["p1"],1,-1));
+if($citem){foreach($citem as $key=>$val2){
+$ph=explode("/",$val2);
+$prod_id=$ph[0];
+$prod_hm=$ph[1];
+$citem_data[$prod_id]['item']=ShopItem::itemData($prod_id);
+$citem_data[$prod_id]['hm']=$prod_hm;
+//var_dump($citem_data);
+}}
+$count_item=0;
+$stoit=0;
+?>
+
+<table style="width: 100%;margin-top:10px;" cellpadding="0" cellspacing="0">
+<?$item_list2=$citem_data;
+if($item_list2!=NULL){?>
+<?foreach($item_list2 as $key=>$valz){?>
+<tr>
+<td width="165">
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$valz['item']["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<img src="<?=$img1?>" style="margin-right:7px;margin-bottom:3px;" width="150" align="left" />
+</td><td>
+<div style="margin-bottom:7px;">
+<a target="_blank" href="/shop/cart/look/<?=$valz['item']["id"]?>-<?=$valz['item']["seolink"]?>" title="Подробнее" style="color:#3256B4;">
+<?=trim($valz['item']['caption'])?></a></div>
+
+<div style="color: #494949;margin-bottom:7px;"><span style="font-size:11px;">
+Артикул:</span>
+<?
+$param_connectus=explode(";",substr($valz['item']["param_connect"],1,-1));
+
+$param_item_r=ParamItem::itemData($param_connectus[0]);
+$param_item_l=ParamItem::itemData($param_connectus[1]);
+?>
+<span style="" id="article"><?=$param_item_l['value1']!=''?$param_item_l['value1'].'-':''?><?=$valz['item']["article"]?><?=$param_item_r['value1']!=''?'-'.$param_item_r['value1']:''?></span>
+</div>
+
+<div style="color: #494949;margin-bottom:7px;">
+<span style="font-size:11px;">Упаковка:</span>
+<span style=""><?=$valz['item']["package"]?></span>
+</div>
+
+</td><td width="130" valign="middle">
+
+<?$price_roznica = Price::getPrice($valz['item']['postavschik'],$valz['item']['price_roznica'],$valz['item']['price_diler'],$valz['item']['ddp']);
+$dp=explode(".",$price_roznica);?>
+
+&nbsp;<b><?=$price_roznica?></b> X <b><?=$valz["hm"]?></b>&nbsp;
+
+</td><td align="left" width="125" valign="middle">
+
+<?
+$cena=Price::getPrice($valz['item']['postavschik'],$valz['item']['price_roznica'],$valz['item']['price_diler'],$valz['item']['ddp']);
+$ocena=$cena*$valz['hm'];
+$stoit=$stoit+$ocena;
+$count_item=$count_item+$valz['hm'];
+
+?>
+
+<input id="buyprice_<?=$valz['item']['id']?>" type="hidden" value="<?=$price_roznica?>">
+<div style="margin-bottom:7px;"><span style="font-size:11px;">Цена:</span>
+<?if($price_roznica!=0){?>
+<span style="color:#494949;font-weight:bold" id="fullprice_<?=$valz['item']['id']?>"><?=$price_roznica*$valz["hm"]?></span> <?=CURRENCY?>
+<?}else{?>
+<span style="color:#494949;font-weight:bold" id="fullprice_<?=$valz['item']['id']?>">По запросу</span> 
+<?}?>
+</div>
+
+
+</td>
+</tr>
+
+
+
+
+<?}}?>
+</table>
+
+<table style="width: 100%;margin-top:0px;" cellpadding="0" cellspacing="0"><tr>
+<td align="right" style="padding:12px 20px 0px 20px;">
+
+
+</td>
+
+<td style="" width="485" align="right">
+<div style="background-color:#FBFFEE;padding:7px 15px 7px 15px;" class="r5">
+<div style="margin-bottom:10px;color:black;"><b>Обзор заказа</b></div>
+<div style="margin-bottom:10px;color:black;">Количество товаров: <strong id="countcart"><?=$count_item?></strong></div>
+<div style="margin-bottom:10px;color:black;">Предварительная стоимость:	<strong id="moneypay"><?=$stoit?></strong> <?=CURRENCY?></div>
+</div>
+
+</td>
+</tr></table>
+
+<div></div>
+
+</td>
+<td align="right" style="" valign="top" width="50">
+<table style="height:100%;margin:0px 0px 0px 0px;" cellpadding="0" cellspacing="0">
+<tr><td align="right" height="50" style="font-size:12px;" valign="top">
+<div align="right" style="margin:4px 4px 0px 7px;">
+<?if ($val['show']==1){?>
+<span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+<span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+</span>
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Редактировать">
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>')" title="Редактировать">
+<?}?>
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1" style="margin-bottom:-7px;"></a>
+</div>
+</td></tr><tr><td align="right" valign="top" style="padding:2px 7px 2px 7px;">
+
+<nobr>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?>&id=<?=$val['id']?>&event=moveDown" title="Вниз">
+<img src="design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?>&id=<?=$val['id']?>&event=moveUp" title="Вверх">
+<img src="design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+
+</td></tr><tr><td align="right" valign="bottom">
+<div style="margin:2px 4px 7px 0px;">
+<nobr>id:<b><?=$val['id']?></b> 
+<a title="Удалить" href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&tag=<?=$tag?>&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить запись?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1" style="margin-bottom:-5px;"></a>	</nobr>
+</div>
+</td></tr></table>
+</td></tr></table>
+
+<?}}?>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+
+
+<div><br><br><br><br><br><br><br></div>
+
+

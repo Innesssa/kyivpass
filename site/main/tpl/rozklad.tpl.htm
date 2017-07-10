@@ -1,0 +1,145 @@
+<style>
+.header {
+width: 100%;
+height: 40px;
+background: url(/design/img/rozklad-polosa.png);
+}
+.clockArea {
+color: #a0e31f;
+font-size: 20px;
+text-shadow: 1px 1px 1px #282828;
+position: relative;
+background-image: url(http://board.t2t.in.ua/themes/scoreboard/img/clock-icon.png);
+background-repeat: no-repeat;
+background-position: 0 0;
+border-right: solid 1px #cccccc;
+height: 27px;
+padding: 0 10px 0 30px;
+margin: 6px 10px;
+}
+.dateArea {
+color: #cccccc;
+font-size: 18px;
+text-shadow: 1px 1px 1px #282828;
+position: relative;
+margin: 7px 0;
+padding: 0;
+}
+
+h1.headerTitle {
+margin: 6px 10px;
+padding: 0;
+font-size: 20px;
+color: #ffffff;
+text-shadow: 1px 1px 1px #282828;
+font-weight: normal;
+position: relative;
+}
+.floatLeft {
+float: left;
+}
+.floatRight {
+float: right;
+}
+
+
+
+table.contentInformationTable {
+text-shadow: 1px 1px 2px #282828;
+}
+
+table.contentInformationTable {
+width: 100%;
+position: relative;
+background-color: #092c4c;
+text-shadow: 1px 1px 2px #282828;
+}
+table.contentInformationTable tr.contentInformationTableHeader {
+cursor: default;
+}
+table.contentInformationTable tr {
+height: 50px;
+max-height: 50px;
+}
+tr.contentInformationTableHeader td {
+background-color: #2b2b2b;
+text-align: center;
+color: #ffffff;
+text-shadow: 1px 1px 1px #282828;
+height: 22px;
+font-size: 17px;
+}
+table.contentInformationTable td {
+padding: 5px 10px;
+text-align: center;
+vertical-align: middle;
+color: #ffffff;
+font-size: 17px;
+}
+.iconLeft {
+background-image: url(http://board.t2t.in.ua/themes/scoreboard/img/table-header-icons.png);
+background-repeat: no-repeat;
+padding: 1px 0 1px 25px;
+}
+.fontBold {
+font-weight: bold;
+}
+#departure {
+background-position: 0 0;
+}
+#arrival {
+background-position: 0 -42px;
+}
+#bus {
+background-position: 0 -84px;
+}
+#state {
+background-position: 0 -126px;
+}
+.bigLoader {
+display: none;
+background-color: #092c4c;
+
+}
+.footer {
+background-color: #041524;
+background-position: center;
+background-repeat: no-repeat;
+height: 37px;
+}
+
+</style>
+<div style="width:1020px;height:1000px;max-height:1000px;">
+
+<div class="header">
+    <div class="headerGradient gradient"></div>
+    <div class="clockArea floatLeft jqclock" id="clock"><span class="clocktime"><?=date("H:i:s")?></span></div>
+    <div class="dateArea floatLeft jqclock" id="calendar"><span class="clockdate"></span></div>
+    <div class="stationNameList floatRight">
+        <h1 class="headerTitle floatLeft">Розклад руху автобусів&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+</div>
+
+
+
+    
+<div class="bigLoader" style="display: block;padding-top:200px;height:730px" align="center">
+    <img src="/design/img/sb_loader_01.gif" alt="loading...">
+</div>
+
+<div class="footer">
+    <div class="footerTopShadow">
+        <div class="pagination" id="footer-pagination">
+				<span>
+
+				</span>
+        </div>
+    </div>
+    <a hreg="#" onclick="nextPage()" style="display:none" id="next_page">Next</a>
+    <!--		<div class="footerLeftSupportText floatLeft">Для скарг та пропозицій звертайтесь за тел. (044) 555-55-55</div>-->
+    <div class="clockArea floatRight jqclock" id="clock-footer"><span class="clocktime"><?=date("H:i:s")?></span></div>
+</div>
+
+
+
+</div>

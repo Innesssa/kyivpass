@@ -1,0 +1,83 @@
+<?
+
+if($this->partialLoop()->view->dt!=$this->date_begin){
+    $this->partialLoop()->view->dt=$this->date_begin;
+    $aDt = explode("-",$this->date_begin);
+    /*
+    if( $this->partialLoop()->view->dt!=""){?>
+            <tr align="right">
+                    <th colspan="7">Всього:</th>
+                    <td><?=sprintf("%5.3f",$this->partialLoop()->view->total8)?></td>
+                    <td><?=$this->partialLoop()->view->total9?></td>
+                    <td>0</td>
+                    <td><?=$this->partialLoop()->view->total10?></td>
+                    <td><?=sprintf("%8.2f",$this->partialLoop()->view->total11)?></td>
+                    <td><?=$this->fail_type?></td>
+            </tr><?
+    }*/
+    ?><tr><th colspan="13" align="left"><?=$aDt[2].".".$aDt[1].".".$aDt[0]?></th></tr><?
+    $this->partialLoop()->view->total8=0.0;
+    $this->partialLoop()->view->total9=0.0;
+    $this->partialLoop()->view->total10=0.0;
+    $this->partialLoop()->view->total11=0.0;
+}
+$kof = ($this->places>0) ? ($this->places_busy/$this->places) : 0.0;
+?>
+    <tr align="right">
+        <td align="left"><?=$this->routecode?></td>
+        <td><?=sprintf("%02d:%02d",$this->hour,$this->minute)?></td>
+        <td align="left"><?=$this->routetitle?></td>
+        <td><?=$this->tm_received?></td>
+        <td align="left"><?=$this->vehiclename?></td>
+        <td align="left"><?=$this->govnumber?></td>
+        <td align="left"><?=$this->driver_name?></td>
+        <td><?=sprintf("%5.3f",$kof)?></td><?/* Загр. */?>
+        <td><?=$this->places_busy?></td>
+        <td>0</td><? /* Доп.*/ ?>
+        <td><?=($this->places*1-$this->places_busy*1)?></td>
+        <td><?=sprintf("%8.2f",$this->total)?></td>
+        <td><? if($this->status=="failed" && !empty($this->fail_type)){
+               echo $this->fail_type;
+            }else{
+                switch ($this->status) {
+                    case "opened"   :
+                        echo "В";
+                        break;
+                    case "sent"     :
+                        echo "О";
+                        break;
+                    case "forbidden":
+                        echo "Б";
+                        break;
+                    case "received"  :
+                        echo "П";
+                        break;
+                }
+            }?></td>
+    </tr>
+<?
+$this->partialLoop()->view->total8+=$kof;
+$this->partialLoop()->view->total9+=(int)$this->places_busy;
+$this->partialLoop()->view->total10+=($this->places*1-$this->places_busy*1);
+$this->partialLoop()->view->total11+=$this->total*1.0;
+
+if($kof<0.4){
+    $this->partialLoop()->view->total_04+=1;
+}else if($kof<0.8) {
+    $this->partialLoop()->view->total_08 += 1;
+}else $this->partialLoop()->view->total_01 += 1;
+
+
+switch($this->status){
+    case "opened"     : $this->partialLoop()->view->total_opened+=1; break;
+    case "sent"       : $this->partialLoop()->view->total_sent+=1; break;
+    case "forbidden"  : $this->partialLoop()->view->total_forbidden+=1; break;
+    case "received"    : $this->partialLoop()->view->total_received+=1; break;
+    case "failed"     : $this->partialLoop()->view->total_failed+=1;
+                        if(empty($this->partialLoop()->view->total_aFailed[$this->fail_type])){
+                            $this->partialLoop()->view->total_aFailed[$this->fail_type]=1;
+                        }else {
+                            $this->partialLoop()->view->total_aFailed[$this->fail_type]+=1;
+                        }
+                        break;
+}

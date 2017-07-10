@@ -1,0 +1,26 @@
+
+<div class="corn polosa" style="padding:7px 7px 7px 21px;">
+<a href="/gallery/otraslevye-tegi">Отрасль применения</a>
+</div>
+
+<div align="left" style="padding:0px 12px;margin-bottom:10px;">
+<?if($branch_top){foreach($branch_top as $key=>$valb){?>
+
+<style>
+#branch_<?=$valb['seolink']?> span{
+background: url('/design/branch/<?=$valb['seolink']?>.png') no-repeat -6px 0 transparent;
+color:#7B7B7B;
+text-decoration:underline;
+}
+#branch_<?=$valb['seolink']?>:hover  span{
+background: url('/design/branch/<?=$valb['seolink']?>_active.png') no-repeat -6px 0 transparent;
+color:red;
+text-decoration:none;
+
+}
+</style>
+<a href="/gallery/otraslevye-tegi/<?=$valb['seolink']?>" id="branch_<?=$valb['seolink']?>">
+<span style="line-height: 55px;padding-left: 50px;display: inline-block;"><?=$valb['caption']?></span></a>&nbsp;&nbsp;&nbsp; 
+
+<?}}?>
+</div>

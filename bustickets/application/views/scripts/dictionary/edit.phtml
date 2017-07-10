@@ -1,0 +1,7 @@
+<h4><?=$this->partialLoop('partials/breadcrums.phtml',$this->breadcrums)?> <?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? }
+echo $this->form;

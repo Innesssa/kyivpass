@@ -1,0 +1,48 @@
+<?php
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="row">
+	<div class="span9">
+            <div class="btn-group"> 
+                <a id="id_by_run_btn" class="btn" href="/admin/invoicing/" >By Run</a>
+                <a id="id_by_project_btn" class="btn" href="/admin/invoicing/by/project/" >By Project</a>
+            </div>
+		<table class="table">
+            <tr>
+                <th>Project name</th>
+                <th>Supplier Totals</th>
+                <th>Supplier Lines</th>
+                <th>Invoice Totals</th>
+                <th>Invoice Lines</th>
+                <th style="width:90px"></th>
+            </tr>
+			<?=$this->partialLoop('partials4adm/invoicing_prj.phtml', $this->aInvoices)?>
+		</table>
+	</div>
+</div>
+
+<div class="pagination">
+<ul>
+<?php
+    if(!empty($this->aInvoices)){
+        if($this->page>1){?><li><a href="/admin/invoicing/by/run_detail/id/<?=$this->param?>/page/<?=$this->page-1?>/<?=$this->filters?>" class="prev a_paginator">&laquo;</a></li><? } ?>
+           <?php
+           $k=5;
+           $iStart=$this->page-5;
+           if($iStart>$this->iPages) $iStart=$iPages-10;
+           if($iStart<1)       $iStart=1;
+           $iter=0;
+           while($iter<10){
+              ?><li class="<?=($iStart==$this->page) ? ' active' : ''?>"><a class="a_paginator" href="/admin/invoicing/by/run_detail/id/<?=$this->param?>/page/<?=$iStart?>/<?=$this->filters?>"><?=$iStart?></a></li><?
+              $iter++;
+              $iStart++;
+              if($iStart>$this->iPages) break;
+           }
+           ?><?php if($this->page<$this->iPages){?><li><a href="/admin/invoicing/by/run_detail/id/<?=$this->param?>/page/<?=$this->page+1?>/<?=$this->filters?>" class="next a_paginator">&raquo;</a></li><? }
+   }?>
+<ul>
+</div>
+
+
+<script>reload();</script>

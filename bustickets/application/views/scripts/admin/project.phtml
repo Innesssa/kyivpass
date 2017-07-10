@@ -1,0 +1,90 @@
+<?php 
+if(!$this->isAjax){
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?><div class="well">
+	<div class="filter projects form-inline">
+			<label>Filter By:</label>
+			<select name="status" class="myfilter">
+				<option value="">Project Status</option>
+                <option value="1">New</option>
+                <option value="10">Active</option>
+                <option value="20">On hold</option>
+                <option value="30">Finished</option>
+			</select>
+			<a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        <input type="hidden" class="myfilter" name="sort" value=""/>
+        <input type="hidden" class="myfilter" name="order" value=""/>
+       </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th id="id_sort_id" class="header" style="width:25px">ID</th>
+					<th id="id_sort_pname" class="header" style="width:300px">Project Name</th>
+					<th id="id_sort_status" class="header status" style="width:100px">Status</th>
+					<th style="width:250px"></th>
+					<th>no invoice</th>
+					<th style="width:120px"></th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/projects.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+<script>var jSearchData=<?=$this->aFilter?>;
+        var jContracts =<?=json_encode($this->aContracts)?>;       
+</script>    
+<?=$this->paginationControl($this->paginator)?>	
+<div class="clearfix"></div> 
+<?php if(!$this->isAjax){?></div>
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+   <div class="modal-body">
+          <div id="id_form"></div>
+	  <div id="id_form_load"></div>          
+  </div>
+  <div class="modal-footer">
+    <button class="btn" id="id_btn_save"  >Save</button>
+    <button class="btn" id="id_btn_del" >Delete</button>   
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>    
+  </div>
+</div>
+
+<? } else{?><script>reload();</script><?} ?>
+<script>
+    $(document).ready(function(){
+        // highlight table headers
+        if(jSearchData.sort.length>0){
+            if(jSearchData.order.length>0){
+                $('#id_sort_'+jSearchData.sort).addClass('headerSort'+(jSearchData.order=='desc'?'Up':'Down'));
+            }
+        }
+        // update table headers
+        $('.tablesorter .header').on('click',function(){
+            var order = 'asc';
+            var sort = $(this).attr('id').split('_')[2];
+
+            if($(this).hasClass('headerSortUp')){
+                $(this).removeClass('headerSortUp').addClass('headerSortDown');
+                order = 'asc';
+            } else if($(this).hasClass('headerSortDown')){
+                $(this).removeClass('headerSortDown').addClass('headerSortUp');
+                order = 'desc';
+            } else {
+                $(this).addClass('headerSortDown');
+            }
+            $('.myfilter[name="sort"]').val(sort);
+            $('.myfilter[name="order"]').val(order);
+
+            var data = {};
+            $('.myfilter').each(function(){data[$(this).attr('name')]=$(this).val();});
+            loadContent('/admin/project/',data,'#id_ajax_content','html');
+            return false;
+        });
+    });
+</script>

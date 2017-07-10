@@ -1,0 +1,19 @@
+<?php
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="row">
+	<div class="span9">
+		<table class="table home_testimonials">
+            <tr>
+                 <td><div class="btn-group">
+                         <a id="id_edit_scroll_0" class="btn btn-primary edit" href="javascript:void(0);" >New Project</a>
+                     </div></td>
+                 <td style="width:90px"></td>
+            </tr>
+			<?=$this->partialLoop('partials4adm/homepage_projects_scrollbar.phtml', $this->aProjects)?>
+
+		</table>
+	</div>
+</div>
+<script>reload();</script>

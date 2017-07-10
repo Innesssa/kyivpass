@@ -1,0 +1,52 @@
+<? /*
+ 0358*	Каминская Л.П.*	1126,70*1	994,30*2	132,40*3	16,55*4	204,88*5	12,00*6		195,00*	10,00*7			1565,13	92,38	55	33	0*/
+//echo str_replace(" ","&nbsp;",sprintf("%6s %-15s ",$this->login,mb_substr($this->lastname." ".mb_strcut($this->firsname,0,1).".".mb_strcut($this->middlename,0,1),0,15)));
+//printf(" %7.2f %7.2f %7.2f %7.2f%7.2f %7.2f %7.2f %7.2f %05d %05d %05d\n",
+?><tr align="right">
+    <td><?=$this->lastname."&nbsp;".mb_substr($this->firstname,0,1).((mb_strlen(trim($this->firstname))>1)?".":"").mb_substr($this->middlename,0,1).((mb_strlen(trim($this->middlename))>1)?".":"")?></td>
+    <td><?=$this->login?></td>
+    <td><?=sprintf("%7.2f",$this->openamount)?></td><?/*Остаток?*/?>
+    <td><?=sprintf("%7.2f",$this->col2)?></td><? /* conv. */?>
+    <td><?=sprintf("%7.2f",$this->col3)?></td><? /* stat. */?>
+    <td><?=sprintf("%7.2f",$this->col4)?></td><? /* Страх. збiр. */?>
+    <td><?=sprintf("%7.2f",$this->col5)?></td><? /* Станц. збiр. */?>
+    <? if($this->partialLoop()->view->isShowLuggage) {?>
+        <td><?=sprintf("%7.2f",$this->col13)?></td><? /*Багаж.*/?>
+    <? } ?>
+    <td><?=sprintf("%7.2f",$this->col6)?></td><? /* Предв. */?>
+    <td>0.00</td><? /*Броня*/?>
+    <td>0.00</td><? /*Замовле*/?>
+    <td><?=sprintf("%7.2f",$this->col6_5)?></td><? /*Утрим.Тар*/?>
+    <td><?=sprintf("%7.2f",$this->col7)?></td><? /* +Посл. З */?>
+    <td><?=sprintf("%7.2f",$this->col8)?></td><? /* +Кам. схв. */?>
+    <td><?=sprintf("%7.2f",$this->col8_5)?></td><? /* Всього дод. */?>
+    <td><?=sprintf("%7.2f",0)?></td><? /* Внес.З підз */?>
+    <td><?=sprintf("%7.2f",($this->col6_5+(float)$this->col2+(float)$this->col3+(float)$this->col4+(float)$this->col5+(float)$this->col6+(float)$this->col8_5+(float)$this->col13))?></td><? /* Виручка */?>
+    <td><?=sprintf("%7.2f",$this->col9)?></td>
+    <td>0.00</td><? /*Вид.в підзв.*/?>
+    <td><?=sprintf("%7.2f",$this->inkasamount)?></td><?/*Вид. інкасатору ?*/?>
+    <?                                               /*Вид.в підзв.*/ ?>
+    <td><?=sprintf("%7.2f",(float)$this->inkasamount + (float)0.00)?></td><? /*Всього*/?>
+    <td><?=sprintf("%7.2f",$this->closeamount)?></td><?/*К.Остаток*/?>
+    <td><?=sprintf("%5d",$this->places)?></td>
+    <td><?=sprintf("%4d",0)?></td>
+</tr><?
+
+$this->partialLoop()->view->total_oamount+=(float)$this->openamount;
+$this->partialLoop()->view->total_camount+=(float)$this->closeamount;
+$this->partialLoop()->view->total_inkas+=(float)$this->inkasamount;
+$this->partialLoop()->view->total1+=(float)$this->col1;
+$this->partialLoop()->view->total2+=(float)$this->col2;
+$this->partialLoop()->view->total3+=(float)$this->col3;
+$this->partialLoop()->view->total4+=(float)$this->col4;
+$this->partialLoop()->view->total5+=(float)$this->col5;
+$this->partialLoop()->view->total6+=(float)$this->col6;
+$this->partialLoop()->view->total6_5+=(float)$this->col6_5;
+$this->partialLoop()->view->total7+=(float)$this->col7;
+$this->partialLoop()->view->total8+=(float)$this->col8;
+$this->partialLoop()->view->total8_5+=(float)$this->col8_5;
+$this->partialLoop()->view->total9+=(float)$this->col9;
+$this->partialLoop()->view->totalplaces+=(int)$this->places;
+$this->partialLoop()->view->total13+=(float)$this->col13;
+
+$this->partialLoop()->view->total_all+=(float)$this->inkasamount + (float)0.00; /*Вид.в підзв.*/

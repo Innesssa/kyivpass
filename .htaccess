@@ -1,0 +1,15 @@
+
+
+AddDefaultCharset utf-8 
+
+RewriteEngine on
+RewriteBase / 
+
+RewriteCond %{REQUEST_URI}  !^/cms/
+RewriteCond %{REQUEST_URI}  !^/lib/
+RewriteCond %{REQUEST_URI}  !^/magic/
+RewriteCond %{REQUEST_URI}  !^/userfiles/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]

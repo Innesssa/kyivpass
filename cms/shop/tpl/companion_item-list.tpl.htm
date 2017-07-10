@@ -1,0 +1,134 @@
+<style>
+.price span {
+background-color: #f5f5f5;
+border-left: 2px solid #7b7b7b;
+padding: 5px;
+font: bold 25px Arial;
+color:#7B7B7B;
+}
+.price span font {
+font-size: 12px;
+vertical-align: super;
+}
+.wrap_catalog_sell{
+  border: 2px solid #fff;
+}
+.wrap_catalog_sell:hover{
+cursor:pointer;
+  border: 2px dashed #95CF24;
+  box-shadow:
+    0 0 0 1px #95CF24,
+    inset 0 0 0 1px #95CF24;}
+    
+</style>
+<div align="center">
+
+<table style="width: 95%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=tag&com=list<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку тегов" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+
+</td><td align="center" style="padding-left:7px;">
+
+</td><td align="center" width="95%" style="padding-left:7px;">
+
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;">Сопутствующие товары</span></nobr><br>
+<nobr><span style="color:#444;"></span><?=$tag_list[$tag]['caption']?></nobr>
+</tr>
+</table>
+
+
+
+<div style="padding:0px 0px 0px 12px;width:763px;min-height:500px;">
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/".$mod."/".$type."/".$val['id']."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+if ($val['show']!=1){$item_color = " #FFF1F1";}else{$item_color = "#F1FFE6";}
+?>
+<table onClick="parent.companionItem(<?=$val['id']?>);" style="background-color:<?=$item_color?>;margin:0px 12px 7px 0px;width:98%;height:150px" cellpadding="0" cellspacing="1" class="wrap_catalog_sell r7" title="Выбрать">
+<tr><td style="padding:0px;background-color:wite;" width="200">
+
+<a href="#shopItem--<?=$val['id']?>" title="Выбрать">
+<img src="<?=$img1?>?<?=time()?>" height="150" border="0">
+</a>
+</td><td align="left" style="padding:10px 12px 12px 12px;height:125px;overflow:hidden;" valign="top">
+  
+<div style="margin-bottom:7px;">
+<!--<a href="?mod=<?=$mod?>&type=<?=$type?>&com=<?=$com?>&tag=<?=$val1?><?if($display!=""){?>&display=<?=$display?><?}?>" style="line-height:17px;color:#5E84B8;font-size:12px;<?if($val1==$tag){?>font-weight:bold;<?}?>"><?=$tag_list[$val1]['caption']?></a>&nbsp; -->
+
+<a href="#shopItem--<?=$val['id']?>" title="Выбрать">
+<span style="line-height:17px;color:#466AC8;font-size:13px;font-weight:bold;"><?=$val['caption']?></a>&nbsp;
+</div>
+
+
+<table width="99%" cellpadding="0" cellspacing="0"><tr><td valign="top" width="240">
+<div style="margin-top:10px;">
+<?$dp=explode(".",$val['price_diler']);?>
+<table cellpadding="0" cellspacing="0" width="90%" class="price" style="margin-bottom:10px;"><tr><td style="height:25px;margin-bottom:12px;" valign="bottom" align="left">
+<div style="margin-bottom:12px;color:#AE0B12">Цена: <span style="color:#C21F26;border-color:#AE0B12"><?=$dp[0]?>.<font><?=$dp[1]?></font></span></div>
+</td></tr></table>
+<?$price_roznica = Price::getPrice($val['postavschik'],$val['price_roznica'],$val['price_diler'],$val['ddp']);
+$sp=explode(".",$price_roznica);
+$sp[1]=substr($sp[1]."00",0,2);
+?>
+<table cellpadding="0" cellspacing="0" width="90%" class="price" style="margin-bottom:7px;"><tr><td style="width:77px;height:25px;" valign="top" align="left">
+<div>Цена </div><div>магазина:</div> 
+</td><td>
+<div><span><?=$sp[0]?>.<font><?=$sp[1]?></font></span> <?=CURRENCY?></div>
+</td></tr></table>
+</div>
+
+</td><td valign="top">
+
+<!-- ====================================== -->
+<?
+$param_list = ShopItem::getParam($val[param_connect],";");
+$param_1 = ($param_list[0]['value1'] != "") ? $param_list[0]['value1']."-" : "";
+$param_2 = ($param_list[1]['value1'] != "") ? "-".$param_list[1]['value1'] : "";
+$article = $param_1.$val['article'].$param_2;
+?>
+<div style="font-size:11px;margin-bottom:10px;"><b>Код:</b> <?=$article?></div>
+<!-- ====================================== -->
+
+<div style="font-size:11px;margin-bottom:10px;">
+<b>Упаковка:</b> <?=$val["package"]?>
+</div>
+
+<div style="font-size:11px;margin-bottom:10px;">
+<b><?=$param_tag_list[substr($param_list[0]['connect'],1,-1)]['caption']?>:</b> <?=$param_list[0]['caption']?>
+</div>
+
+<div style="font-size:11px;margin-bottom:10px;">
+<b><?=$param_tag_list[substr($param_list[1]['connect'],1,-1)]['caption']?>:</b> <?=$param_list[1]['caption']?>
+</div>
+
+</td></tr></table>
+<?
+$tag_connect=explode(";",$val['connect']);
+//var_dump($tag_connect);
+if($tag_connect!=null){
+foreach($tag_connect as $key1=>$val1){
+?>
+<!--<a href="?mod=<?=$mod?>&type=<?=$type?>&com=<?=$com?>&tag=<?=$val1?><?if($display!=""){?>&display=<?=$display?><?}?>" style="line-height:17px;color:#5E84B8;font-size:12px;<?if($val1==$tag){?>font-weight:bold;<?}?>"><?=$tag_list[$val1]['caption']?></a>&nbsp; -->
+<?
+}}
+?>
+<td align="right" style="" valign="top" width="50">
+
+</td></tr></table>
+
+<?}}?>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+
+
+<div><br><br><br><br><br><br><br></div>
+
+

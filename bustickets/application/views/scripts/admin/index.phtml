@@ -1,0 +1,38 @@
+<h3>Dashboard</h3>
+
+<table class="table table-bordered" style="width: 300px;">
+    <tr style="background-color: #D9E4E4">
+        <th colspan="2">API systems</th>
+    </tr>
+    <?
+    foreach ($this->statuses as $key => $data) {
+    ?>
+        <tr>
+            <th><?=$data['title']?></th>
+            <td style="width: 50px; padding: 10px 20px;">
+                <?if ($data['status'] == Govsource_ApiTester::STATUS_OK) {
+                    ?>
+                    <span class="label label-success">Ok</span>
+                <?
+                }
+                elseif ($data['status'] == Govsource_ApiTester::STATUS_WARN){
+                    ?>
+                    <span class="label label-warning"><?=$data['message']?></span>
+                    <?
+                }
+                else {
+                    ?>
+                    <span data-toggle="tooltip" title="<?=$data['error']?>" class="label label-important with-tooltip">Error <i class="icon icon-question-sign icon-white"></i></span>
+                <?
+                }?>
+
+            </td>
+        </tr>
+    <?
+    }
+    ?>
+</table>
+
+<script>
+    $('.with-tooltip').tooltip();
+</script>

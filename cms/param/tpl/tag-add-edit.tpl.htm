@@ -1,0 +1,137 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку записей" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&level=<?=$level?><?if($parent_tag!=""){?>&parent_tag=<?=$parent_tag?><?}?>&id=new<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить новую запись" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?$id=$_GET['id'];if($id!=""&&$id!="new"){?></td><td align="center" style="padding-left:7px;"><a href="<?=SITE_URL."/".$parent_data['seo']."/".$art_data["id"]."-".$art_data["seo"].".html"?>" title="Посмотреть на сайте"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a><?}?>
+</td><td align="center" style="padding-left:7px;">
+<a href="javascript:void(0)" onclick="addEdit.submit();"><img src="design/ico_save.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" width="95%" style="padding-left:7px;">
+<?if($cmd=="update"||$_GET['save']=="ok"){?><b style="color:forestgreen;font-size:13px;">Данные сохранены!</b><br><?=date("H:i:s d-m-Y")?><?}?>&nbsp; 
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=MOD_NAME?></span></nobr><br>
+<nobr><span style="color:#444;">Карточка категории : </span># <?=$tag_data['id']!=''?$tag_data['id']:'NEW'?></nobr>
+</tr>
+</table>
+
+
+<div align="center">
+<div style="padding:0px 12px 12px 20px;max-width:870px;min-height:500px;" align="left">
+
+<form name="addEdit" method="post" action="<?=SITE_URL?>/cms/?<?=getenv("QUERY_STRING")?>">  	
+
+<fieldset class="pole">
+<legend>&nbsp;Название :&nbsp;</legend>
+<input type="text" name="caption" id="caption" maxlength="250" style="padding:5px 7px;width:98%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$tag_data['caption']?>">
+</fieldset>
+
+<input type="hidden" name="cmd" value="<?=$tag_data['id']!=''?'update':'insert'?>">
+<input type="hidden" name="pos" value="<?=$tag_data['pos']?>">
+<input type="hidden" name="level" value="<?=$tag_data['level']!=""?$tag_data['level']:$level?>">
+<?if($level==1){?>
+<input type="hidden" name="connect" value="<?=$tag_data['connect']?>">
+<?}?>
+<table style="width:100%" cellpadding="0" cellspacing="0"><tr>
+<td valign="top" style="width:350px;padding-right:0px;">
+<?
+
+$img1="/image/".$mod."/".$type."/".$tag_data['id']."/1.jpg";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/index_files/noimage_740x480.png";
+	?>
+<fieldset class="pole">
+<legend>&nbsp;Фото :&nbsp;</legend>
+
+<a href="javascript:onWhiteSlimbox('/cms/gallery/magic/load_item_image.php?img=/image/gallery/item/<?=$tag_data['id']?>/1.jpg&prodid=<?=$tag_data['id']!=''?$tag_data['id']:'new'?>&numer=1')">
+	    <img id="prodimg1" alt="" src="<?=$img1?>?<?=time()?>" width="350" style="border:0px solid #d7d7d7" /></a>
+</fieldset>
+
+<?
+$pid=explode(";",substr($tag_data["connect"],1,-1));
+if($pid[0]!=''){$parent_tag=$pid[0];}
+?>
+</td><td valign="top" style="padding-left:7px;">
+
+<fieldset class="pole">
+<legend>&nbsp;Секция :&nbsp;</legend>
+<?if($level==1){?>
+<div style="width:99%;padding:1px 20px;height:30px;font-weight:bold;font-size:15px;color:#5A7EDC;" align="center">Главная секция</div>
+<?}else{?>
+<select name="connect[]" style="color:#5A7EDC;width:99%;padding:2px 2px;height:25px;font-weight:bold;line-height:20px;font-size:14px;font-family:verdana;margin:3px 0px 4px 0px;">
+<option value="null" selected> --- Выберите секцию</option>
+<?foreach ($tag_list1 as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($parent_tag==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+<?}?>
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Краткое описание :&nbsp;</legend>
+<textarea name="desc_short" style="padding:7px;height:81px;width:96%;"><?=$tag_data['desc_short']?></textarea>
+</fieldset>
+
+ <fieldset class="pole">
+<legend>&nbsp;Видимость :&nbsp;</legend>
+<div style="margin-bottom:0px;"><label><input name="show" type="checkbox"<?if ($tag_data['show']==1||$com=='add'){?> checked="checked"<?}?> value="1" />&nbsp;Показывать на сайте&nbsp;</label></div> 
+</fieldset>
+
+</td></tr></table>
+
+<fieldset class="pole">
+<legend>&nbsp;Seo Link :&nbsp;</legend>
+<input name="seolink" value="<?=$tag_data['seolink']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Описание :&nbsp;</legend>
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+//include(SITE_PATH."/lib/ckfinder/ckfinder.php") ;
+
+$sBasePath =SITE_URL.'/lib/fckeditor/';
+$oFCKeditor = new FCKeditor('desc_full') ;
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor->Config['EditorAreaCSS'] = SITE_URL.'/cms/design/fckeditor.css';
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $tag_data['desc_full'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '200' ;
+$oFCKeditor->ToolbarSet = 'Basic';
+//CKFinder::SetupFCKeditor($oFCKeditor,'/cms/lib/ckfinder/');
+$oFCKeditor->Create() ;
+?>   
+</fieldset>
+
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Title :&nbsp;</legend>
+<input name="meta_t" value="<?=$tag_data['meta_t']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Keywords :&nbsp;</legend>
+<input name="meta_k" value="<?=$tag_data['meta_k']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Description :&nbsp;</legend>
+<textarea name="meta_d" style="padding:7px;height:40px;width:98%;"><?=$tag_data['meta_d']?></textarea>
+</fieldset>
+
+
+
+</form>	
+
+<br>
+<table style="width:98%;" cellpadding="0" cellspacing="0"><tr><td align="left" style="width:50%;padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&id=<?=$tag_data['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" onclick="if (confirm('Вы уверены что хотите удалить запись?')) location=this.href; return false;"><img src="design/icon-delete.gif" style="cursor: pointer;" title="Удалить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="right">
+<a href="javascript:void(0)" onclick="addEdit.submit();"><img src="design/ico_save.gif" style="cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td></tr></table>
+
+</div></div>
+
+<br><br>
+
+

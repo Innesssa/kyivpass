@@ -1,0 +1,113 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<div class="corn polosa3">
+<a href="../<?=$all_tag_list[str_replace(";","",$item_data['connect'])]['seolink']?>"><?=$all_tag_list[str_replace(";","",$item_data['connect'])]['caption']?></a> » <?=$item_data['caption']?>
+</div>
+<style>
+.desc li{margin-left:20px;margin-bottom:7px;}
+</style>
+<table style="width:100%"><tr><td valign="top" width="440">
+<?
+$img1=GALLERY_ITEM_IMG_PATH."/".$item_data['id']."/1m.png";
+$img2=GALLERY_ITEM_IMG_PATH."/".$item_data['id']."/2s.png";
+$img3=GALLERY_ITEM_IMG_PATH."/".$item_data['id']."/3s.png";
+$img4=GALLERY_ITEM_IMG_PATH."/".$item_data['id']."/4s.png";
+$img5=GALLERY_ITEM_IMG_PATH."/".$item_data['id']."/5s.png";
+
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img2))$img2="";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img3))$img3="";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img4))$img4="";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img5))$img5="";
+?>
+
+<div class="image">
+<a href="<?=str_replace("m.png",".png",$img1)?>" title="Кликните для увеличения">
+<img id="prodimg1" alt="" src="<?=$img1?>?<?=time()?>" width="421" height="273" border="1" /></a>
+</div>
+<div class="image" style="margin:7px 0px;width:425px;">
+<?if($img2!=""){?><a href="<?=str_replace("s.png",".png",$img2)?>" title="Кликните для увеличения"><img id="prodimg2" src="<?=$img2?>?<?=time()?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+<?if($img3!=""){?><a href="<?=str_replace("s.png",".png",$img3)?>" title="Кликните для увеличения"><img id="prodimg3" src="<?=$img3?>?<?=time()?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+<?if($img4!=""){?><a href="<?=str_replace("s.png",".png",$img4)?>" title="Кликните для увеличения"><img id="prodimg4" src="<?=$img4?>?<?=time()?>" width="100" height="65" border="1" style="margin-right:7px;" /></a><?}?>
+<?if($img5!=""){?><a href="<?=str_replace("s.png",".png",$img5)?>" title="Кликните для увеличения"><img id="prodimg5" src="<?=$img5?>?<?=time()?>" width="100" height="65" border="1" /></a><?}?>
+</div>
+</td><td valign="top">
+<h1 style="font: 18px Arial;color: #ff0000;margin:15px 0px;">
+<?=$item_data['caption']?>
+</h1>
+<div style="color: black;margin-bottom:15px;">
+<b>Код:</b> 
+<span style="font:normal 12px Tahoma;">A4-101101-С01</span>
+</div>
+<div style="color: black;margin-bottom:15px;">
+<b>Упаковка:</b> 
+<span style="font:normal 12px Tahoma;"><?=$item_data["package"]?></span>
+</div>
+<div class="desc" style="color: black;margin-bottom:25px;">
+<div style="color: black;margin-bottom:15px;">
+<b style="color: black;">Комплект:</b></div> 
+<?=$item_data["desc_full"]?>
+</div>
+	
+</td></tr></table>
+
+<div align="right">
+<div style="width:305px;color: black;margin-bottom:15px;" align="left">
+<div><b>Цена за комплект :</b></div>
+<div style="font: 25px Arial;color: #000000;">
+<span style="font: 37px Arial;color: #ff0000;"><?=$item_data["price_diler"]?></span> грн. </div>
+
+<div class="form">
+<form method="POST" class="order wareItem">
+<input name="wId" type="hidden" value="67">
+<input name="t" type="hidden" value="ware">
+<input name="skoka" type="text" value="1"> x <?=$item_data["price_diler"]?> грн.
+<br><span class="inCart" style="line-height:4px;">&nbsp;</span><br>
+<input name="incart" type="submit" value="В корзину">
+</form>
+</div>
+
+
+
+</div>
+</div>
+
+
+
+<br><br>
+<div class="corn polosa">
+Отрасли применения
+</div>
+<?
+$gallery_tag_list1=Gallery::tagListShowConnectId(1);
+$branch_c=explode(";",substr($item_data['branch_connect'],1,-1));
+?>
+
+<div align="center">
+<?if($branch_c){foreach($branch_c as $key=>$valb){?>
+
+<label style="margin:1px 7px 1px 7px;" id="branch_label_<?=$gallery_tag_list1[$valb]['seolink']?>">
+<style>
+#branch_label_<?=$gallery_tag_list1[$valb]['seolink']?> input + span{
+background: url('/design/branch/<?=$gallery_tag_list1[$valb]['seolink']?>.png') no-repeat -6px 0 transparent;
+color:#999;
+}
+#branch_label_<?=$gallery_tag_list1[$valb]['seolink']?> input:checked + span{
+background: url('/design/branch/<?=$gallery_tag_list1[$valb]['seolink']?>_active.png') no-repeat -6px 0 transparent;
+color:black;
+
+}
+</style>
+<input type="checkbox" value="<?=$gallery_tag_list1[$valb]['id']?>" name="branch[]" id="branch_<?=$gallery_tag_list1[$valb]['id']?>" style="display:none;"<?if(strstr($item_data['branch_connect'],";".$gallery_tag_list1[$valb]['id'].";")){?> checked="checked"<?}?>>
+<span style="line-height: 55px;padding-left: 50px;display: inline-block;">
+<?=$gallery_tag_list1[$valb]['caption']?>
+</span>
+</label>
+
+<?}}?>
+</div>
+
+
+
+
+<br><br><br><br>
+

@@ -1,0 +1,18 @@
+<div class="page_header" style="background: #f9f9f9">&nbsp;</div>
+<div class="container_page">
+    <h1 style="height: 35px; font-size: 23px; line-height: 35px; color: #175ca0; padding-left: 50px; margin: -60px 0 25px -20px; background: url('/img/sprite.png') 0 -239px no-repeat;">
+  <?php echo $this->message ?></h1>
+  <? if (getenv('APPLICATION_ENV') == 'development' ): ?>
+  <?php if (isset($this->exception)): ?>
+  <h3>Exception information:</h3>
+  <p><?php echo $this->exception->getMessage() ?></p>
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+  </pre>
+  <? endif; ?>
+  <?php endif ?>
+  </div>

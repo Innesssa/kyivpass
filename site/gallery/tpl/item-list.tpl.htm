@@ -1,0 +1,92 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<style>
+.wrap_catalog{
+    padding:0px; margin:10px auto;
+    width:780px; min-height:100px;
+    text-align:center;
+
+}
+.wrap_catalog_sell{
+height:295px;
+    float:left;
+    background-color:#fff;
+    margin:0px 11px 11px 0px;
+    border:0px solid orangered;
+    padding:4px 0px 7px 0px;
+}
+.wrap_catalog_sell:hover{
+     -webkit-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     -moz-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+     box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+}
+.buy{display:none;}
+
+.wrap_catalog_sell:hover td .buy{
+    display:block;
+}
+.wrap_catalog_sell:hover td .price{
+    display:block;
+}
+.wrap_catalog_sell:hover a{
+    text-decoration:none;
+}
+.view_grid{
+    width:248px;   
+}
+.view_list{
+    width:99%;
+    text-align:left;
+    padding-left:10px;
+}
+.price span {
+background-color: #f5f5f5;
+border-left: 2px solid #7b7b7b;
+padding: 5px;
+font: bold 25px Arial;
+}
+.price span font {
+font-size: 12px;
+vertical-align: super;
+}
+</style>
+<div class="corn polosa">
+<a href="../<?=$all_tag_list[str_replace(";","",$tag2_data['connect'])]['seolink']?>"><?=$all_tag_list[str_replace(";","",$tag2_data['connect'])]['caption']?></a> » <?=$tag2_data['caption']?>
+</div>
+<div class="wrap_catalog">
+<div style="padding:0px 0px 0px 12px;width:763px;">
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/gallery/item/".$val['id']."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<table style="float:left;background-color:#F1F1F1;margin:0px 12px 12px 0px;width:240px" cellpadding="0" cellspacing="1" class="r7b"><tr><td style="padding:0px;background-color:wite;">
+<a href="<?=str_replace("m.png",".png",$img1)?>" title="Кликните для подолжения" rel="lightbox[yoo-gallery-<?=$tag2_data['seolink']?>]">
+<img src="<?=$img1?>?<?=time()?>" width="240" border="0">
+</a>
+</td></tr>
+<tr><td align="center" style="padding:12px 15px 12px 15px;height:65px;overflow:auto;" valign="top">
+
+<?
+
+$tag_connect=explode(";",$val['connect']);
+//var_dump($tag_connect);
+if($tag_connect!=null){
+foreach($tag_connect as $key1=>$val1){
+?>
+<a href="../<?=$all_tag_list[str_replace(';','',$all_tag_list[$val1]['connect'])]['seolink']?>/<?=$all_tag_list[$val1]['seolink']?>" style="font-family:verdana;line-height:19px;color:#5E84B8;font-size:12px;<?if($all_tag_list[$val1]['seolink']==$GLOBALS['tag2']){?>font-weight:bold;text-decoration:none;<?}?>"><?=$all_tag_list[$val1]['caption']?></a>&nbsp; 
+<?
+}}
+?>
+
+</td></tr></table>
+
+<?}}?>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+<br><br><br><br>
+

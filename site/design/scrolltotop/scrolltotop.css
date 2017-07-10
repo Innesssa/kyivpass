@@ -1,0 +1,39 @@
+		#message
+		{
+			/* display: block before hiding */
+			display: block;
+			display: none;
+
+			/* link is above all other elements */
+			z-index: 999; 
+
+			/* link doesn't hide text behind it */
+			opacity: .8;
+
+			/* link stays at same place on page */
+			position: fixed;
+
+			/* link goes at the bottom of the page */
+			top: 100%;
+			margin-top: -80px; /* = height + preferred bottom margin */
+
+			/* link is centered */
+			right: 94%;
+			margin-right: -10px;
+
+			/* round the corners (to your preference) */
+			-moz-border-radius: 24px;
+			-webkit-border-radius: 24px;
+
+			/* make it big and easy to see (size, style to preferences) */
+			width: 50px;
+			line-height: 20px;
+			height: 20px;
+			padding: 10px;
+			background-color: #d91219;
+			font-size: 14px;
+			text-align: center;
+			color: #fff;
+		}
+		
+		#message a { color: #fff; }

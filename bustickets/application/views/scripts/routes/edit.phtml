@@ -1,0 +1,23 @@
+<h4><?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? }
+echo $this->form;
+echo $this->htmlpart;
+?><script>$( ".datepicker" ).datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+    var jReserve = <?=(!empty($this->jReserve)) ? $this->jReserve : "{}" ?>;
+    var i=0;
+    for (key in jReserve) {
+        if(jReserve[key]!=""){
+            var elm = (i==0) ? $('#idButtonReserve').parent().find('div').last() : addRow('#idButtonReserve');
+            $(elm).find('input').val(jReserve[key]);
+            $(elm).find('select option[value="'+key+'"]').attr('selected', 'selected');
+            i++;
+        }
+    }
+</script>

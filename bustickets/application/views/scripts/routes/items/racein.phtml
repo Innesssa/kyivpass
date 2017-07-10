@@ -1,0 +1,25 @@
+<tr id="id_row_<?=$this->id?>">
+    <td class="code"><?=$this->code?></td>
+    <td class="title"><?=$this->title?></td>
+    <td><?
+        $tm = $this->hour*60 + $this->minute+$this->timeperiod; /*  $this->hour.":".sprintf("%02d",$this->minute) */
+        $H = floor($tm/60);
+        $M = $tm-$H*60;
+        $D = "";
+        if($H>24){
+           $D = floor($H/24);
+           $H = $H-$D*24;
+        }
+        echo $D." ".sprintf("%02d",$H).":".sprintf("%02d",$M);
+        ?></td>
+    <td><?=!empty($this->rcstatus) ? Application_Model_Races::$_aTypes[$this->rcstatus] : "відсутній"?></td>
+    <td>
+        <span data-toggle="tooltip" title="<?=htmlspecialchars(str_replace("\r"," ",str_replace("\n"," ",$this->description)),ENT_QUOTES)?>" class="label label-important with-tooltip"><i class="icon icon-question-sign icon-white"></i></span>
+    </td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_close_item_<?=$this->id?>_<?=$this->rcid?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="прийняти маршрут" alt="прийняти маршрут"><i class="icon-ok-circle"></i></a>
+            <a id="id_print_item_<?=$this->id?>_<?=$this->rcid?>" class="btn btn-mini edit"  title="примірник маршруту" alt="примірник маршруту"><i class="icon-print"></i></a>
+        </div>
+    </td>
+</tr>

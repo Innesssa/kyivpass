@@ -1,0 +1,18 @@
+<tr id="id_item_<?=$this->id?>">
+    <td><?=$this->id?></td>
+    <td><b><small><?php echo $this->code ?></small></b></td>
+    <td><b><small><?php echo $this->title ?></small></b></td>
+    <td><?php echo $this->title_short ?></td>
+    <td><?php echo $this->title_print ?></td>
+    <td><?php echo $this->price ?></td>
+    <td><?php echo $this->vat ?></td>
+    <td><?php echo $this->article ?></td>
+    <td><?php echo $this->group_vat ?></td>
+    <td><?php echo $this->description ?></td>
+    <td class="actions">
+       <div class="btn-group">
+            <a id="id_edit_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>
+            <a id="id_del_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);"><i class="icon-remove"></i></a>
+        </div>
+    </td>
+</tr>

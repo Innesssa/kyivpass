@@ -1,0 +1,56 @@
+<?php
+if(!$this->isAjax){
+echo $this->partial('partials4adm/messages.phtml');
+?>
+    <div class="well" style="min-height:100px;">
+        <iframe style="width: 100%; height: 100%;" onload="$('#loader').hide(); $('#id_apply_filter').click();" id="cron_frame"></iframe>
+        <button onclick="cron_reload();">Cron Call</button>
+    </div>
+    <script>
+        function cron_reload() {
+            $('#loader').show();
+            $('#cron_frame').attr('src','/cron_plugins.php?manual=true');
+        }
+    </script>
+<div class="well">
+	<div class="filter form-inline">
+        <form action="/admin/tasks" id="form-filter">
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+		    <label for="plugin_field"><span> Filter By: </span></label>
+            <select name="filter[plugin]" class="myfilter" id="plugin_field">
+				<option value="">Plugin</option>
+                <?
+                foreach ($this->plugins as $data) {
+                    echo '<option value="'.$data->plugin.'">'.$data->plugin.'</option>';
+                }
+                ?>
+			</select><a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        </form>
+    </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table id="id_table_crontasks" class="tablesorter">
+			<thead>
+				<tr>
+					<th data-field-name="id" class="header" style="width:25px">#</th>
+                    <th data-field-name="next" class="status header" style="width:100px">Next</th>
+                    <th data-field-name="prev" class="status header" style="width:100px">Previous</th>
+					<th data-field-name="plugin" class="header" style="width:50px">Plugin</th>
+                    <th data-field-name="task" class="header" style="width:50px">Task</th>
+					<th data-field-name="manual" class="header" style="width:30px">Need manual</th>
+                    <th  style="width:100px">Commands</th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/tasks.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+<script>govsource.pageConfig.searchData=<?=$this->aFilter?>;</script>
+<?=$this->paginationControl($this->paginator)?>	
+<div class="clearfix"></div> 
+<?php if(!$this->isAjax){?></div>
+<!-- Modal -->
+<?= $this->partial('partials4adm/modal.phtml'); ?>
+<!-- End Modal-->
+<? } else { ?><script>govsource.AdminTasks.bindEvents();</script><? } ?>

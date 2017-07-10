@@ -1,0 +1,115 @@
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Маршрут</th>
+        <th>На</th>
+        <th>Місце</th>
+        <th>Каса</th>
+        <th>Касир</th>
+        <th>Придбано</th>
+        <th>Чек №</th>
+        <th>PPO №</th>
+        <th>Сплачено</th>
+        <th></th>
+    </tr>
+    <tr align="right">
+        <td><?=$this->data['id']?></td>
+        <td><?=$this->data['code']?></td>
+        <td><?=$this->data['dt_time_begin']?></td>
+        <td><?=$this->data['place']?></td>
+        <td><?=$this->data['station_buy']?></td>
+        <td><?=$this->data['kassauid']?></td>
+        <td><?=date("d.m.Y H:i",$this->data['lastchange'])?></td>
+        <td><?=$this->data['checknumber']?></td>
+        <td><?=$this->data['ppo']?></td>
+        <td><?=sprintf("%8.2f",$this->data['total_price_with_benefits'])?></td>
+        <td><a href="javascript:void(0);" onclick="PrintBackElem();">Повернути</a></td>
+    </tr>
+
+   <? /*
+
+
+    [kassauid] => 23
+    [to_id] => 1015
+    [from_id] => 1306
+    [dt_time_begin] => 2015-03-28 09:30:00
+    [status] => paid
+    [dt_time_finish] => 2015-03-28 20:47:00
+    [conv_id] => 13
+    [insurer_id] => 5
+    [vehicle_id] => 1348
+    [benefits_id] => 0
+    [benefits_docnum] =>
+    [price_tariff] => 35.35
+    [price_tariff_with_benefits] => 35.35
+    [benefits_percent] => 0.00
+    [conv_tariff] => 31.82
+    [stat_tariff] => 3.53
+    [benefits_name] =>
+    [conveyor_vat] =>
+    [gov_vat] => 20.00
+    [conv_tariff_vat] => 0.00
+    [stat_tariff_vat] => 0.71
+    [insurer_percent] => 1.50
+    [insurer_tariff] => 0.53
+    [station_tax] => 15.00
+    [station_tax_tariff] => 5.38
+    [station_tax_tariff_vat] => 1.08
+    [luggage_price] => 2.00
+    [luggage_count] => 0
+    [luggage_total] => 0.00
+    [full_price] => 44.59
+    [full_price_vat] => 2.46
+    [total_price] => 47.05
+    [lastchange] => 1427099958
+    [checknumber] => 0000034646
+    [total_price_with_benefits] => 47.05
+    [full_price_with_benefits_vat] => 2.46
+    [full_price_with_benefits] => 44.59
+    [station_tax_tariff_with_benefits_vat] => 1.08
+    [station_tax_tariff_with_benefits] => 5.38
+    [insurer_tariff_with_benefits] => 0.53
+    [stat_tariff_with_benefits_vat] => 0.71
+    [conv_tariff_with_benefits_vat] => 0.00
+    [stat_tariff_with_benefits] => 3.53
+    [conv_tariff_with_benefits] => 31.82
+    [prepaid_vat] => 0.67
+    [prepaid] => 3.33
+    [paidfromother_vat] => 0.00
+    [paidfromother] => 0.00
+    [conv_luggage_tariff] => 0.00
+    [stat_luggage_tariff] => 0.00
+    [conv_luggage_tariff_vat] => 0.00
+    [stat_luggage_tariff_vat] => 0.00
+    [ppo] => 1140032316
+    [back_date] =>
+ */?>
+</table><script>
+var jBackTicket = <?=($this->data)? json_encode($this->data):"{}"?>;
+    jBackTicket["kassauid"]         = "<?=$this->kassauid?>";
+    jBackTicket["kassaname"]        = "<?=$this->kassaname?>";
+    jBackTicket["acname"]           = "<?=addslashes($this->station->title)?>";
+    jBackTicket["raceid"]           = "<?=$this->data["routeid"]?>";
+    jBackTicket["title"]            = "<?=addslashes($this->title)?>";
+    jBackTicket["conv_title"]       = "<?=addslashes($this->conveyor_name)?>";
+    jBackTicket["insurer_title"]    = "<?=addslashes($this->insurer_title)?>";
+    jBackTicket["vehiclename"]      = "<?=addslashes($this->vehiclename)?>";
+    jBackTicket["from"]             = "<?=addslashes($this->from->title)?>";
+    jBackTicket["to"]               = "<?=addslashes($this->to->title)?>";
+    jBackTicket["benefits_title"]   = "<?=addslashes($this->benefits_title)?>";
+    jBackTicket["benefits_name"]    = "<?=addslashes($this->benefits_name)?>";
+    jBackTicket["dt_start"]         = "<?=$this->data['dt_time_begin']?>";
+    jBackTicket["dt_finish"]        = "<?=$this->data['dt_time_finish']?>";
+    jBackTicket["conveyor_vat"]=(jBackTicket["conveyor_vat"]=="true" || jBackTicket["conveyor_vat"]=="TRUE" || jBackTicket["conveyor_vat"]==true ) ? 1 : 0;
+
+    jBackTicket['conv_luggage_full_price'] = jBackTicket['luggage_price'] * 1.0  * 90;
+    jBackTicket['stat_luggage_full_price'] = jBackTicket['luggage_price'] * 100.0 - jBackTicket['conv_luggage_full_price'] * 1.0;
+
+    jBackTicket['stat_luggage_full_price'] = Number( (jBackTicket['stat_luggage_full_price']*1.0+jBackTicket['stat_luggage_full_price']*1.0/100*govVAT)/100.0).toFixed(2);
+    jBackTicket['conv_luggage_full_price'] = Number( (jBackTicket['conv_luggage_full_price']*1.0+( (jBackTicket["conveyor_vat"] * 1.0) ? (jBackTicket['conv_luggage_full_price'] /100.0  * jBackTicket["gov_vat"]*1.0 ) : 0.0) )/100).toFixed(2);
+
+
+if(DEBUG_BUSTICKETS) {console.log("File:findcheck.phtml jBackTicket="); console.log(jBackTicket);}
+</script><?
+//trace($this->data);
+?>

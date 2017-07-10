@@ -1,0 +1,23 @@
+<div class="feedback_popup form_feedback">
+	<a class="feedback_close" href="#">Close</a>
+	<h1><?=FEEDBACK_TITLE?></h1>
+	<form method="post" action="/message/feedback" id="feedback_form">
+		<input type="text" name="feedback_name" placeholder="<?=FEEDBACK_NAME?>" />
+        <input type="text" name="feedback_phone" placeholder="<?=FEEDBACK_PHONE?>" />
+        <input type="text" name="feedback_email" placeholder="E-mail" />
+        <textarea placeholder="<?=FEEDBACK_MESS?>" name="feedback_mess" id="feedback_mess"></textarea>
+        <div class="both br_10"></div><div align="center">
+		<input type="submit" value="<?=FEEDBACK_ONLINE?>" name="feedback_online"  class="btns" />	</div>
+	</form>
+<!--
+<input type="text" name="form__phone" placeholder="Телефон"  onkeyup="check(this.value)"/>
+<span id="phone" style="display: none; color: #c00;">Минимум 7 цифр</span>
+<script type="text/javascript">
+   function check(phone) {
+    if (phone.length < 7) document.getElementById("phone").style.display = "inline";
+    else document.getElementById("phone").style.display = "none";
+  }
+</script>
+-->
+</div>
+

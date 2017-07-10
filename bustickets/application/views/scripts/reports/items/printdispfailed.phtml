@@ -1,0 +1,5 @@
+<tr align="left">
+    <th colspan="3"><?="(".$this->description.")".$this->title?></th>
+    <th align="right"><?=((!empty(  $this->partialLoop()->view->total_aFailed[$this->description]  )) ? $this->partialLoop()->view->total_aFailed[$this->description] : 0)?></th>
+    <th colspan="9" align="right"></th>
+</tr>

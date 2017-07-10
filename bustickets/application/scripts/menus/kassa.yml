@@ -1,0 +1,17 @@
+nav:
+  buytickets:
+     label: 'Квитки продаж'
+     controller: tickets
+     action: index
+  backticket:
+     label: 'Повернення квитка'
+     controller: tickets
+     action: back
+  operations:
+     label: 'Касові операції'
+     controller: kassa
+     action: index
+  logout:
+      label: 'Вийти'
+      controller:  logout
+

@@ -1,0 +1,36 @@
+<?
+if(!empty($this->partialLoop()->view->curConvoer) && $this->conveyorid!=$this->partialLoop()->view->curConvoer){
+?>
+<tr align="right">
+    <td  align="left"><b>Всього:</b></td><?
+    foreach($this->partialLoop()->view->td_failtype as $key=>$val){
+        ?><td><?=(!empty($this->partialLoop()->view->td_Local_sum[$key])  ) ? $this->partialLoop()->view->td_Local_sum[$key] : 0?></td><?
+
+    }?>
+</tr>
+<?
+}
+if($this->conveyorid!=$this->partialLoop()->view->curConvoer) {
+    $this->partialLoop()->view->td_Local_sum=array()
+    ?><tr><th colspan="4" align="left"><?=$this->atp?></th></tr><?
+}
+$this->partialLoop()->view->curConvoer=$this->conveyorid;
+
+?>
+<tr align="right">
+    <td><?=$this->code?></td>
+    <!-- td><?=$this->atp?></td -->
+    <?
+    foreach($this->partialLoop()->view->td_failtype as $key=>$val){
+        ?><td><?=(!empty($this->{$key})  ) ? $this->{$key} : 0?></td><?
+
+        if(empty($this->partialLoop()->view->td_Local_sum[$key])) $this->partialLoop()->view->td_Local_sum[$key]=0;
+        $this->partialLoop()->view->td_Local_sum[$key]+= (!empty($this->{$key})  ) ? $this->{$key} : 0;
+
+        if(empty($this->partialLoop()->view->td_Total_sum[$key])) $this->partialLoop()->view->td_Total_sum[$key]=0;
+        $this->partialLoop()->view->td_Total_sum[$key]+= (!empty($this->{$key})  ) ? $this->{$key} : 0;
+
+
+    }
+    ?>
+</tr>

@@ -1,0 +1,82 @@
+<select id="month">
+    <?
+    $monthes = array();
+    $date = new DateTime('2014-06-01');
+    while($date->format("Y-m") < date('Y-m')) {
+        $date->modify("+1 month");
+        $monthes[] = $date->format("Y-m");
+    }
+    foreach ($monthes as $month) {
+        $selected = $month == $this->month ? 'selected' : '';
+        echo '<option '.$selected.'>'.$month.'</option>';
+    }
+    ?>
+</select>
+
+<table>
+    <tr>
+        <td>Last update - <a target="_blank"
+                             href="/admin/finreport-download/?source=amazon&month=<?= $this->month ?>">amazon</a>:
+        </td>
+        <td><b><?= $this->lastAmazonInvoice ?></b></td>
+        <td><a target="_blank" href="/admin/tasks/?plugin=AwsBilling">(billing task)</a></td>
+    </tr>
+    <tr>
+        <td>Last update - <a target="_blank"
+                             href="/admin/finreport-download/?source=marketplace&month=<?= $this->month ?>">marketplace</a>:
+        </td>
+        <td><b><?= $this->lastAmazonMarketplaceInvoice ?></b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Last update - tickets:</td>
+        <td><b><?= $this->lastTicketDate ?></b></td>
+        <td><a target="_blank" href="/admin/tasks/?plugin=TimeTicketsCollector">(ticket task)</a></td>
+    </tr>
+
+</table>
+<div>
+    <h3>Month: <?=$this->month?></h3>
+</div>
+<div>
+    <table class="table table-hover table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th style="width:120px">Project</th>
+            <th style="width:120px" class="status">Marketplace</th>
+            <th style="width:120px" class="status">Amazon</th>
+            <th style="width:120px" class="status">Total</th>
+            <th style="width:120px" class="status">Rate</th>
+            <th style="width:120px">Customer price</th>
+            <th style="width:120px">Ticket</th>
+            <th style="width:120px"></th>
+        </tr>
+        </thead>
+        <?
+        foreach ($this->report as $account => $projects) {
+            echo '<tr>';
+            echo '<td colspan=10><b>Account: ' . (($account == \Zend_Registry::get('config')->aws->testdrive->account_id) ? 'TestDrive' : $account) . '</b></td>';
+            echo '</tr>';
+            foreach ($projects as $prj_id => $data) {
+                echo '<tr class="'. (round($data['for_customer'], 2) == round($data['in_ticket'], 2) ? 'success':'warning') . '"><td>' . $prj_id . '</td>';
+                echo '<td>' . round($data['invoiced_separate']['marketplace'], 4) . '</td>';
+                echo '<td>' . round($data['invoiced_separate']['amazon'], 4) . '</td>';
+                echo '<td>' . round($data['invoiced'], 4) . '</td>';
+                echo '<td>' . $data['rate'] . '</td>';
+                echo '<td><b>' . round($data['for_customer'], 4) . '</td>';
+                echo '<td><b>' . round($data['in_ticket'], 4) . '</td>';
+                echo '<td><a target="_blank" href="/admin/finreport-details/?account=' . $account . '&month=' . $this->month
+                    . '&project_id=' . $prj_id . '">View</td></tr>';
+            }
+        }
+        ?>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#month').bind('change', function(){
+           document.location.href = '/admin/finreport/?month='+$(this).val();
+        });
+    });
+</script>

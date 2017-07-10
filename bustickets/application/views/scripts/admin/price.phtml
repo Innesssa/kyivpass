@@ -1,0 +1,136 @@
+<form action="/admin/price" method="POST">
+    <fieldset>
+        <legend>USD to AUD rate</legend>
+        <label>$1 USD - $? AUD</label><input name="aud_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['aud_rate'];?>">
+    </fieldset>
+    <fieldset>
+        <legend>Contractors pricing</legend>
+        <label>Rate level (in $)</label>
+        <input name="contractors_dollars_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['contractors_dollars_rate'];?>" onchange=visibleMarkupDownRate();>
+        <div name="contractors_markup_down_rate" <?if ($this->priceMarkups['contractors_dollars_rate']==0) echo 'style="display:none"';?>>
+        <label>Markup for contractors with rate < <var name='rate_level'><?php echo $this->priceMarkups['contractors_dollars_rate'];?></var> (in $) <input type="radio" name="markup_type_down_rate" value="1" onchange=disableByType(); <?=($this->priceMarkups['contractors_dollars_markup_down_rate']>0 OR $this->priceMarkups['contractors_percents_markup_down_rate']==0)?'checked':''?>> Apply in $ </label>
+        <input name="contractors_dollars_markup_down_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['contractors_dollars_markup_down_rate'];?>">
+        <label>Markup for contractors with rate < <var name='rate_level'><?php echo $this->priceMarkups['contractors_dollars_rate'];?></var> (in %) <input type="radio" name="markup_type_down_rate" value="2" onchange=disableByType(); <?=($this->priceMarkups['contractors_percents_markup_down_rate']>0)?'checked':''?>> Apply in % </label>
+        <input name="contractors_percents_markup_down_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['contractors_percents_markup_down_rate'];?>">
+        </div>
+        <label>Markup for contractors with rate > <var name='rate_level'><?php echo $this->priceMarkups['contractors_dollars_rate'];?></var> (in $) <input type="radio" name="markup_type" value="1" onchange=disableByType(); <?=($this->priceMarkups['contractors_dollars_markup']>0 OR $this->priceMarkups['contractors_percents_markup']==0)?'checked':''?>> Apply in $ </label>
+        <input name="contractors_dollars_markup" type="text" class="input-small" value="<?php echo $this->priceMarkups['contractors_dollars_markup'];?>">
+        <label>Markup for contractors with rate > <var name='rate_level'><?php echo $this->priceMarkups['contractors_dollars_rate'];?></var> (in %)  <input type="radio" name="markup_type" value="2" onchange=disableByType(); <?=($this->priceMarkups['contractors_percents_markup']>0)?'checked':''?>> Apply in % </label>
+        <input name="contractors_percents_markup" type="text" class="input-small" value="<?php echo $this->priceMarkups['contractors_percents_markup'];?>">
+    </fieldset>
+    <fieldset>
+        <legend>Amazon services</legend>
+        <label>Markup(in %)</label>
+        <input name="aws_markup" type="text" class="input-small" value="<?php echo $this->priceMarkups['aws_markup'];?>">
+    </fieldset>
+     <fieldset>
+        <legend>Invoice Me</legend>
+        <label>Markup(in %)</label>
+        <input name="invoice_me_markup" type="text" class="input-small" value="<?php echo $this->priceMarkups['invoice_me_markup'];?>">
+    </fieldset>
+    <fieldset>
+        <legend>Assurer pricing</legend>
+        <label>Rate level (in $)</label>
+        <input name="assurer_dollars_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['assurer_dollars_rate'];?>" onchange=visibleMarkupDownRateAssurer();>
+        <div name="assurer_mark_down_rate" <?if ($this->priceMarkups['assurer_dollars_rate']==0) echo 'style="display:none"';?>>
+        <label>Markup for assurers with rate < <var name='assurer_rate_level'><?php echo $this->priceMarkups['assurer_dollars_rate'];?></var> (in $) <input type="radio" name="assurer_mark_type_down_rate" value="1" onchange=disableByTypeAssurer(); <?=($this->priceMarkups['assurer_dollars_mark_down_rate']>0 or $this->priceMarkups['assurer_percents_mark_down_rate']==0)?'checked':''?>> Apply in $ </label>
+        <input name="assurer_dollars_mark_down_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['assurer_dollars_mark_down_rate'];?>">
+        <label>Markup for assurers with rate < <var name='assurer_rate_level'><?php echo $this->priceMarkups['assurer_dollars_rate'];?></var> (in %) <input type="radio" name="assurer_mark_type_down_rate" value="2" onchange=disableByTypeAssurer(); <?=($this->priceMarkups['assurer_percents_mark_down_rate']>0)?'checked':''?>> Apply in % </label>
+        <input name="assurer_percents_mark_down_rate" type="text" class="input-small" value="<?php echo $this->priceMarkups['assurer_percents_mark_down_rate'];?>">
+        </div>
+        <label>Markup for assurers with rate > <var name='assurer_rate_level'><?php echo $this->priceMarkups['assurer_dollars_rate'];?></var> (in $) <input type="radio" name="assurer_mark_type" value="1" onchange=disableByTypeAssurer(); <?=($this->priceMarkups['assurer_dollars_mark']>0 or $this->priceMarkups['assurer_percents_mark']==0)?'checked':''?>> Apply in $ </label>
+        <input name="assurer_dollars_mark" type="text" class="input-small" value="<?php echo $this->priceMarkups['assurer_dollars_mark'];?>">
+        <label>Markup for assurers with rate > <var name='assurer_rate_level'><?php echo $this->priceMarkups['assurer_dollars_rate'];?></var> (in %)  <input type="radio" name="assurer_mark_type" value="2" onchange=disableByTypeAssurer(); <?=($this->priceMarkups['assurer_percents_mark']>0)?'checked':''?>> Apply in % </label>
+        <input name="assurer_percents_mark" type="text" class="input-small" value="<?php echo $this->priceMarkups['assurer_percents_mark'];?>">
+    </fieldset>
+    <fieldset>
+        <legend>ALM pricing</legend>
+        <label>Basic per project per hour</label>
+        <input name="alm_basic" type="text" class="input-small" value="<?php echo $this->priceMarkups['alm_basic'];?>">
+        <label>Premium per project per month</label>
+        <input name="alm_premium" type="text"  class="input-small" value="<?php echo $this->priceMarkups['alm_premium'];?>">
+    </fieldset>
+    <input type="hidden" name="csrf_token" id="csrf_token"/>
+    <button type="submit" class="btn">Submit</button>
+</form>
+<script>
+    $(function(){
+        $('#csrf_token').val(govsource.Utils.getCsrfToken());
+    });
+    function visibleMarkupDownRate() {
+        if (document.getElementsByName("contractors_dollars_rate")[0].value==0) {
+        document.getElementsByName("contractors_markup_down_rate")[0].style.display = "none";
+        }else{
+        document.getElementsByName("contractors_markup_down_rate")[0].style.display = "";
+        };
+        var length = document.getElementsByName("rate_level").length,
+            element = null;
+        for (var i = 0; i < length; i++) {
+            document.getElementsByName("rate_level")[i].innerHTML  = document.getElementsByName("contractors_dollars_rate")[0].value;
+        }
+        document.getElementsByName("contractors_percents_markup")[0].value = 0;
+        document.getElementsByName("contractors_dollars_markup")[0].value = 0;
+        document.getElementsByName("contractors_dollars_markup_down_rate")[0].value = 0;
+        document.getElementsByName("contractors_percents_markup_down_rate")[0].value = 0;
+        document.getElementsByName("markup_type")[0].checked=true;
+        document.getElementsByName("markup_type_down_rate")[0].checked=true;
+        disableByType();
+    };
+    function disableByType() {
+      if (document.getElementsByName("markup_type")[0].checked) {
+            document.getElementsByName("contractors_percents_markup")[0].disabled = "enabled";
+            document.getElementsByName("contractors_dollars_markup")[0].disabled = "";
+      }
+      if (document.getElementsByName("markup_type")[1].checked) {
+            document.getElementsByName("contractors_dollars_markup")[0].disabled = "enabled";
+            document.getElementsByName("contractors_percents_markup")[0].disabled = "";
+      }
+      if (document.getElementsByName("markup_type_down_rate")[0].checked) {
+            document.getElementsByName("contractors_percents_markup_down_rate")[0].disabled = "enabled";
+            document.getElementsByName("contractors_dollars_markup_down_rate")[0].disabled = "";
+      }   
+      if (document.getElementsByName("markup_type_down_rate")[1].checked) {
+            document.getElementsByName("contractors_dollars_markup_down_rate")[0].disabled = "enabled";
+            document.getElementsByName("contractors_percents_markup_down_rate")[0].disabled = "";
+      } 
+
+    };
+    function visibleMarkupDownRateAssurer() { 
+        if (document.getElementsByName("assurer_dollars_rate")[0].value==0) {
+        document.getElementsByName("assurer_mark_down_rate")[0].style.display = "none";
+        }else{
+        document.getElementsByName("assurer_mark_down_rate")[0].style.display = "";
+        };
+        var length = document.getElementsByName("assurer_rate_level").length,
+            element = null;
+        for (var i = 0; i < length; i++) {
+            document.getElementsByName("assurer_rate_level")[i].innerHTML  = document.getElementsByName("assurer_dollars_rate")[0].value;
+        }
+        document.getElementsByName("assurer_percents_mark")[0].value = 0;
+        document.getElementsByName("assurer_dollars_mark")[0].value = 0;
+        document.getElementsByName("assurer_dollars_mark_down_rate")[0].value = 0;
+        document.getElementsByName("assurer_percents_mark_down_rate")[0].value = 0;
+        document.getElementsByName("assurer_mark_type")[0].checked=true;
+        document.getElementsByName("assurer_mark_type_down_rate")[0].checked=true;
+        disableByTypeAssurer();
+    };
+    function disableByTypeAssurer() {
+      if (document.getElementsByName("assurer_mark_type")[0].checked) {
+            document.getElementsByName("assurer_percents_mark")[0].disabled = "enabled";
+            document.getElementsByName("assurer_dollars_mark")[0].disabled = "";
+      } else {
+            document.getElementsByName("assurer_dollars_mark")[0].disabled = "enabled";
+            document.getElementsByName("assurer_percents_mark")[0].disabled = "";
+      }
+      if (document.getElementsByName("assurer_mark_type_down_rate")[0].checked) {
+            document.getElementsByName("assurer_percents_mark_down_rate")[0].disabled = "enabled";
+            document.getElementsByName("assurer_dollars_mark_down_rate")[0].disabled = "";
+      }   else {
+            document.getElementsByName("assurer_dollars_mark_down_rate")[0].disabled = "enabled";
+            document.getElementsByName("assurer_percents_mark_down_rate")[0].disabled = "";
+      } 
+
+    };
+    disableByType();  
+    disableByTypeAssurer();
+</script>

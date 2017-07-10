@@ -1,0 +1,27 @@
+
+<?
+if (!$this->success):
+?>
+<div style="padding: 50px; margin: 200px auto; border: #ff7300 1px solid; width: 400px;">
+    Error occured while tring subscribe automatically.
+    <br><br>
+    <div>
+        <a href="javascript:self.close()">Close</a> |
+        <a href="/admin/subscribe/?platform_id=<?=$this->platform_id?>&manually=1">Manually subscribe on Amazon Marketplace</a>
+    </div>
+</div>
+
+<?
+else:
+?>
+
+    <div style="padding: 50px; margin: 200px auto; border: #006400 1px solid; width: 400px;">
+        Platform was automatically subscribed.
+        <br><br>
+        <div>
+            <a href="javascript:self.close()">Close</a>
+        </div>
+    </div>
+<?
+endif;
+?>

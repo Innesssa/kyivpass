@@ -1,0 +1,27 @@
+<?//if(strlen($page['content']['caption'])>='60'){$font_size = "15px";}else{$font_size = "18px";}?>
+<div class="red_string_2"><?=$page['content']['caption']?></div>
+<!--<div class="block_main_header_center" style="font-size:<?//=$font_size?>;"><?//=$page['content']['caption']?></div>-->
+<?//Sys::varDump($page)?>
+<div id="wrap_page">
+<?if($page['content']['image'] !=="")
+  {
+      if($page['content']['img_alt'] == ""){$img_alt = $page['content']['caption'];}else{$img_alt = $page['content']['img_alt'];}
+      if($page['content']['img_title'] == ""){$img_title = $page['content']['caption'];}else{$img_title = $page['content']['img_title'];}
+      
+      if($rub == "Контакты")
+      {?>
+      <div style="margin:0px;padding:0px;text-align:center">
+    <a rel="lightbox-gallery1" href="http://www.mkr.com.ua/site/design/img/map/map_maxi.jpg" title="<?=$page['content']['caption']?>" style="margin:0px;padding:0px;text-align:center">
+        <img src="http://www.mkr.com.ua/site/design/img/map/map_mini.jpg" style="padding-right:5px" title="<?=$img_title?>" alt="<?=$img_alt?>" />
+    </a>
+    </div>
+    <?}
+      else
+      {?>
+    <a rel="lightbox-gallery1" href="http://www.mkr.com.ua/<?=$page['content']['image']?>" title="<?=$page['content']['caption']?>" style="margin:0px;padding:0px;">
+        <img src="http://www.mkr.com.ua/<?=$page['content']['image_small']?>" align="left" style="padding-right:10px" title="<?=$img_title?>" alt="<?=$img_alt?>" />
+    </a>
+    <?}}?> 
+    <div class="center"><?=$page['content']['content']?></div>
+<div class="both"></div>
+</div>

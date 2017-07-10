@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <td colspan="8">
+                    <div class="btn-group" style="vertical-align:bottom;">
+                        <?=$this->form?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div id="id_ajax_content">
+            <div class="table">
+                <table id="id_table_feedback" class="tablesorter">
+                    <thead>
+                    <tr>
+                        <th id="id_sort_rate" class="header" style="width:50px">#</th>
+                        <th id="id_sort_date" class="header" style="width:250px">маршрут</th>
+                        <th style="width:150px">час прибуття</th>
+                        <th style="width:150px">Коментар</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody><?=$this->partialLoop('routes/items/racein.phtml', $this->list)?></tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>

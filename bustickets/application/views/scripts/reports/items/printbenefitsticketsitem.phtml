@@ -1,0 +1,58 @@
+<?
+
+if(!empty($this->partialLoop()->view->m_benefits) && $this->benefits_id!=$this->partialLoop()->view->m_benefits){
+    ?>
+    <tr>
+    <td colspan="3" align="left"><b>Всього:</b></td>
+    <td></td>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totAll)?></td>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totStat)?></td><?/*Тариф Пер.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totConv)?></td><?/*Тариф Орг.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totInsh)?></td><?/*Страх збір.*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totStat)?></td><?/*Станц. збір*/?>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totTot)?></td><?/*Виручка*/?>
+    <td><?=$this->partialLoop()->view->m_totNum?></td>
+    </tr>
+<?
+}
+if($this->benefits_id!=$this->partialLoop()->view->m_benefits) {
+    $this->partialLoop()->view->m_totAll=0;
+    $this->partialLoop()->view->m_totStat=0;
+    $this->partialLoop()->view->m_totConv=0;
+    $this->partialLoop()->view->m_totInsh=0;
+    $this->partialLoop()->view->m_totStat=0;
+    $this->partialLoop()->view->m_totTot=0;
+    $this->partialLoop()->view->m_totNum=0;
+    ?><tr><th align="left"><?=$this->title_short?></th></tr><?
+}
+$this->partialLoop()->view->m_benefits=$this->benefits_id
+?>
+    <tr>
+    <td><?=$this->checknumber?>@<?=$this->ppo?></td>
+    <td><?=date("d.m.y H:i",$this->lastchange)?></td>
+    <td><?=(!empty($this->kassa_tab)) ? $this->kassa_tab : $this->kassauid ?></td>
+    <td><?=$this->benefits_docnum.((trim($this->benefits_name)!=="" && trim($this->benefits_docnum)!="" ) ? "," : "").$this->benefits_name?></td>
+    <td><?=sprintf("%.2f",$this->stat_tariff_with_benefits+$this->stat_tariff_with_benefits_vat+$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat)?></td>
+    <td><?=sprintf("%.2f",$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat)?></td><?/*Тариф Пер.*/?>
+    <td><?=sprintf("%.2f",$this->stat_tariff_with_benefits+$this->stat_tariff_with_benefits_vat)?></td><?/*Тариф Орг.*/?>
+    <td><?=sprintf("%.2f",$this->insurer_tariff)?></td><?/*Страх збір.*/?>
+    <td><?=sprintf("%.2f",$this->station_tax_tariff_with_benefits_vat+$this->station_tax_tariff_with_benefits)?></td><?/*Станц. збір.*/?>
+    <td><?=sprintf("%.2f",$this->full_price_with_benefits_vat+$this->full_price_with_benefits)?></td><?/*Виручка*/?>
+    <td>1</td>
+    </tr><?
+$this->partialLoop()->view->m_totAll+=$this->stat_tariff_with_benefits+$this->stat_tariff_with_benefits_vat+$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat;
+$this->partialLoop()->view->m_totStat+=$this->stat_tariff_with_benefits+$this->stat_tariff_with_benefits_vat;
+$this->partialLoop()->view->m_totConv+=$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat;
+$this->partialLoop()->view->m_totInsh+=$this->insurer_tariff;
+$this->partialLoop()->view->m_totStat+=$this->station_tax_tariff_with_benefits_vat+$this->station_tax_tariff_with_benefits;
+$this->partialLoop()->view->m_totTot+=$this->full_price_with_benefits_vat+$this->full_price_with_benefits;
+$this->partialLoop()->view->m_totNum++;
+
+
+$this->partialLoop()->view->totAll+=$this->stat_tariff_with_benefits+$this->stat_tariff_with_benefits_vat+$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat;
+$this->partialLoop()->view->totStat+=$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat;
+$this->partialLoop()->view->totConv+=$this->conv_tariff_with_benefits+$this->conv_tariff_with_benefits_vat;
+$this->partialLoop()->view->totInsh+=$this->insurer_tariff;
+$this->partialLoop()->view->totStat+=$this->station_tax_tariff_with_benefits_vat+$this->station_tax_tariff_with_benefits;
+$this->partialLoop()->view->totTot+=$this->full_price_with_benefits_vat+$this->full_price_with_benefits;
+$this->partialLoop()->view->totNum++;

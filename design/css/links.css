@@ -1,0 +1,21 @@
+a{
+font-size:16px;line-height:17px; font-family:Times New Roman, Tahoma, Arial, sans-serif;font-weight: 100;color:#004D98;outline: none;text-decoration:none;
+}
+a:visited{
+color:#004D98;
+}
+a:hover{
+     color:#A09219;text-decoration: underline;
+}
+a img{
+	 border: none;
+}
+
+
+
+a.nav_main{
+font-size:16px;Times New Roman, Tahoma, Arial, sans-serif;white-space:nowrap;font-weight: bold;color:#fff;outline: none;text-decoration: none;
+}
+a.nav_main:hover{
+font-size:16px;Times New Roman, Tahoma, Arial, sans-serif;font-weight: bold; color:#0066b0;outline: none;text-decoration: underline;
+}

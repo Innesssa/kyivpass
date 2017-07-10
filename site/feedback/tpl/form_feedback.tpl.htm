@@ -1,0 +1,22 @@
+<div class="feedback_popup form_feedback">
+	<a class="feedback_close" href="#">Close</a>
+	<h1>Online запрос</h1>
+	<form method="post" action="/feedback/online/">
+		<input type="text" name="form__name" placeholder="Ваше имя" />
+        <input type="text" name="form__phone" placeholder="Телефон" />
+        <input type="text" name="form__email" placeholder="E-mail" />
+        <textarea placeholder="Ваше сообщение" name="form__mess"></textarea>
+        <div class="both br_10"></div><div align="center">
+		<input type="submit" value="Отправить" name="feedback_online"  class="btns" />	</div>
+	</form>
+<!--
+<input type="text" name="form__phone" placeholder="Телефон"  onkeyup="check(this.value)"/>
+<span id="phone" style="display: none; color: #c00;">Минимум 7 цифр</span>
+<script type="text/javascript">
+   function check(phone) {
+    if (phone.length < 7) document.getElementById("phone").style.display = "inline";
+    else document.getElementById("phone").style.display = "none";
+  }
+</script>
+-->
+</div>

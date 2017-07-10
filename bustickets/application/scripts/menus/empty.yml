@@ -1,0 +1,12 @@
+nav:
+  dashboard:
+    label: "Головна"
+    controller: index
+    action: index
+  login:
+      label: 'Війти'
+      controller: login
+  logout:
+    label: 'Вийти'
+    controller: logout
+

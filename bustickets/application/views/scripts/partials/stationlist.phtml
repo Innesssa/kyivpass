@@ -1,0 +1,13 @@
+<tr id="id_station_<?=$this->id?>">
+    <td><?=$this->station_name?></td>
+    <td><?=$this->pos?></td>
+    <td><?=$this->timeperiod?></td>
+    <td><?=$this->holdtime?></td>
+    <td><?=$this->distantion?></td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_schema_item_<?=$this->routeid?>_<?=$this->id?>" class="btn btn-mini edit"  href="javascript:void(0);" alt="редагувати"><i class="icon-pencil"></i></a>
+            <a id="id_del_station_<?=$this->routeid?>_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);" alt="видалити"><i class="icon-remove" ></i></a>
+        </div>
+    </td>
+</tr>

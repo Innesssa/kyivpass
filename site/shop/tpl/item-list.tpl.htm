@@ -1,0 +1,52 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<div class="corn polosa">
+<a href="../<?=$all_tag_list[str_replace(";","",$tag2_data['connect'])]['seolink']?>"><?=$all_tag_list[str_replace(";","",$tag2_data['connect'])]['caption']?></a> » <?=$tag2_data['caption']?>
+</div>
+<div class="wrap_catalog">
+<?if($item_list!=NULL){?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$val["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<div class="wrap_catalog_sell view_grid" align="center"><div style="margin-bottom:12px;height:200px;overflow:hidden;">
+<?if($val['good_price']==1){?>
+<div style="margin-bottom:-25px;position:relative;z-index:2;" align="left">
+<span class="bestprice r5">Хорошая цена</a>
+</div>
+<?}else if($val['sell_out']==1){?>
+<div style="margin-bottom:-25px;position:relative;z-index:2;">
+<span class="sale r5">Распродажа</span>
+</div>
+<?}?>
+
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<img src="<?=$img1?>" width="240" style="margin-bottom:7px;" />
+</a>
+<div style="padding:0px 10px;">
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<?=$val["caption"]?></a>
+</div>
+
+</div>
+
+<?$price_roznica = Price::getPrice($val['postavschik'],$val['price_roznica'],$val['price_diler'],$val['ddp']);
+$dp=explode(".",$price_roznica);?>
+<table width="90%" class="price"><tr><td style="height:70px;margin-bottom:12px;" valign="bottom" align="center">
+
+<div style="margin-bottom:12px;">Цена: 
+<?if($price_roznica!=0){?>
+<span><?=$dp[0]?>.<font><?=$dp[1]?></font></span> <?=CURRENCY?>
+<?}else{?>
+<span style="font-size:17px;line-height:25px;padding:7px;">По запросу</span> 
+<?}?>
+</div>
+<div class="buy">
+<input name="incart" type="submit" value="В корзину" style="text-align:center;padding-left:0;" onClick="inCart2(<?=$val["id"]?>,1)">
+
+</div>
+</td></tr></table></div>
+<?}}?>
+</div>
+
+<br><br><br><br>

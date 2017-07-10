@@ -1,0 +1,44 @@
+<?php 
+if(!$this->isAjax){
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?><div class="well">
+	<div class="filter projects form-inline">
+        <form action="/admin/cronlogs" id="form-filter">
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+			<span> Filter By: </span>
+			<select name="filter[status]" class="input-small myfilter">
+				<option value="">Status</option>
+                <option value="start">start</option>
+                <option value="finish">finish</option>
+			</select>
+            <label for="plugin_field"><span> Search: </span></label>
+            <input type="text" class="myfilter input-medium" name="filter[search]"/>
+            <a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        </form>
+    </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th data-field-name="id" class="header" style="width:25px">#</th>
+					<th data-field-name="name" class="header" style="width:70px">Name</th>
+					<th data-field-name="st" class="header" style="width:110px">Start</th>
+                    <th data-field-name="ft" class="header" style="width:110px">Finish</th>
+					<th data-field-name="status" class="header" style="width:600px">Status</th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/cron.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+    <script>govsource.pageConfig.searchData=<?=$this->aFilter?>;</script>
+<?=$this->paginationControl($this->paginator)?>	
+<div class="clearfix"></div> 
+<?php if(!$this->isAjax){?></div>
+    <!-- Modal -->
+    <?= $this->partial('partials4adm/modal.phtml'); ?>
+    <!-- End Modal-->
+<? } else { ?><script>govsource.AdminCronlogs.bindEvents();</script><? } ?>

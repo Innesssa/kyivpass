@@ -1,0 +1,73 @@
+nav:
+  dashboard:
+    label: "Головна"
+    controller: index
+    action: index
+  bucharea:
+       label: 'Бухгалтер АРМ'
+       uri: '#'
+       pages:
+         organization:
+            label: 'Юридичні особи'
+            controller: organization
+            action: index
+          conveyors:
+            label: 'Перевізники'
+            controller: conveyors
+            action: index
+         reportstk:
+            label: 'Звіт рейси'
+            controller: reports
+            action: tickets
+         reportsks:
+            label: 'Звіт про роботу касирів'
+            controller: reports
+            action: kassa
+         reports_3:
+            label: 'Надходження по статтях'
+            controller: reports
+            action: debet
+         reportsds:
+            label: 'Звіт про роботу диспетчера'
+            controller: reports
+            action: disp
+         reportsks_2:
+             label: 'Місячний звіт'
+             controller: reports
+             action: month
+         reportsks_4:
+             label: 'Реестр відомостей'
+             controller: reports
+             action: list
+         report_4:
+              label: 'Перехідні суми (з періоду)'
+              controller: reports
+              action: prevperiod
+         report_5:
+             label: 'Перехідні суми (у період)'
+             controller: reports
+             action: nextperiod
+         failedraces:
+             label: 'Звіт про зриви'
+             controller: reports
+             action: failedraces
+         allraces:
+             label: 'Звіт виконані рейси'
+             controller: reports
+             action: allraces
+         benefitstickets:
+             label: 'Звіт по пільговим квиткам'
+             controller: reports
+             action: benefitstickets
+         minustickets:
+              label: 'Недоотримання'
+              controller: reports
+              action: minustickets
+         buhgalteria:
+            label: 'Бугалтерія'
+            controller: buhgalteria
+            action: index
+  logout:
+      label: 'Вийти'
+      controller:  logout
+

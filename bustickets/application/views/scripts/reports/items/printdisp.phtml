@@ -1,0 +1,86 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Журнал роботи диспетчера</h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <th>Рейс</th>
+    <th>Расч.</th>
+    <th>Название рейса</th>
+    <th>Факт.</th>
+    <th>АТП	Марка</th>
+    <th>№</th>
+    <th>Водитель</th>
+    <th>Загр.</th>
+    <th>Знт.</th>
+    <th>Доп.</th>
+    <th>Свбд.</th>
+    <th>По вед.</th>
+    <th>?</th>
+</tr>
+<?=$this->partialLoop('reports/items/printdispitem.phtml', $this->rs)?>
+    <tr align="left">
+        <th colspan="7">Всього:</th>
+        <td  align="right"><?=sprintf("%5.3f",$this->partialLoop()->view->total8)?></td><?/* Загр. */?>
+        <td  align="right"><?=$this->partialLoop()->view->total9?></td>
+        <td  align="right">0</td><? /* Доп.*/ ?>
+        <td  align="right"><?=$this->partialLoop()->view->total10?></td>
+        <td  align="right"><?=sprintf("%8.2f",$this->partialLoop()->view->total11)?></td>
+        <td></td>
+    </tr>
+    <tr align="left">
+        <th colspan="3">Всього по загрузці:</th>
+        <th colspan="10"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">від 0.0 до 0.4:</th>
+        <th align="right"><?=$this->partialLoop()->view->total_04?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">від 0.4 до 0.8:</th>
+        <th align="right"><?=$this->partialLoop()->view->total_08?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">від 0.8 до 1:</th>
+        <th align="right"><?=$this->partialLoop()->view->total_01?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">Всього за станом:</th>
+        <th align="right"></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">(Н)епринятых:</th>
+        <th align="right">0</th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">(П)ринятых:</th>
+        <th align="right"><?=$this->partialLoop()->view->total_received?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">(О)тправленных:</th>
+        <th align="right"><?=$this->partialLoop()->view->total_sent?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+    <tr align="left">
+        <th colspan="3">(С)орванных</th>
+        <th align="right"><? if(count($this->partialLoop()->view->total_aFailed)==0){?>0<?}?></th>
+        <th colspan="9" align="right"></th>
+    </tr><?=$this->partialLoop('reports/items/printdispfailed.phtml', $this->failed)?>
+    <tr align="left">
+        <th colspan="3">(Б)локированных</th>
+        <th align="right"><?=$this->partialLoop()->view->total_forbidden?></th>
+        <th colspan="9" align="right"></th>
+    </tr>
+</table>
+</pre>

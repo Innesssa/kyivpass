@@ -1,0 +1,468 @@
+
+
+table.grey-right-border td{
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-right-color: #D9D9D9;
+}
+table.main-menu td{
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-color: #E8EAFF;
+	border-left-color: #E8EAFF;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: Verdana;
+	text-transform: lowercase;
+	color: #FFFFFF;
+	width: 14%;
+	vertical-align: middle;
+}
+
+td{
+	vertical-align: top;
+}
+form{
+    padding: 0px; margin: 0px;
+}
+    form button{ 
+        padding:0;
+        border:none;
+        background:transparent; 
+    }
+    form button img{ 
+        display:block;
+    }
+    input, select, textarea{
+	    font-size: 11px;
+	    margin: 0px 4px 0px 0px;
+	    padding: 0px;
+    }
+ul{
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+	list-style-type: disc; 
+	list-style-position: inside
+}
+    li{
+        margin:3px 0px 3px 0px;
+    }
+    a:li{
+        background-color: #d91219;
+    }
+.br_1{
+    height: 1px;
+}
+.br_2{
+    height: 2px;
+}
+.br_5{
+    height: 5px;
+}
+.br_10{
+    height: 10px;
+}
+.br_15{
+    height: 15px;
+}
+.br_20{
+    height: 20px;
+}
+.br_50{
+    height: 50px;
+}
+.hr{
+ 	border-width: 0px;
+	border-top: 1px solid #E2E2E2;
+	height:1px;
+	margin:0px;
+	padding:0px 0px 4px;
+}
+.both{
+    clear: both;
+}
+.left{
+    float:left;
+}
+.right{
+    float: right;
+}
+.error{
+    color:#d91219;
+    font-size:14px;font-weight: 900;
+}
+
+
+
+.title,.title_1{
+    height:30px;line-height: 30px;
+    text-align:left;
+    padding-left:21px;
+    color:#7b7b7b;
+    display:block;
+    width:100%;
+}
+    .title{
+        background: url('/site/design/img/title-bg.png') repeat-x 0 0 transparent;
+        border-left: 2px solid #ccc;
+        font-size:1.1em;
+    }
+    .title_1{
+        background-color:#eee;
+        font-size:1.2em;
+    }
+
+
+.footer{
+    background: url("/site/design/img/foot-bg.png") repeat-x 0 0 transparent;
+    width: 100%;
+    height: 145px;
+    margin-top: 27px;
+    text-align:left;
+    
+}
+.footer_menu{
+    float:left;
+    width:49%;
+    border:0px solid #000;
+}
+.footer_menu li{
+    list-style-type: none; /* Убираем маркеры */
+    line-height:25px;
+}
+
+
+
+
+
+/*******************************/
+
+
+
+
+
+
+.next a{
+    color:#d91219;
+    font-size:14px;font-weight:900;
+}
+.date{
+    font-size: 18px; color:#797979;
+}
+.links{
+    color:blue;font-weight:normal;font-size:14px;text-decoration:underline;
+}
+#wrap{
+    margin: 0 auto;
+}
+.wrap{
+    width: 1077px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+.wrap > *{
+    display: block;
+    position: absolute;
+    top: 19px;
+}
+.all .wrap{
+    margin-top: 22px;
+}
+.all .wrap > *{
+    position: static;
+}
+
+
+
+.header{
+    background: url("/site/design/img/title-bg.png") repeat-x 0 0 transparent;
+    width: 100%;
+    height: 99px;
+    margin-top: 27px;
+}
+
+.header .logo{
+    background: url("/site/design/img/logo.png") no-repeat 0 0 transparent;
+    width: 213px;
+    height: 62px;
+    left:0;
+}
+.header .search{
+    left:249px;
+    margin: 16px 0 0 18px;
+}
+
+    
+.header .on-line{
+    left:496px;
+    margin: 0 0 0 29px;
+}
+    .on-line span{
+        font: 11px Arial;
+    }
+    .on-line span.phone{
+        font: 18px Arial;
+        color: #c21f26;
+        font-style:italic;
+    }
+    .on-line a.form{
+        font: bold 14px Arial;
+        font-style:italic;
+    }
+
+.header .user-menu{
+    background-color: #fff;
+    width: 238px;
+    height: 100%;
+    top:0;
+    left:795px;
+}
+
+
+.menu, .menu ul{
+    width: 270px;
+}
+    .menu a{
+        display: block;
+    }
+    .menu ul{
+        display: none;
+        position: absolute;
+        z-index: 1000000;
+        top: 0;
+        left:270px;
+        -webkit-box-shadow: 4px 4px 6px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    4px 4px 6px rgba(50, 50, 50, 0.75);
+        box-shadow:         4px 4px 6px rgba(50, 50, 50, 0.75);
+    }
+    .menu > li{
+	    background: url("/site/design/img/menu-bg.png") repeat-x scroll 0 0 #f1f1f2;
+    }
+    .menu li{
+        position: relative;
+        
+    }
+    .menu > li > a{
+        background: url("/site/design/img/menu-arrow.png") no-repeat scroll 240px 13px transparent;
+        height: 40px;
+        border-bottom: 2px dashed #bcbbbc;
+        
+    }
+    .menu ul > li{
+    	padding: 0 0 0 42px
+    }
+    .menu ul > li.label{
+    	padding: 23px 0 25px 42px;
+    	color:#c52b32;
+    	font:21px Arial
+    }
+    .menu ul li > a{
+        /*background-color: #f7f6f6;*/
+        
+        height: 29px;
+    }
+    .menu ul li > a:hover, .menu ul li > a:hover span{
+    	color:#ff0000;
+    }
+    .menu ul li > a, .menu ul li > a span{
+    	color:#009cd8;
+        text-decoration: auto;
+    }
+    .menu > li > a:hover, .menu > li > a.active{
+        /*background-color: #f7f6f6;*/
+        background-image: url("/site/design/img/menu-arrow-active.png");
+        border-bottom: 2px solid #bcbbbc;
+        width:259px;
+    }
+    .menu > li > a > *{
+        padding-left: 6px;
+        text-decoration: none;
+        color:#7b7b7b;
+    }
+    
+    .menu > li > a:hover > *, .menu > li > a.active > *{
+        color:#ff0000;
+    }
+
+.left-bar{
+    width: 275px;
+    float: left;
+    
+}
+.content{
+    float: left;
+    width: 726px;
+    padding-left:10px;
+    border:0px solid #000;
+}
+.hidden{
+    display: none;
+}
+.block{
+    width: 104%;
+    margin-bottom: 10px;
+}
+/*    .block > .title{
+        background: url("/site/design/img/title-bg.png") repeat-x 0 0 transparent;
+        width: 100%;
+        height: 30px;
+        border-left: 2px solid #7b7b7b;
+        padding-left: 21px;
+        display: block;
+    }
+*/
+
+        
+
+        
+        
+        
+
+ul.block li.item{
+	
+    display: inline-block;
+    height: 275px;
+    margin: 5px;
+    text-align: center;
+    vertical-align: top;
+    width: 205px;
+    padding:10px;
+    position:relative;
+}
+ul.block li.item .image {
+	margin-top:5px;
+	
+	
+}
+
+.ch{
+	text-align:left;
+	position:absolute;
+	bottom:10px;
+}
+.ch span{
+	display:inline;
+	text-align: left;
+}
+
+
+
+
+
+
+#paginator  {
+	display: table;
+	margin: 0px auto;
+}
+#paginator span {
+	background: #C21F26;
+	border-radius: 13px;
+	display: inline-block;
+	height: 21px;
+	margin: 0px 5px;
+	padding-top: 5px;
+	width: 26px;
+	font-weight: 700;
+}
+
+#paginator a {
+	color: #575A62;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 700;
+	margin: 0 14px;
+	padding-top: 4px;
+}
+
+#paginator_out {
+	width: 100%;
+}
+
+
+.description .image{
+	margin: 0 15px 15px 0;
+	float:left;
+}
+
+.contacts p{
+	margin:10px 0;
+	clear:both;
+}
+.contacts p img{
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+	margin:0 15px 0 0;
+}
+
+.block.ware.page .image{
+	width:315px;
+	float:left;
+}
+.block.ware.page .descr{
+	width:276px;
+	float:right;
+}
+.block.ware.page .descr > *{
+	margin-top:15px
+}
+.block.ware.page .descr *{
+	color:#000000;
+}
+.block.ware.page .descr .name{
+	font:18px Arial;
+	color:#ff0000;
+}
+
+.block.ware.page .image li{
+	/*width:100px!important;*/
+}
+
+.item.ware > *{
+	
+}
+
+.query{
+	font:normal 18px Arial!important;
+	color:#7b7b7b!important;
+}
+
+ul.contact-page li{
+    color: #7298CC;
+    height: 35px;
+    padding-left: 43px;
+    padding-top: 9px;
+}
+ul.contact-page li.skype{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/skype.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.email{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/mail.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.phone{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/phone.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.mobile{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/mobile.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.child-inline > *{
+	display:inline-block
+}
+
+.table.cart *{
+	vertical-align:middle
+}
+
+form[name="order"] label{
+	font-size:10px;
+	color:red;
+}
+
+.inner-inline > *{
+	display:inline-block
+}

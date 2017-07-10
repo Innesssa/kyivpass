@@ -1,0 +1,86 @@
+<script>
+    var kassaname = "<?=addslashes($this->kassaname)?>";
+</script>
+<div class="row">
+    <div class="span9">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#FRMcashOpenDay">Відкриття зміни</a></li>
+                        <li><a href="#FRMcashNullRep">Нульовой чек</a></li>
+                        <li><a href="#FRMcashCasIn">Внесення готівки</a></li>
+                        <li><a href="#FRMcashCasOut">Вилучення готівки</a></li>
+                        <li><a href="#FRMcashInkas">Інкасація</a></li>
+                        <li><a href="#FRMadService">Додаткові послуги</a></li>
+                        <li><a href="#FRMXReport">X Звіт</a></li>
+                        <li><a href="#FRMcashCloseDay">Закриття зміни</a></li>
+                    </ul>
+
+                    <div id="FRMcashOpenDay">
+                        <p>Відкриття зміни</p>
+                        <? /*## 1 OpenDay Відкриття зміни(ЛОГИН, нулевой чек, внесение денег),*/?>
+                        <input type="text" style="width:200px;" class="input-small" id="cashOpenDay" name="cashOpenDay" value="<?=sprintf("%.2f",$this->lastCloseDay)?>"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="OpenDay">Виконати</button>
+                    </div>
+                    <div id="FRMcashNullRep">
+                        <p>Нульовой чек</p>
+                        <? /*## 2 NullRep нулевой чек */?>
+                        <br/><button style="width:200px;" class="btn btn-primary" id="NullRep">Виконати</button>
+                    </div>
+                    <div id="FRMcashCasIn">
+                        <p>Внесення готівки</p>
+                        <? /* ## 3 CasIn внесение денег */?>
+                        <input type="text" style="width:200px;" class="input-small" name="cashCasIn" value="0.00"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="CasIn">Виконати</button>
+                    </div>
+                    <div id="FRMcashCasOut">
+                        <p>Вилучення готівки</p>
+                        <? /* ## 4 CasOut вилучення коштів */ ?>
+                        <input type="text" style="width:200px;" class="input-small" name="cashCasOut" value="0.00"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="CasOut">Виконати</button>
+                    </div>
+                    <div id="FRMcashInkas">
+                        <p>Інкасація</p>
+                        <?/* Інкасація */?>
+                        <input type="text" style="width:200px;" class="input-small" name="cashInkas" value="0.00"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="Inkas">Виконати</button>
+                    </div>
+                    <div id="FRMXReport">
+                        <p>X Звіт</p>
+                        <? /* ## 5 XReport Х отчет */ ?>
+                        <br/>
+                        <button style="width:200px;" class="btn btn-primary" id="XReport">X Звіт</button>
+                    </div>
+                    <div id="FRMcashCloseDay">
+                        <p>Закриття зміни</p>
+                        <? /* ## 8 CloseDay Закриття зміни(Х звіт, */ ?>
+                        <input type="text" style="width:200px;" class="input-small" name="cashCloseDay" value="0.00"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="CloseDay">Виконати</button>
+                    </div>
+                    <div id="FRMadService">
+                        <p>Додаткові послуги</p>
+                        <?=$this->form?>
+                        <? /* form id="formadService">
+                        <select style="width:200px;" ><option data-price="12.33" data-vat="12.33" value="id">Послуга</option></select><br/>
+                        Кількість: <input style="width:200px;" class="input-small" type="text" name="num" value="1"><br/>
+                        Ціна: <input type="text" style="width:200px;" class="input-small" name="cashadService" value="0.00"><br/>
+                        <button style="width:200px;" class="btn btn-primary" id="adService">Виконати</button>
+                        </form */?>
+                    </div>
+                 </div>
+                <p style="display:none;" id="idErrors" class='error'></p>
+                <div id="id_ajax_content">
+
+                </div>
+    </div>
+</div>
+<script>
+    var jServiceData = <?=($this->services) ? $this->services : "{}" ?>;
+    function fillServSelect(){
+        var sHTML="";
+        for(i in jServiceData){
+            if(i=="empty") sHTML+="<option disabled=\"disabled\" selected=\"selected\" value='"+jServiceData[i].id+"'>"+jServiceData[i].title+"</option>";
+            else sHTML+="<option data-element=\""+i+"\" data-price=\""+jServiceData[i].price+"\" data-vat=\""+jServiceData[i].vat+"\" value='"+jServiceData[i].id+"'>"+jServiceData[i].title+"</option>";
+        }
+        $("#service").html(sHTML);
+    }
+</script>

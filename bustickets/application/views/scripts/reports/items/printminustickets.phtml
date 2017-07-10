@@ -1,0 +1,41 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1><?=$this->sTitle?></h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <td>Тип пільги</td>
+    <td>По відом.</td>
+    <td>Тариф Пер.</td>
+    <td>Тариф Орг.</td>
+    <td>Страх. збір</td>
+    <td>Станц. збір</td>
+    <td>Чеків</td>
+</tr>
+
+<?=$this->partialLoop('reports/items/printminusticketsitem.phtml', $this->rs)?>
+    <tr>
+        <td  align="left"><b>Всього:</b></td>
+        <td><?=sprintf("%.2f",$this->m_totAll)?></td>
+        <td><?=sprintf("%.2f",$this->m_totStat)?></td><?/*Тариф Пер.*/?>
+        <td><?=sprintf("%.2f",$this->m_totConv)?></td><?/*Тариф Орг.*/?>
+        <td><?=sprintf("%.2f",$this->m_totInsh)?></td><?/*Страх збір.*/?>
+        <td><?=sprintf("%.2f",$this->m_totStat)?></td><?/*Станц. збір*/?>
+        <td><?=$this->m_totNum?></td>
+    </tr>
+    <tr>
+        <td  align="left"><b>Всього:</b></td>
+        <td><?=sprintf("%.2f",$this->totAll)?></td>
+        <td><?=sprintf("%.2f",$this->totStat)?></td><?/*Тариф Пер.*/?>
+        <td><?=sprintf("%.2f",$this->totConv)?></td><?/*Тариф Орг.*/?>
+        <td><?=sprintf("%.2f",$this->totInsh)?></td><?/*Страх збір.*/?>
+        <td><?=sprintf("%.2f",$this->totStat)?></td><?/*Станц. збір*/?>
+        <td><?=$this->totNum?></td>
+    </tr>
+</table>
+</pre>

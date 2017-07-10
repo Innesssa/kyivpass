@@ -1,0 +1,11 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<p><b>Event id:</b> <?=$this->log["id"];?></p>
+<p><b>To:</b> <?=$this->log["to"];?></p>
+<p><b>Status:</b> <?=$this->log["stat"];?></p>
+<p><b>Date:</b> <?=date("Y-m-d H:i:s", $this->log["dt"]);?></p>
+<p><b>Is apply:</b> <? if ($this->log["is_apply"]==1) echo "YES"; else echo 'NO';?></p>
+<p><b>Message:</b> <pre><?=$this->log["mssg"];?></pre></p>
+<? if ($this->log["trace"]) { ?><p><b>Trace:</b> <pre><?=$this->log["trace"];?></pre></p><? } ?>

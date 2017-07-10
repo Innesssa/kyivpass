@@ -1,0 +1,72 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1>Звіт про роботу касирів</h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <th>Касир</th>
+    <th>Им'я</th>
+    <th>По вед.</th>
+    <th>Тар. Пер.</th>
+    <th>Тар. Орг.</th>
+    <th>Страх. збiр.</th>
+    <th>Станц. збiр.</th>
+    <? if($this->partialLoop()->view->isShowLuggage) {?>
+        <th>Багаж.</th><? /*Багаж.*/?>
+    <? } ?>
+    <th>Попер.пр.</th>
+    <th>Доп. посл</th>
+    <th>Утр. тар</th>
+    <th>Кам. схв.</th>
+    <th>Посл. З</th>
+    <th>Виручка</th>
+    <th>В т.ч. ПДВ</th>
+    <th>Білетів</th>
+    <th>Пас.</th>
+    <th>МЖР Пас</th>
+</tr><?=$this->station->title."\n"?>
+<?=$this->partialLoop('reports/items/printkassaitem.phtml', $this->rs)?>
+
+<tr align="right"><td colspan="2" align="left"><b>Всего:</b></td>
+    <td><?=sprintf("%7.2f",$this->total1)?></td>
+    <td><?=sprintf("%7.2f",$this->total2)?></td>
+    <td><?=sprintf("%7.2f",$this->total3)?></td>
+    <td><?=sprintf("%7.2f",$this->total4)?></td>
+    <td><?=sprintf("%7.2f",$this->total5)?></td>
+    <? if($this->partialLoop()->view->isShowLuggage) {?>
+        <td><?=sprintf("%7.2f",$this->total13)?></td><? /*Багаж.*/?>
+    <? } ?>
+    <td><?=sprintf("%7.2f",$this->total6)?></td>
+    <td><?=sprintf("%7.2f",$this->total6_5)?></td>
+    <td><?=sprintf("%7.2f",$this->total6_4)?></td>
+    <td><?=sprintf("%7.2f",$this->total7)?></td>
+    <td><?=sprintf("%7.2f",$this->total8)?></td>
+    <td><?=sprintf("%7.2f",($this->total6_4+$this->total6_5+(float)$this->total2+(float)$this->total3+(float)$this->total4+(float)$this->total5+(float)$this->total6)+(float)$this->total13)?></td>
+    <td><?=sprintf("%7.2f",$this->total9)?></td>
+    <td><?=sprintf("%6d",$this->totalplaces)?></td>
+    <td><?=sprintf("%4d",0)?></td>
+    <td><?=sprintf("%4d",0)?></td>
+</tr>
+</table>
+
+
+    <? /*sprintf("%25s %7.2f %7.2f %7.2f %7.2f %7.2f %7.2f %7.2f %7.2f %05d %05d %05d\n",
+    " ",
+    (float)$this->total1,
+    (float)$this->total2,
+    (float)$this->total3,
+    (float)$this->total4,
+    (float)$this->total5,
+    (float)$this->total6,
+    ((float)$this->total1+(float)$this->total2+(float)$this->total3+(float)$this->total4+(float)$this->total5+(float)$this->total6),
+    (float)$this->total7,
+    (int)$this->totalplaces,
+    0,
+    0
+    ); */?>
+</pre>

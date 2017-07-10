@@ -1,0 +1,74 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="form-inline">
+	<label>Term to Re-apply (days): </label> <input type="text" class="input" name="termreapply" value="<?=$this->termreapply?>" /> <input type="button" class="btn submit" id="id_btn_reapply" value="set" />
+</div>
+ <table id="id_table_assurers" class="table table-striped media tablesorter">
+     <thead>
+                <tr>
+                    <th></th>
+                    <th>Status</th>
+                    <th>Info</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th style="width:90px"></th>
+                </tr>
+            </thead>
+            <tbody>
+        <?=$this->partialLoop('partials4adm/assurer.phtml', $this->aAssurers)?>
+     </tbody>
+</table>
+<!-- div class="pagination pagination-centered">
+  <ul>
+    <li class="disabled"><a href="#">«</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">»</a></li>
+ </ul>
+</div -->
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+   <div class="modal-body">
+	  <div id="id_form"></div>
+          
+  </div>
+  <div class="modal-footer">
+   <button class="btn" id="id_btn_apply"  >Approve</button>
+   <button class="btn" id="id_btn_reject" >Reject</button>   
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>    
+  </div>
+</div>
+
+<script>
+var iTermreapply = <?=$this->termreapply?>;
+var aCompanies = new Array();<?=$this->partialLoop('partials4adm/array_companies.phtml', $this->aCompanies)?>  
+var aSkills    = new Array();<?=$this->partialLoop('partials4adm/array_skills.phtml', $this->aSkills)?>  
+</script>
+<script type='text/javascript'>
+    // add parser through the tablesorter addParser method
+    $.tablesorter.addParser({
+        // set a unique id
+        id: 'status_parse',
+        is: function(s) {
+            // return false so this parser is not auto detected
+            return false;
+        },
+        format: function(s) {
+            // format your data for normalization
+            return s.replace(/.*Pending Approval.*/,'0').replace(/.*Approved.*/,'1').replace(/.*Rejected.*/,'2').replace(/.*Incomplete.*/,'-1');
+        },
+        // set type, either numeric or text
+        type: 'numeric'
+    });
+    $(document).ready(function(){
+        $('#id_table_assurers').tablesorter({headers:{0:{sorter:false},1:{sorter:'status_parse'},2:{sorter:false},5:{sorter:false}}});
+    });
+</script>

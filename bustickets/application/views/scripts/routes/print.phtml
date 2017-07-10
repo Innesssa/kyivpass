@@ -1,0 +1,43 @@
+<pre style="font-family:Courier New;font-size:9.8">
+<?=date("d.m.y H:i:s")?> № примірника @@@#@@@                                            <?=$this->conveyor['code']." ".$this->conveyor['title']?>
+
+                                      ВІДОМІСТЬ № <?=date("d-m-y")."-".$this->route->code."(".sprintf("%06d",(!empty($this->race->id)? $this->race->id : 0 )).")"?>
+
+АС       : <?=$this->station->title."\n"?>
+ДАТА     : <?=$this->date_begin."\n"?>
+РЕЙС     : <?=$this->route->code."\n"?>
+МАРКА    : <?=(!empty($this->vehicletitle)) ? ($this->vehicletitle."\n") : ($this->vehicle->title."\n")  ?>
+Держ №   : <?=(!empty($this->race->govnumber)) ? ($this->race->govnumber."\n") : ("--------"."\n")  ?>
+ПІБ водія: <?=(!empty($this->race->driver_name)) ? ($this->race->driver_name."\n") : ("--------"."\n")  ?>
+АТП      : <?=$this->conveyor['code']." ".$this->conveyor['title']?>, <?=(!empty($this->conveyor['vat'])) ? ("Платник"."\n") : ("Неплатник"."\n")?>
+
+ЧАС ПРИБУТТЯ:         ЗА РОЗКЛАДОМ ********   ФАКТИЧНЕ <?=(!empty($this->race->tm_received))? $this->race->tm_received :"********"?>
+
+ЧАС ВІДПРАВЛЕННЯ:     ЗА РОЗКЛАДОМ <?=sprintf("%02d",$this->route->hour).":".sprintf("%02d",$this->route->minute).":00"?>   ФАКТИЧНЕ <?=(!empty($this->race->time_begin)) ? ($this->race->time_begin."\n") : ("********"."\n")?>
+
+
+ мі-    Продавець       № РРО    № чека    Дата      Час   Пільга    Станція     Станція      Тариф     Стр.  Проїзд   Багаж     В т.ч
+ сце                                      продажу   прод. посвідч.    відправ.   прибуття     з ПДВ           з ПДВ,   з ПДВ     ПДВ
+<?=$this->partialLoop('routes/items/printitem.phtml', $this->tickets)?>
+
+
+РАЗОМ:
+Кіл-ть  Кіл-ть Тариф по Україні  Тариф по зак.   Тариф з   Страховий  Проїзд з    Багаж з      В т.ч.
+квитків  багажу    з ПДВ, грн.     з ПДВ, грн.   ПДВ, грн.  збір грн.  ПДВ, грн.  ПДВ, грн,    ПДВ, грн.
+<?=sprintf("% 3d     % 3d   % 7.2f           % 7.2f         % 7.2f   % 7.2f      % 7.2f   % 7.2f      % 7.2f \n",count($this->tickets),$this->luggageCount,$this->totalUA,0,($this->totalUA+0.0),$this->totalInsurer/*Страховий*/,($this->totalInsurer+$this->totalUA+0.0)/*Проїзд з*/,$this->totalLuggage/*Багаж з      */,$this->totalVat/*В т.ч.*/)?>
+
+В тому числі СУМИ ПЕРЕВІЗНИКА
+Тариф по Україні  Тариф по зак.      Багаж         ПДВ     К видачі
+   з ПДВ, грн.     з ПДВ, грн.    з ПДВ, грн.     грн.       грн.
+<?=sprintf(" % 7.2f           % 7.2f         % 7.2f      % 7.2f    % 7.2f \n",$this->convTotalUA,0,$this->convLuggageUA,$this->convLuggageVat,($this->convTotalUA+0.0+$this->convLuggageUA))?>
+
+
+Кількість місць:
+Пункт призначення         Кіл-ть місць   Кіл-ть пас. * км.   Кіл-ть броней   Кіл-ть пільговиків    Кіл-ть багажу
+<?=$this->partialLoop('routes/items/printstatitem.phtml', $this->aStation)?>
+РАЗОМ <?=sprintf("    % 20d   % 15.2f  % 15d  % 15d  % 20d \n",$this->aStatTotal['total_tickets'],$this->aStatTotal['distantion'],$this->aStatTotal['total_order'],$this->aStatTotal['total_benefits'],$this->aStatTotal['total_luggage'])?>
+
+
+
+Вивів на друк діспетчер: <?=(!empty($this->race->fio))? $this->race->fio :"********"?>                                                 Контролер:
+</pre>

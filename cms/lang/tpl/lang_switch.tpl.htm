@@ -1,0 +1,24 @@
+<?
+$site_langs = Lang::getSiteLangs();
+
+SYS::varDump($site_langs,__FILE__,__LINE__,"LANGS");
+
+if($site_langs !== NULL)
+{
+    foreach($site_langs as $key=>$val)
+    {
+        if($_SESSION['lang'] == $val['lang'])
+        {
+            $color="color:#004379";
+            $weight="font-weight:bolder";
+            $border="border:1px solid #004379;"; 
+        }
+        else
+        {
+            $color="color:#777";
+            $weight="font-weight:normal";
+            $border="";
+        }?>          
+        <a href="/<?=$val['lang']?>/" style="<?=$border?>;<?=$weight?>;<?=$color?>;text-decoration:none;padding:3px;"><?=$val['lang']?></a>&nbsp; 
+  <?}
+}?>

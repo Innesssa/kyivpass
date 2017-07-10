@@ -1,0 +1,51 @@
+<script>
+function myHide(elms){for(i=0;i<elms.length;i++)if($(elms[i])) { $(elms[i]).hide();}} function myShow(elms){for(i=0;i<elms.length;i++) if($(elms[i])) { $(elms[i]).show(); }}
+function luggageSwitcher(){
+    if(DEBUG_BUSTICKETS) {
+        console.log("function luggageSwitcher luggagetype-fixed:"+$("#luggagetype-fixed:checked").length);
+        console.log("function luggageSwitcher luggagetype-calculated:"+$("#luggagetype-calculated:checked").length);
+    }
+    if($("#luggagetype-fixed:checked").length){          myShow(new Array('#idluggagefixed'));      myHide(new Array('#idluggagecalculated'));}
+    else { if(!$("#luggagetype-calculated:checked").length)$("#luggagetype-calculated").attr('checked','checked'); myShow(new Array('#idluggagecalculated')); myHide(new Array('#idluggagefixed'));}
+}
+function ticketsSwitcher(){
+    if(DEBUG_BUSTICKETS) {
+        console.log("function ticketsSwitcher pricetype-fixed:"+$("#pricetype-fixed:checked").length);
+        console.log("function ticketsSwitcher pricetype-calculated:"+$("#pricetype-calculated:checked").length);
+    }
+    if($("#pricetype-calculated:checked").length)          {  myShow(new Array('.calculated'));  myHide(new Array('.priceperkm','#rebuild','#tabs'));}
+    else {if(!$("#pricetype-fixed:checked").length)$("#pricetype-fixed").attr('checked','checked');  myShow(new Array('.priceperkm','#rebuild','#tabs'));  myHide(new Array('.calculated'));}
+}
+function ticketsShower(show) {
+    var elms = new Array('.pricetype','.priceperkm','#rebuild','#tabs','.calculated');
+    //.toggleClass()
+    if(show){
+        $('#ticketsTR').addClass("inlineactive");
+        backShower(0);luggageShower(0); myShow(elms);
+        ticketsSwitcher();
+        $('#idactivepart').val(1);
+        }else{ $('#ticketsTR').removeClass("inlineactive"); myHide(elms);  }
+}
+function luggageShower(show) {
+    var elms = new Array(".luggage","#idluggagefixed","#idluggagecalculated");
+    if(show){
+        $('#luggageTR').addClass("inlineactive");
+        backShower(0);ticketsShower(0); myShow(elms);
+        luggageSwitcher();
+        $('#idactivepart').val(2);
+    } else { $('#luggageTR').removeClass("inlineactive"); myHide(elms);  }
+}
+function backShower(show) {
+    var elms = new Array('.backtickets');
+    if(show){ $('#backTR').addClass("inlineactive"); luggageShower(0);ticketsShower(0); myShow(elms);  $('#idactivepart').val(3); }else{ $('#backTR').removeClass("inlineactive"); myHide(elms);  }
+}
+if(DEBUG_BUSTICKETS) {
+    console.log("File:tarrifs dinamicly.js ActivePart:"+$("#idactivepart").val());
+}
+switch ($("#idactivepart").val()) {
+    case "2":   luggageShower(1);  break;
+    case "3":   backShower(1);    break;
+    default:  ticketsShower(1);  break;
+}
+var elm;
+</script>

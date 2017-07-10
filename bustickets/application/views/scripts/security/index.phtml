@@ -1,0 +1,31 @@
+<h4><?=(count($this->breadcrums)) ? $this->partialLoop('partials/breadcrums.phtml',$this->breadcrums):""?> </h4>
+<?=$this->sErrorMessage?>
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <td colspan="8">
+                    <div class="btn-group" style="vertical-align:bottom;">
+                        <a id="id_edit_item_0" class="btn btn-primary edit" href="#myModal" role="button" data-toggle="modal" >Додати новий запис</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <?
+        if(count($this->contlist)){ ?>
+        <table id="id_table_items" class="table table-hover tablesorter">
+            <thead>
+            <tr>
+                <th>ID&nbsp;&nbsp;</th>
+                <th>Назва&nbsp;&nbsp;</th>
+                <th>Опис&nbsp;&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?=$this->partialLoop('security/items/cont_items.phtml', $this->diclist)?>
+            </tbody>
+        </table>
+        <? } //if(count($this->diclist)){ ?>
+    </div>
+</div>

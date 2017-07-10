@@ -1,0 +1,58 @@
+<?php 
+if(!$this->isAjax){
+echo $this->partial('partials4adm/messages.phtml');
+?>
+    <div class="well">
+        <div class="filter form-inline">
+        <form action="/admin/platforms" id="form-filter">
+			<label>Filter By:</label>
+        <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+        <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+			<select name="filter[vendor]" class="myfilter">
+                <option value="">Vendor</option>
+                <?
+                foreach ($this->vendors as $vendor) {
+                    echo '<option value="'.$vendor->vendor.'">'.$vendor->vendor.'</option>';
+                }
+                ?>
+			</select>
+            <select name="filter[status]" class="myfilter">
+                <option value="">Status</option>
+                <option value="not_actual">Not actual</option>
+                <option value="not_available">Unavailable</option>
+                <option value="ok">Ok</option>
+            </select>
+			<a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+
+        </form>
+       </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table id="id_table_platforms" class="tablesorter">
+			<thead>
+				<tr style="white-space: nowrap">
+					<th data-field-name="id" class="header" style="width:25px"></th>
+					<th data-field-name="title" class="header" style="width:350px">Platform Name</th>
+					<th data-field-name="is_actual" class="header" style="width:30px">Status</th>
+					<th data-field-name="date_updated" class="header" style="width:100px">Last update</th>
+					<th style="width:150px"></th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/platforms.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+<script>govsource.pageConfig.searchData=<?=$this->aFilter?>;
+</script>
+<?=$this->paginationControl($this->paginator)?>
+<div class="clearfix"></div>
+<?php if(!$this->isAjax){?></div>
+    <!-- Modal -->
+    <?= $this->partial('partials4adm/modal.phtml'); ?>
+    <!-- End Modal-->
+
+<? } else{?>
+    <script>
+        govsource.AdminPlatforms.bindEvents();
+//        $('.ajaxpaginator').click(function(){ loadContent($(this).attr('href'),jSearchData,'#id_ajax_content','html');return false; });
+    </script><?} ?>

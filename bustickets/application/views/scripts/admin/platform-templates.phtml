@@ -1,0 +1,51 @@
+<?php 
+if(!$this->isAjax){
+echo $this->partial('partials4adm/messages.phtml');
+?>
+        <!--<label>Filter By:</label>-->
+    <div class="well">
+        <form style="display: none" action="/admin/platform-templates" id="form-filter" style="margin: 0">
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+
+        </form>
+        <a id="id_add_button" class="btn btn-info" href="#myModal" role="button" data-toggle="modal">Add new</a>
+        <!--<div class="filter form-inline">-->
+       <!--</div>-->
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table id="id_table_platforms" class="tablesorter">
+			<thead>
+				<tr>
+					<th data-field-name="id" class="header" style="width:25px"></th>
+					<th data-field-name="title" class="header" style="width:350px">Template Name</th>
+					<th style="width:250px">Conditions</th>
+					<th style="width:20px"></th>
+				</tr>
+			</thead>
+			<tbody><?
+            if (count($this->paginator)) echo $this->partialLoop('partials4adm/platform-templates.phtml', $this->paginator);
+            else {
+                ?>
+                <tr><td colspan="4" style="text-align: center">No entries</td></tr>
+                <?
+            }
+            ?></tbody>
+		</table>
+</div>
+<script>govsource.pageConfig.searchData=<?=$this->aFilter?>;
+</script>
+<?=$this->paginationControl($this->paginator)?>
+<div class="clearfix"></div>
+<?php if(!$this->isAjax){?></div>
+    <!-- Modal -->
+    <?= $this->partial('partials4adm/modal.phtml'); ?>
+    <!-- End Modal-->
+
+<? } else{?>
+    <script>
+        govsource.AdminPlatformTemplates.bindEvents();
+//        $('.ajaxpaginator').click(function(){ loadContent($(this).attr('href'),jSearchData,'#id_ajax_content','html');return false; });
+    </script><?} ?>

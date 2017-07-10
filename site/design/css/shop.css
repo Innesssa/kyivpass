@@ -1,0 +1,59 @@
+.wrap_price{
+    float:left;background-color:#eee;border-left:2px solid #ccc;padding:5px;width:auto;	    	
+}
+.price_grn{
+    float:left;font-family:Arial;font-size:25px;font-weight:900;color:#7b7b7b;	
+}
+.price_kop{
+    float:left;font-family:Arial;font-size:12px;font-weight:900;color:#7b7b7b;	
+}
+.price_words{
+    float:left;margin:10px;color:#7b7b7b;
+}
+.free_delivery{
+    font-size:16px; color:green;
+}
+/*============ Button ============*/        
+.btns {
+    padding:5px 10px;
+    font-size:175%;
+    color:#fff;
+    background-color:#d91219;
+    text-align:center;
+}
+    .btns:hover {
+        background-color:#911313;
+        cursor:pointer;
+    }
+/*============ /Button ============*/   
+
+
+
+
+
+.feature-select .item input[type="radio"],
+.feature-select .item input[type="checkbox"]
+{
+	//display:none
+}
+.feature-select .item label{
+	border:1px solid #ffffff;
+	display:block;
+}
+.feature-select .item label.selected{
+	border:1px solid #800000;
+}
+.feature-select .item label{
+	cursor:pointer;
+}
+feature-list li.feature-select{
+	display:block
+}
+
+.feature-select .list.horizont-orient > li{
+	display:inline-block;
+	padding:0px;
+}
+.feature-select .list.vertical-orient > li{
+	display:block
+}

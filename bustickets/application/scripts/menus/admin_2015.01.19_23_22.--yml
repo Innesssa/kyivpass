@@ -1,0 +1,180 @@
+nav:
+  dashboard:
+    label: "Головна"
+    controller: index
+    action: index
+
+  dictionary:
+    label: 'Довідники'
+    uri: '#'
+    pages:
+        area:
+            label: 'area Територіальні одиниці/якісь області'
+            controller: dictionary
+            action: index
+            params:
+            	type: area
+        cities:
+            label: 'cities Територіальні одиниці/міста'
+            controller: dictionary
+            action: index
+            params:
+            	type: cities
+        districts:
+            label: 'districts Територіальні одиниці/райони'
+            controller: dictionary
+            action: index
+            params:
+            	type: districts
+        insurerrate:
+            label: 'insurerrate Типи страхових ставок'
+            controller: dictionary
+            action: index
+            params:
+            	type: insurerrate
+        organisation:
+            label: 'organisation Організації'
+            controller: dictionary
+            action: index
+            params:
+            	type: organisation
+        orgtypes:
+            label: 'orgtypes Типи організацій'
+            controller: dictionary
+            action: index
+            params:
+            	type: orgtypes
+        phonetype:
+            label: 'phonetype Типи телефонів'
+            controller: dictionary
+            action: index
+            params:
+            	type: phonetype
+        position:
+            label: 'position Посади'
+            controller: dictionary
+            action: index
+            params:
+            	type: position
+        price:
+            label: 'price Типи ціноутворення'
+            controller: dictionary
+            action: index
+            params:
+            	type: price
+        regions:
+            label: 'Територіальні одиниці/області'
+            controller: dictionary
+            action: index
+            params:
+            	type: regions
+        sitnumber:
+            label: 'sitnumber Число місць у транспортному засобі'
+            controller: dictionary
+            action: index
+            params:
+            	type: sitnumber
+        vehicletype:
+            label: 'vehicletype Транспортний засіб'
+            controller: dictionary
+            action: index
+            params:
+            	type: vehicletype
+        villages:
+            label: 'villages Територіальні одиниці'
+            controller: dictionary
+            action: index
+            params:
+            	type: villages
+  bucharea:
+       label: 'Бухгалтер АРМ'
+       uri: '#'
+       pages:
+         organization:
+            label: 'Юридичні особи'
+            controller: organization
+            action: index
+         reports:
+            label: 'Репорти'
+            controller: reports
+            action: index
+         buhgalteria:
+            label: 'Бугалтерія'
+            controller: buhgalteria
+            action: index
+   tech:
+         label: 'Технолог АРМ'
+         uri: '#'
+         pages:
+                disproutes:
+                    label: 'Maршрути'
+                    controller: routes
+                    action: index
+                shedule:
+                    label: 'Розклад'
+                    controller: shedules
+                    action: index
+                techusers:
+                    label: 'Користувачі'
+                    controller: users
+                    action: index
+                techusers1:
+                    label: 'Користувачі1'
+                    controller: admin
+                    action: users-list
+
+  disp:
+           label: 'Діспечер АРМ'
+           uri: '#'
+           pages:
+             race:
+                 label: 'Рейси'
+                 controller: races
+                 action: index
+  kassa:
+             label: 'Касир АРМ'
+             uri: '#'
+             pages:
+               buytickets:
+                 label: 'Квитки продаж'
+                 controller: tickets
+                 action: index
+               backtickets:
+                  label: 'Квитки повернення'
+                  controller: tickets
+                  action: backticket
+
+  adminarea:
+      label: 'Додатки(for admin)'
+      uri: '#'
+      pages:
+        controllers:
+          label: Controllers
+          controller: admin
+          action: controllers-list
+        actions:
+          label: Actions
+          controller: admin
+          action: actions-list
+        roles:
+          label: Roles
+           controller: admin
+           action: roles-list
+        permissions:
+          label: Permissions
+          controller: admin
+          action: permissions-list
+       settingss:
+           label: Settings
+           controller: admin
+           action: settings-list
+
+  monitoring:
+    label: 'Monitoring'
+    controller: admin
+    action: monitor
+  logout:
+    label: 'Logout'
+    controller: admin
+    action: logout
+

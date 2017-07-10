@@ -1,0 +1,28 @@
+<div class="corn polosa">
+Детали
+</div>
+<div class="wrap_catalog" style="min-height:300px;display:table;">
+<?
+$item_list=$best_prop;
+if($item_list!=NULL){?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$val["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+<div class="wrap_catalog_sell view_grid" align="center"><div style="margin-bottom:12px;height:200px;overflow:hidden;">
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<img src="<?=$img1?>" width="240" style="margin-bottom:7px;" />
+</a>
+<a href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$GLOBALS["tag2"]?>/<?=$val["id"]?>-<?=$val["seolink"]?>" title="Подробнее">
+<?=$val["caption"]?></a>
+</div>
+<?$dp=explode(".",$val["price_diler"]);?>
+<table width="90%" class="price"><tr><td style="height:70px;margin-bottom:12px;" valign="bottom" align="center">
+<div style="margin-bottom:12px;">Цена: <span><?=$dp[0]?>.<font><?=$dp[1]?></font></span> <?=CURRENCY?></div>
+<div class="buy">
+<input name="incart" type="submit" value="В корзину">
+</div>
+</td></tr></table></div>
+<?}}?>
+</div>

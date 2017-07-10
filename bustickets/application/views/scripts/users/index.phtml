@@ -1,0 +1,47 @@
+<h3><?=$this->sTitle?></h3>
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <td colspan="8">
+                    <div class="btn-group" style="vertical-align:bottom;">
+                        <a id="id_edit_item_0" class="btn btn-primary edit" href="#myModal" role="button" data-toggle="modal" >Додати користувача</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="well">
+            <? /*div class="filter projects">
+        <span> Filter By: </span>
+        <select name="status" class="myfilter">
+            <option value="">Feedback Status</option>
+            <option value="good">Good</option>
+            <option value="normal">Normal</option>
+            <option value="bad">Bad</option>
+        </select><a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        <input type="hidden" class="myfilter" name="sort" value=""/>
+        <input type="hidden" class="myfilter" name="order" value=""/>
+    </div */?>
+        </div>
+        <div id="id_ajax_content">
+            <div class="table">
+                <table id="id_table_feedback" class="tablesorter">
+                    <thead>
+                    <tr>
+                        <th id="id_sort_id" class="header" style="width:25px">#</th>
+                        <th id="id_sort_rate" class="header" style="width:300px">Логін</th>
+                        <th id="id_sort_date" class="header" style="width:100px">ПІБ</th>
+                        <th style="width:150px">Роль</th>
+                        <th style="width:150px">Станція прив'язки</th>
+                        <th style="width:150px">Телефон</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody><?=$this->partialLoop('partials/users.phtml', $this->paginator)?></tbody>
+                </table>
+            </div>
+            <script>var jSearchData=<?=$this->aFilter?>;</script>
+            <?=$this->paginationControl($this->paginator)?>
+            <div class="clearfix"></div>
+        </div>
+    </div>

@@ -1,0 +1,34 @@
+<h4><?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? } ?>
+<form id="tariffMatrix" class="form-horizontal" action="tariff/edit-matrix" method="post">
+    <fieldset>
+        <input type="hidden" name="tariffID" value="<?=$this->tariffID?>"><input type="hidden" name="needstore" value="1">
+        <fieldset id="fieldset-needstore">
+            <legend><label>Сітка</label>
+                <div class="control-group reserv" id="idreserv">
+                    <div class="multyfields">
+                        Від(km): <input type="text" name="begin[]"  value="" class="input-small reserve"> До(km): <input type="text" name="end[]"  value="" class="input-small reserve"> Крок: <input type="text" name="step[]"  value="" class="input-small reserve"> <button name="remove"  type="button" class="btn inline2" onclick="delRow(this);">Видалити</button>
+                    </div>
+                    <button name="add" id="idButtonReserve" type="button" class="btn inline3" onclick="addRow(this);">Додати рядок</button>
+                </div>
+            </legend>
+
+        </fieldset>
+    </fieldset>
+</form>
+<script>
+    var jReserve = <?=(!empty($this->jReserve)) ? $this->jReserve : "{}" ?>;
+    var i=0;
+    console.log(jReserve);
+    for (key in jReserve) {
+            var elm = (i==0) ? $('#idButtonReserve').parent().find('div').last() : addRow('#idButtonReserve');
+            $(elm).find('input[name="begin[]"]').val(jReserve[key]["begin"]);
+            $(elm).find('input[name="end[]"]').val(jReserve[key]["end"]);
+            $(elm).find('input[name="step[]"]').val(jReserve[key]["step"]);
+            i++;
+    }
+</script>

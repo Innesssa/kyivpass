@@ -1,0 +1,14 @@
+<tr id="id_row_<?=$this->id?>">
+    <td><?=sprintf('%04d',$this->id)?></td>
+    <td class="name"><?=$this->login?></td>
+    <td class="type"><?=$this->lastname.' '.$this->firstname.' '.$this->middlename?></td>
+    <td><?=$this->perm_description?></td>
+    <td><?=$this->defaultstation?></td>
+    <td>-//-</td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_edit_item_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>
+            <a id="id_del_item_<?=$this->id?>" class="btn btn-mini delete" href="javascript:void(0);"><i class="icon-remove"></i></a>
+        </div>
+    </td>
+</tr>

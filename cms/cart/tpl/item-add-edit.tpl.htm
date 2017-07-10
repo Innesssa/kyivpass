@@ -1,0 +1,207 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?><?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку записей" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить новую запись" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?$id=$_GET['id'];if($id!=""&&$id!="new"){?></td><td align="center" style="padding-left:7px;"><a href="<?=SITE_URL."/art/".$tag1_list[substr($tag2_list[substr($item_data["connect"],1,-1)]["connect"],1,-1)]["seolink"]."/".$tag2_list[substr($item_data["connect"],1,-1)]["seolink"]."/".$item_data["id"]."-".$item_data["seolink"].""?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a><?}?>
+</td><td align="center" style="padding-left:7px;">
+<a href="javascript:void(0)" onclick="addEdit.submit();"><img src="design/ico_save.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" width="95%" style="padding-left:7px;">
+<?if($cmd=="update"||$_GET['save']=="ok"){?><b style="color:forestgreen;font-size:13px;">Данные сохранены!</b><br><?=date("H:i:s d-m-Y")?><?}?>&nbsp; 
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=CART_NAME?></span></nobr><br>
+<nobr><span style="color:#444;">Редактор заказа  : </span># <?=$item_data['id']!=''?$item_data['id']:'NEW'?></nobr>
+</tr>
+</table>
+
+<div align="center">
+<div style="padding:0px 12px 12px 20px;max-width:890px;min-height:500px;" align="left">
+
+<form name="addEdit" method="post" action="<?=SITE_URL?>/cms/?<?=getenv("QUERY_STRING")?>">  	
+
+
+
+<input type="hidden" name="cmd" value="<?=$item_data['id']!=''?'update':'insert'?>">
+<input type="hidden" name="pos" value="<?=$item_data['pos']?>">
+<input type="hidden" name="connect" value="<?=$item_data['connect']?>">
+<input type="hidden" name="show" value="1">
+
+<table style="width:100%" cellpadding="0" cellspacing="0"><tr>
+<td valign="top" style="width:550px;padding-right:0px;">
+<fieldset class="pole">
+<legend>&nbsp;Имя заказчика :&nbsp;</legend>
+<input type="text" name="desc_short" id="desc_short" maxlength="250" style="padding:5px 7px;width:97%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$item_data['desc_short']?>">
+</fieldset>
+
+</td><td valign="top" style="padding-left:7px;">
+<fieldset class="pole">
+<legend>&nbsp;&nbsp;Телефон :&nbsp;&nbsp;</legend>
+<input type="text" name="caption" id="caption" maxlength="250" style="padding:5px 7px;width:95%;font-size: 22px;font-weight: normal;line-height: 25px;font-family:verdana" value="<?=$item_data['caption']?>">
+</fieldset>
+</td></tr></table>
+<?
+$pid=explode(";",substr($item_data["connect"],1,-1));
+if($pid[0]!=''){$parent_tag=$pid[0];}
+?>
+<fieldset class="pole">
+<legend>&nbsp;&nbsp;Категория :&nbsp;&nbsp;</legend>
+<select name="connect[]" style="color:#5A7EDC;width:99%;padding:2px 2px;height:25px;font-weight:bold;line-height:20px;font-size:14px;font-family:verdana;margin:3px 0px 4px 0px;">
+<option value="null" selected> --- Выберите категорию</option>
+<?foreach ($tag2_list as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($parent_tag==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</fieldset>
+
+
+
+<fieldset class="pole">
+<legend>&nbsp;&nbsp;Комментарий :&nbsp;&nbsp;</legend>
+<textarea name="desc_full" style="padding:7px;height:50px;width:98%;"><?=$item_data['desc_full']?></textarea>
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Список покупок :&nbsp;</legend>
+
+<?
+unset($citem_data);
+$citem=explode(";",substr($item_data["p1"],1,-1));
+if($citem){foreach($citem as $key=>$val2){
+$ph=explode("/",$val2);
+$prod_id=$ph[0];
+$prod_hm=$ph[1];
+$citem_data[$prod_id]['item']=ShopItem::itemData($prod_id);
+$citem_data[$prod_id]['hm']=$prod_hm;
+//var_dump($citem_data);
+}}
+$count_item=0;
+$stoit=0;
+?>
+
+<table style="width: 100%;margin-top:10px;" cellpadding="0" cellspacing="0">
+<?$item_list2=$citem_data;
+if($item_list2!=NULL){?>
+<?foreach($item_list2 as $key=>$valz){?>
+<tr>
+<td width="165">
+<?
+$img1=SHOP_ITEM_IMG_PATH."/".$valz['item']["id"]."/1m.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_740x480.png";
+?>
+
+<img src="<?=$img1?>" style="margin-right:7px;margin-bottom:3px;" width="150" align="left" />
+</td><td>
+<div style="margin-bottom:12px;">
+<a target="_blank" href="/shop/cart/look/<?=$valz['item']["id"]?>-<?=$valz['item']["seolink"]?>" title="Подробнее" style="color:#3256B4;">
+<?=trim($valz['item']['caption'])?></a></div>
+
+<div style="color: #494949;margin-bottom:7px;"><span style="font-size:11px;">
+Артикул:</span>
+<?
+$param_connectus=explode(";",substr($valz['item']["param_connect"],1,-1));
+
+$param_item_r=ParamItem::itemData($param_connectus[0]);
+$param_item_l=ParamItem::itemData($param_connectus[1]);
+?>
+<span style="" id="article"><?=$param_item_l['value1']!=''?$param_item_l['value1'].'-':''?><?=$valz['item']["article"]?><?=$param_item_r['value1']!=''?'-'.$param_item_r['value1']:''?></span>
+</div>
+
+<div style="color: #494949;margin-bottom:7px;">
+<span style="font-size:11px;">Упаковка:</span>
+<span style=""><?=$valz['item']["package"]?></span>
+</div>
+
+</td><td width="130" valign="middle">
+
+<?$price_roznica = Price::getPrice($valz['item']['postavschik'],$valz['item']['price_roznica'],$valz['item']['price_diler'],$valz['item']['ddp']);
+$dp=explode(".",$price_roznica);?>
+
+&nbsp;<b><?=$price_roznica?></b> X 
+<input style="width:30px;margin-top:4px;" id="cart_<?=$valz['item']["id"]?>" name="cart[<?=$valz['item']["id"]?>]" type="text" value="<?=$valz["hm"]?>">
+&nbsp;
+
+</td><td align="left" width="125" valign="middle">
+
+<?
+$cena=Price::getPrice($valz['item']['postavschik'],$valz['item']['price_roznica'],$valz['item']['price_diler'],$valz['item']['ddp']);
+$ocena=$cena*$valz['hm'];
+$stoit=$stoit+$ocena;
+$count_item=$count_item+$valz['hm'];
+
+?>
+
+<input id="buyprice_<?=$valz['item']['id']?>" type="hidden" value="<?=$price_roznica?>">
+<div style="margin-bottom:7px;"><span style="font-size:11px;">Цена:</span>
+<?if($price_roznica!=0){?>
+<span style="color:#494949;font-weight:bold" id="fullprice_<?=$valz['item']['id']?>"><?=$price_roznica*$valz["hm"]?></span> <?=CURRENCY?>
+<?}else{?>
+<span style="color:#494949;font-weight:bold" id="fullprice_<?=$valz['item']['id']?>">По запросу</span> 
+<?}?>
+</div>
+
+
+</td>
+</tr>
+
+
+
+
+<?}}?>
+</table>
+<table style="width: 100%;margin-bottom:10px;" cellpadding="0" cellspacing="0"><tr>
+<td align="right" style="padding:12px 20px 0px 20px;">
+
+
+</td>
+
+<td style="" width="355" align="right">
+<div style="background-color:#F1FFE6;padding:7px 15px 7px 15px;" class="r5">
+<div style="margin-bottom:10px;color:black;"><b>Обзор заказа</b></div>
+<div style="margin-bottom:10px;color:black;">Количество товаров: <strong id="countcart"><?=$count_item?></strong></div>
+<div style="margin-bottom:10px;color:black;">Предварительная стоимость:	<strong id="moneypay"><?=$stoit?></strong> <?=CURRENCY?></div>
+</div>
+
+</td>
+</tr></table>
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Seo Link :&nbsp;</legend>
+<input name="seolink" value="<?=$item_data['seolink']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Title :&nbsp;</legend>
+<input name="meta_t" value="<?=$item_data['meta_t']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Keywords :&nbsp;</legend>
+<input name="meta_k" value="<?=$item_data['meta_k']?>" type="text" style="width:98%">
+</fieldset>
+
+<fieldset class="pole">
+<legend>&nbsp;Meta Description :&nbsp;</legend>
+<textarea name="meta_d" style="padding:7px;height:40px;width:98%;"><?=$item_data['meta_d']?></textarea>
+</fieldset>
+
+
+
+</form>	
+
+<br>
+
+
+<table style="width:98%;" cellpadding="0" cellspacing="0"><tr><td align="left" style="width:50%;padding-left:15px;">
+<a href="?mod=<?=$mod?>&com=delete&id=<?=$item_data['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" onclick="if (confirm('Вы уверены что хотите удалить запись?')) location=this.href; return false;"><img src="design/icon-delete.gif" style="cursor: pointer;" title="Удалить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="right">
+<a href="javascript:void(0)" onclick="addEdit.submit();"><img src="design/ico_save.gif" style="cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td></tr></table>
+
+</div></div>
+
+<br><br><br>
+
+
+

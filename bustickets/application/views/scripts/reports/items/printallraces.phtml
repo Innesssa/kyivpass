@@ -1,0 +1,45 @@
+<style>H2 {font: bold 16px Verdana;}TH {font: bold 11px Verdana;}TD {font: 10px Verdana;}table.STYLE tr TH {font: bold 11px Verdana;border:solid windowtext .5pt;}table.STYLE tr TD {font: 10px Verdana;border: 1px solid windowtext .5pt;}B {font: bold 10px Verdana;}.STYLE{ border-collapse:collapse;border: 1px solid windowtext .5pt;}</style>
+<?/* style="font-family:Courier New;font-size:9.8"*/?>
+<h1><?=$this->sTitle?></h1>
+
+<h3>Об'єкт(и) - <?=$this->station->title."\n"?></h3>
+
+Період	<?=$this->dtb?> - <?=$this->dte."\n"?><br/>
+Звіт створено	<?=date("d.m.Y H:i")."\n"?><br/>
+Оператор:	<?=$this->oSession->login."\n"?><br/>
+<table border="1" class="STYLE">
+<tr align="center">
+    <td>№</td>
+    <td>Назва маршруту</td>
+    <td>за планом</td>
+    <td>не вик.</td>
+    <td>к-т регул.</td>
+    <td>виконані</td>
+    <td>По розрахунку</td>
+    <td>Пасажирів</td>
+    <td>Перевізник</td>
+</tr>
+
+<?=$this->partialLoop('reports/items/printallracesitem.phtml', $this->rs)?>
+    <tr  align="right">
+        <td  colspan="2" align="left"><b>Всього:</b></td>
+        <td><?=$this->m_totNum?></td>
+        <td><?$this->m_totStat?></td>
+        <td><?=($this->m_totNum>0) ? sprintf("%3d",ceil(100/$this->m_totNum*$this->m_totAll)): 0?></td>
+        <td><?=$this->m_totAll?></td>
+        <td><?=sprintf("%.2f",$this->m_totInsh)?></td>
+        <td><?=$this->m_totConv?></td>
+        <td></td>
+    </tr>
+    <tr  align="right">
+        <td  colspan="2" align="left"><b>Всього:</b></td>
+        <td><?=$this->totNum?></td>
+        <td><?=$this->totStat?></td>
+        <td><?=($this->totNum>0) ? sprintf("%3d",ceil(100/$this->totNum*$this->totAll)): 0?></td>
+        <td><?=$this->totAll?></td>
+        <td><?=sprintf("%.2f",$this->totInsh)?></td>
+        <td><?=$this->totConv?></td>
+        <td></td>
+    </tr>
+</table>
+</pre>

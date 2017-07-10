@@ -1,0 +1,80 @@
+<?php
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="row">
+	<div class="span9">
+        <? /* table class="table">
+            <tr>
+                <td colspan="5">
+                    <div class="btn-group">
+                        <a id="id_add_group" class="btn btn-primary edit" href="javascript:void(0);" >New Rule</a>
+                    </div>
+                </td>
+            </tr>
+            </table */?>
+        <a name="project"></a><b>Project:</b><br/>
+		<table id="id_groups" class="table tablesorter">
+            <thead>
+            <tr>
+                <th>Group name</th><?
+                $colPrjP=1;
+                foreach($this->aPropPrj as $r){
+                    ?><th><?=$r?></th><?
+                    $colPrjP++;
+                }
+                ?>
+                <th style="width:40px"></th>
+            </tr>
+            </thead>
+            <tbody>
+			<?=$this->partialLoop('partials4adm/permissiongroups.phtml', $this->aPermissionsPrj)?>
+            </tbody>
+		</table>
+        <a name="organization"></a><b>Organization</b>:<br/>
+        <table id="id_groups_org" class="table tablesorter">
+            <thead>
+            <tr>
+                <th>Group name</th><?
+                $colOrgP=1;
+                foreach($this->aPropOrg as $r){
+                    ?><th><?=$r?></th><?
+                    $colOrgP++;
+                }
+                ?><th style="width:40px"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?=$this->partialLoop('partials4adm/permissiongroupsorg.phtml', $this->aPermissionsOrg)?>
+            </tbody>
+        </table>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+	  <div id="id_form"></div>
+      <div class="clearfix"></div>
+
+        <p class="text-error" id="id_error">
+        </p>
+
+        <p class="text-success" id="id_loading">
+        </p>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button id="id_submit" class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#id_groups').tablesorter({headers: { <?=$colPrjP?>: { sorter: false} }});
+        $('#id_groups_org').tablesorter({headers: { <?=$colOrgP?>: { sorter: false} }});
+    });
+</script>

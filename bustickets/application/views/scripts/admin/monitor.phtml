@@ -1,0 +1,37 @@
+<?php
+if(!$this->isAjax){?>
+    <div class="well">
+        <div class="filter form-inline">
+            <form action="/admin/monitor" id="form-filter">
+                <label for="plugin_field"><span> Search: </span></label>
+                <input type="text" class="myfilter" name="filter[search]"/> <a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+                <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+                <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+            </form>
+        </div>
+    </div>
+<div id="id_ajax_content"><? } ?>
+<div class="row">
+	<div class="span9">
+		<table class="table tablesorter">
+            <thead>
+            <tr>
+                <th data-field-name="id" class="header">#</th>
+                <th data-field-name="stat" class="header">Lvl</th>
+                <th data-field-name="dt" class="header">Date</th>
+                <th data-field-name="mssg" class="header">Message</th>
+                <th data-field-name="username" class="header">User</th>
+                <th></th>
+            </tr>
+            </thead>
+			<?=$this->partialLoop('partials4adm/monitor.phtml', $this->paginator)?>	
+		</table>		
+	</div>
+</div>
+    <script>govsource.pageConfig.searchData=<?=$this->aFilter?>;</script>
+<?=$this->paginationControl($this->paginator)?>
+<?php if(!$this->isAjax){?></div>
+<? } else{?>
+<script>
+    govsource.AdminMonitor.bindEvents();
+</script><?} ?>

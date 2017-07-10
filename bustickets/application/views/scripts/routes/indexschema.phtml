@@ -1,0 +1,21 @@
+<h4><?=$this->title?></h4><h3>Зупинки</h3>
+<div class="table">
+    <button class="btn btn-primary" id="id_schema_item_<?=$this->routeID?>_0">Додати нову зупинку</button>
+    <table id="id_table_feedback" class="tablesorter">
+        <thead>
+        <tr>
+            <th>Зупинка</th>
+            <th>№</th>
+            <th>Інтервал</th>
+            <th>Тривалість зупинки</th>
+            <th>Відстань</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?=$this->partialLoop('partials/stationlist.phtml', $this->aStationList)?>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" id="id_schema_item_<?=$this->routeID?>_0">Додати нову зупинку</button>
+    <script> $('#myModal #id_btn_save').hide();</script>
+</div>

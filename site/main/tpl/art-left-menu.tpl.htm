@@ -1,0 +1,30 @@
+<?if($_SERVER['REQUEST_URI']!='/'){?>
+        <td style="width:250px;vertical-align:top;" valign="top">
+  <?
+ $tag2id=Art::tagDataSeolink($GLOBALS["tag1"]);
+$sub_menu=Art::tagListShowConnect($tag2id['id']);
+SYS::varDump($sub_menu,__FILE__,__LINE__,"sub_menu");
+?>
+<?if($sub_menu!=NULL){?>      
+        
+            <div class="r5b" style="background-color:#004d98;padding:5px;">
+                <div style="background-color:#004d98;padding:5px;">
+                
+<?foreach($sub_menu as $key=>$val){?>
+<div style="margin:10px 5px;">
+<?if(strpos($val["seolink"],"http:")===false){?>
+<a style="color:#fff" href="/<?=$GLOBALS["mod"]?>/<?=$GLOBALS["tag1"]?>/<?=$val["seolink"]?>" title="Подробнее">
+<?}else{?>
+<a style="color:#fff;" href="<?=$val["seolink"]?>" target="_blank">
+<?}?>
+<?=$val["caption"]?></a></div>    
+ <?}?>              
+
+                </div>  
+            </div>
+ <?}?>  
+ 
+ <?=Banner::LeftTiz();?>
+ 
+        </td>
+<?}?>

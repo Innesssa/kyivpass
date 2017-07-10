@@ -1,0 +1,43 @@
+<?=sprintf("%02d % 15s % 8s % 9s"
+    ,$this->place
+    ,$this->partialLoop()->view->station->title/*$this->kassaname." #".$this->kassauid*/
+    ,$this->ppo/*№ РРО*/
+    ,$this->checknumber/*№ РРО*/)?><?=date(" d.m.Y H:i",$this->lastchange/*Дата*/)?><?=sprintf(
+    " %9s %s  %s % 7.2f % 7.2f % 7.2f % 7.2f % 8.2f \n"
+    ,((!empty($this->benefits_title))? $this->benefits_title :"        ")/*Пільга    */
+    ,mb_substr($this->partialLoop()->view->aStation[$this->from_id]['title'],0,11)/*Станція    */
+    ,mb_substr($this->partialLoop()->view->aStation[$this->to_id]['title'],0,11)/*Станція    */
+    ,($this->conv_tariff_with_benefits*1.0 + $this->stat_tariff_with_benefits*1.0+$this->conv_tariff_with_benefits_vat*1.0+$this->stat_tariff_with_benefits_vat*1.0)
+    ,$this->insurer_tariff_with_benefits
+    ,($this->conv_tariff_with_benefits + $this->stat_tariff_with_benefits + $this->conv_tariff_with_benefits_vat + $this->stat_tariff_with_benefits_vat+ $this->insurer_tariff_with_benefits)
+    ,$this->luggage_total
+    ,($this->stat_tariff_with_benefits_vat + $this->conv_tariff_with_benefits_vat + $this->conv_luggage_tariff_vat + $this->stat_luggage_tariff_vat))?><?
+if(!empty($this->benefits_title)){
+    echo sprintf("% 62s %s\n",$this->benefits_docnum,$this->benefits_name);
+}
+
+$this->partialLoop()->view->luggageCount+=(int)$this->luggage_count;
+$this->partialLoop()->view->totalUA+=($this->conv_tariff_with_benefits + $this->stat_tariff_with_benefits + $this->conv_tariff_with_benefits_vat + $this->stat_tariff_with_benefits_vat);
+
+$this->partialLoop()->view->convTotalUA+=($this->conv_tariff_with_benefits +  $this->conv_tariff_with_benefits_vat );
+$this->partialLoop()->view->convLuggageUA+=($this->conv_luggage_tariff +  $this->conv_luggage_tariff_vat );
+$this->partialLoop()->view->convLuggageVat+=($this->conv_tariff_with_benefits_vat +  $this->conv_luggage_tariff_vat );
+
+
+$this->partialLoop()->view->totalInsurer+=$this->insurer_tariff_with_benefits;
+$this->partialLoop()->view->totalLuggage+=$this->luggage_total;
+$this->partialLoop()->view->totalVat+=($this->stat_tariff_with_benefits_vat + $this->conv_tariff_with_benefits_vat + $this->conv_luggage_tariff_vat + $this->stat_luggage_tariff_vat);
+
+
+
+$this->partialLoop()->view->aStation[$this->to_id]['total_tickets']+=1;
+if((int)$this->benefits_id>0) $this->partialLoop()->view->aStation[$this->to_id]['total_benefits']+=1;
+if((int)$this->luggage_total>0) $this->partialLoop()->view->aStation[$this->to_id]['total_luggage']+=1;
+$this->partialLoop()->view->aStation[$this->to_id]['total_order']=0;
+
+$this->partialLoop()->view->aStatTotal['total_tickets']+=1;
+if((int)$this->benefits_id>0) $this->partialLoop()->view->aStatTotal['total_benefits']+=1;
+if((int)$this->luggage_total>0)$this->partialLoop()->view->aStatTotal['total_luggage']+=1;
+$this->partialLoop()->view->aStatTotal['total_order']=0;
+$this->partialLoop()->view->aStatTotal['distantion']+=$this->partialLoop()->view->aStation[$this->to_id]['distantion'];
+

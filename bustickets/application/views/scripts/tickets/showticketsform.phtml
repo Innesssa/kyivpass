@@ -1,0 +1,85 @@
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? }
+?>
+<script>
+    priceTicket = <?=($this->tprice) ? $this->tprice : "{}"?>;
+    priceLuggage = <?=($this->lprice) ? $this->lprice : "{}" ?>;
+    insurerPercent = <?=($this->insurance_rate) ? $this->insurance_rate : "{}"?>;
+    jBenefits = <?=($this->bm) ? json_encode($this->bm) : "{}"?>;
+    conveyor_VAT = <?=($this->conveyor_vat) ? "true" : "false" ?>;
+
+
+    jRace={ "raceid":"<?=$this->raceID?>",
+            "routeid":"<?=$this->raceID?>",
+            "acname":"AC PODIL",
+            "prepaid": <?=(date("Ymd")*1 < $this->dtSelect*1 ) ? "prepaid" : "0.00" ?>,
+            "paidfromother":"0.00",
+            "station_buy": "<?=$this->form->startid->getValue()?>",
+            "from_id": "<?=$this->form->startid->getValue()?>",
+            "to_id": "<?=$this->form->endid->getValue()?>",
+            "kassauid" : "<?=$this->kassauid?>",
+            "kassaname": "<?=$this->kassaname?>",
+            "code": "<?=addslashes($this->code)?>",
+            "title":"<?=addslashes($this->title)?>",
+            "dt_start": "<?=$this->dt_start?>",
+            "dt_finish": "<?=$this->dt_finish?>",
+            "dt_time_begin": "<?=$this->dt_time_begin?>",
+            "dt_time_finish":"<?=$this->dt_time_finish?>",
+            "conv_title":"<?=str_replace("\r","",str_replace("\n","###",addslashes($this->conveyor_print_name)))?>",
+            "insurer_title":"<?=str_replace("\r","",str_replace("\n","###",addslashes($this->insurer_print_name)))?>",
+            "conv_id": "<?=$this->conveyor_id?>",
+            "insurer_id":"<?=$this->insurer_id?>",
+            "vehiclename":"<?=addslashes($this->vehiclename)?>",
+            "vehicle_id":"<?=addslashes($this->vehicletype)?>",
+            "from":"<?=addslashes($this->start)?>",
+            "to":"<?=addslashes($this->end)?>",
+            "platform":"<?=sprintf("%d",(int)$this->platform)?>"};
+
+    if(DEBUG_BUSTICKETS) {
+        console.log("File:showticketsform.phtml jRace");
+        console.log(jRace);
+    }
+    var aReserv = <?=( count($this->reserv)? json_encode($this->reserv) : "{}" )?>;
+
+    $('#myModal input').focusout(function() {
+        calculate();
+    });
+
+
+
+
+
+
+</script>
+<h4><?=$this->code." | ".$this->title?></h4>
+<h5 class="ticket-h5">Для друку натисніть - F9. Для перегляду натисніть - F10</h5><b>Всього:</b>&nbsp;<span id="idTotal1">0.00</span>&nbsp;грн.<br/>
+Від: <b><?=$this->start?></b> До: <b><?=$this->end?></b> TЗ: <b><?=$this->vehiclename?></b> Відправлення: <b><?=$this->dt?></b> Час: <b><?=$this->time?></b> Платформа: <b><?=sprintf("%02d",$this->platform)?></b></br>
+Відстань: <b><?=$this->distance?>km.</b> Час слідування: <b><?=$this->triptime?>хвилин</b> Тариф за один квиток: <b><?=sprintf("%.2f",$this->tprice)?></b> Тариф за один багаж: <b><?=sprintf("%.2f",$this->lprice)?></b></br>
+Страхова: <b><?=$this->insurer_name?></b> Ставка: <b><?=$this->insurance_rate?></b> Перевізник: <b><?=$this->conveyor_name?></b>
+
+<?=$this->form?>
+<ul id="idPrintArea" style="display:none;">
+    <li><b><?=$this->code." - ".$this->title?></b></li>
+    <li>Від: <b><?=$this->start?></b> До: <b><?=$this->end?></b></li>
+    <li>TЗ: <b><?=$this->vehiclename?></b></li>
+    <li>Відправлення:&nbsp; <b><?=$this->dt?></b>&nbsp; Час:&nbsp; <b><?=$this->time?></b></li>
+    <li>Тaриф:&nbsp;<b><span id="idTariff"></span>&nbsp;грн.</b></li>
+    <li>Cтанційний:&nbsp;<b><span id="idStationTax"></span>&nbsp;грн.</b></li>
+    <li>Cтраховий:&nbsp;<b><span id="idInsurer"></span>&nbsp;грн.</b></li>
+    <li>Пільга:&nbsp;<b><span id="idBenefits"></span></b></li>
+    <li>Багаж:&nbsp;<b><span id="idLuggage"></span>&nbsp;грн.</b></li>
+    <li>Всього:&nbsp;<b><span id="idTotal"></span>&nbsp;грн.</b></li>
+    <li>Час продажу: <b><?=date("d/m/Y H:i")?></b></li>
+    <li>Перевізник: <b><span id="idConveyor"><?=$this->conveyor_print_name?></b></span></li>
+    <li>Страхова: <b><span id="idInsurer"><?=$this->insurer_print_name?></b></span></li>
+</ul>
+<script>
+    var elm = $('#myModal').find('input[type="checkbox"]:enabled').first();
+    if($(elm)) $(elm).focus();
+    checkingBenefits();
+    setBusyPlaces(<?=$this->busy_places?>);
+</script>
+

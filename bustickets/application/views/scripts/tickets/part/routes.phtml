@@ -1,0 +1,25 @@
+<tr id="id_row_<?=$this->id?>">
+    <td class="code"><a id="id_tickets_<?=$this->id?>_" href="#myModal" role="button" data-toggle="modal" title="придбати квиток" alt="придбати квиток"><?=$this->code?></a></td>
+    <td><?=sprintf("%02d",$this->hour).":".sprintf("%02d",$this->minute) ?></td>
+    <td><?
+        $tm = $this->hour*60+$this->minute+$this->triptime;
+        $H=floor($tm/60);
+        $M=$tm-$H*60;
+        $D=floor($H/24);
+        $H = $H-$D*24;
+
+        echo sprintf("%02d",$H).":".sprintf("%02d",$M);
+
+
+        ?></td>
+    <td class="title"><?=$this->title?></td>
+    <?/* td class="title"><?=$this->stationstart?></td */?>
+    <td><?=$this->vehiclename?></td>
+    <td><?="~".sprintf("%7.2f",$this->full_price)?></td>
+    <td class="actions">
+        <div class="btn-group">
+            <a id="id_schema_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="схема маршруту" alt="схема маршруту"><i class="icon-eye-open"></i></a>
+            <a id="id_tickets_<?=$this->id?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal" title="придбати квиток" alt="придбати квиток"><i class="icon-list"></i></a>
+        </div>
+    </td>
+</tr>

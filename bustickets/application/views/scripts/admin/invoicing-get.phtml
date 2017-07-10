@@ -1,0 +1,18 @@
+<?php
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<p><b>Project:</b> <?=$this->aInvoices[0]['pname']?></p>
+<p><b>Owner:</b> <?=$this->aInvoices[0]['fname'].' '.$this->aInvoices[0]['sname']?></p>
+<p><b>Start time:</b> <?=date("Y-m-d H:i:s",strtotime($this->aInvoices[0]['start_time']))?></p>
+<p><b>Finish time:</b> <?=date("Y-m-d H:i:s",strtotime($this->aInvoices[0]['finish_time']))?></p>
+<p><b>Invoicing period:</b> <?=$this->aInvoices[0]['invoicing_period']?></p>
+<p><b>Paymend card id:</b> <?=$this->aInvoices[0]['cardid']?></p>
+<p><b>Type of paymend:</b> <?=$this->aInvoices[0]['type_pay']?></p>
+<p><b>Total amount for client:</b> <?=$this->aInvoices[0]['total_for_clients']?></p>
+<p><b>Total amount for gosource:</b> <?=$this->aInvoices[0]['total_for_internal']?></p>
+<p><b>Xero invoice id:</b> <?=$this->aInvoices[0]['invoice']?></p>
+<p><b>Id from paymenthistory:</b> <?=$this->aInvoices[0]['transaction_id']?></p>
+<p><b>Is Internal:</b> <?=($this->aInvoices[0]['transaction_id'])?'No':'Yes'?></p>
+<p><b>Text for xero:</b> <pre><?=$this->aInvoices[0]['incoice_body']?></pre></p>
+<?//trace($this->aInvoices);?>

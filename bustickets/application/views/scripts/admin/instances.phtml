@@ -1,0 +1,62 @@
+<?php 
+if(!$this->isAjax){
+echo $this->partial('partials4adm/messages.phtml');
+?>
+<div class="well">
+	<div class="filter form-inline">
+
+        <form action="/admin/instances" id="form-filter">
+            <input type="hidden" class="myfilter" name="filter[sort]" value=""/>
+            <input type="hidden" class="myfilter" name="filter[order]" value=""/>
+			<label>Filter By:</label>
+			<select name="filter[project_id]" class="myfilter">
+                <option value="">Project</option>
+                <?
+                foreach ($this->projects as $project) {
+                    echo '<option value="'.$project->id.'">'.$project->pname.'</option>';
+                }
+                ?>
+			</select>
+            <select name="filter[status]" class="myfilter input-medium">
+                <option value="">Status</option>
+                <option value="waiting_setup">Waiting setup</option>
+                <option value="deleted">Deleted</option>
+                <option value="running">Running</option>
+                <option value="pending">Pending</option>
+                <option value="stopping">Stopping</option>
+                <option value="stopped">Stopped</option>
+                <option value="terminated">Terminated</option>
+            </select>
+			<a href="javascript:void(0);" id="id_apply_filter" class="btn">Apply</a>
+        </form>
+    </div>
+</div>
+<div id="id_ajax_content"><? } ?>
+<div class="table">
+		<table id="id_table_instances" class="tablesorter">
+			<thead>
+				<tr>
+					<th data-field-name="id" class="header" style="width:25px"></th>
+					<th data-field-name="title" class="header" style="width:250px">Instance Name</th>
+					<th data-field-name="instance_id" style="width:80px">Instance Id</th>
+					<th data-field-name="instance_type" class="header" style="width:50px">Size</th>
+					<th data-field-name="status" class="header" style="width:50px">Status</th>
+					<th style="width:20px"></th>
+				</tr>
+			</thead>
+			<tbody><?=$this->partialLoop('partials4adm/instances.phtml', $this->paginator)?></tbody>
+		</table>
+</div>
+<script>govsource.pageConfig.searchData=<?=$this->aFilter?>;
+</script>    
+<?=$this->paginationControl($this->paginator)?>	
+<div class="clearfix"></div> 
+<?php if(!$this->isAjax){?></div>
+    <!-- Modal -->
+    <?= $this->partial('partials4adm/modal.phtml'); ?>
+    <!-- End Modal-->
+
+<? } else{?>
+    <script>
+        govsource.AdminInstances.bindEvents();
+    </script><?} ?>

@@ -1,0 +1,59 @@
+<?
+/*
+[0] => Array
+(
+    [routeid] => 42
+            [title] => Київ Поділ - Смоліне
+[code] => 2884
+[num] => 23
+[stationrate] => 1334
+[route_title] => міжміський
+[conv_title] => Журавель В.І. ПП
+)
+*/
+
+if(!empty($this->partialLoop()->view->m_type) && $this->stationrate!=$this->partialLoop()->view->m_type){
+    ?>
+    <tr  align="right">
+    <td  colspan="2" align="left"><b>Всього:</b></td>
+    <td><?=$this->partialLoop()->view->m_totNum?></td>
+    <td><?=$this->partialLoop()->view->m_totStat?></td>
+    <td><?=($this->partialLoop()->view->m_totNum>0) ? sprintf("%3d",ceil(100/$this->partialLoop()->view->m_totNum*$this->partialLoop()->view->m_totAll)): 0?></td>
+    <td><?=$this->partialLoop()->view->m_totAll?></td>
+    <td><?=sprintf("%.2f",$this->partialLoop()->view->m_totInsh)?></td>
+    <td><?=$this->partialLoop()->view->m_totConv?></td>
+    <td></td>
+    </tr>
+<?
+}
+if($this->stationrate!=$this->partialLoop()->view->m_type) {
+    $this->partialLoop()->view->m_totNum=0;
+    $this->partialLoop()->view->m_totAll=0;
+    $this->partialLoop()->view->m_totStat=0;
+    $this->partialLoop()->view->m_totConv=0;
+    $this->partialLoop()->view->m_totInsh=0;
+
+    ?><tr><th colspan="9" align="left"><?=$this->route_title?></th></tr><?
+}
+$this->partialLoop()->view->m_type=$this->stationrate
+?>
+    <tr align="right"><td align="left"><?=$this->code?></td>
+    <td align="left"><?=$this->title?></td>
+    <td><?=$this->num?></td>
+    <td><?=$this->fail?></td><? /* не вик. */ ?>
+    <td><?=($this->num>0) ? ceil(100/$this->num*$this->sent) : 0?></td><? /* к-т регул. */ ?>
+    <td><?=$this->sent?></td>
+    <td><?=sprintf("%.2f",$this->total)?></td>
+    <td><?=$this->pass?></td>
+    <td align="left"><?=$this->conv_title?></td></tr><?
+
+    $this->partialLoop()->view->m_totNum+=$this->num;
+    $this->partialLoop()->view->totNum+=$this->num;
+    $this->partialLoop()->view->m_totAll+=$this->sent;
+    $this->partialLoop()->view->totAll+=$this->sent;
+    $this->partialLoop()->view->totStat+=$this->fail;
+    $this->partialLoop()->view->m_totStat+=$this->fail;
+    $this->partialLoop()->view->m_totConv+=$this->pass;
+    $this->partialLoop()->view->m_totInsh+=$this->total;
+    $this->partialLoop()->view->totConv+=$this->pass;
+    $this->partialLoop()->view->totInsh+=$this->total;

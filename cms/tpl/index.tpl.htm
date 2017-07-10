@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+
+<title><?=SITE_NAME?></title>
+
+<script src="/lib/jQuery/jquery-1.4.min.js" type="text/javascript"></script> 
+
+<link media="all" href="/design/css/cms-main.css" type="text/css" rel="stylesheet"/>
+
+<link media="all" href="/cms/design/css/style.css" type="text/css" rel="stylesheet"/>
+
+
+</head>
+<body><div id="body" style="">
+
+<!------------------------------- InfoPanel ----------------------------------->
+<?$shop_setting=$GLOBALS["shop_setting"];?>
+
+<div id="infoPanel" align="center" style="width:100%;background-color:white;border-bottom:1px solid #ccc;position:relative;top:0;right:0px">
+<table style="width:1020px;height:28px;" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding-left:15px;" width="175">
+<?include SITE_PATH."/cms/lang/tpl/lang_switch.tpl.htm";?>
+</td><td>
+<?=Time::formatMonth(date("Y-m-d H:i"))?>
+</td><td>
+	
+</td><td>
+
+</td><td>
+	<table style="" cellpadding="0" cellspacing="0" border="0"><tr><td>
+	<img src="/design/icon/Chat_32x32.png" width="22" />
+	</td><td style="padding-left:7px;">
+    <a href="/cms/?mod=message&type=tag&com=list">Сообщения</a>
+	</td></tr></table>
+</td><td>
+
+</td><td>
+
+</td><td>
+
+</td><td align="right" width="100" style="padding-right:12px;">
+	<table id="usersMenu" style="" cellpadding="0" cellspacing="0" border="0"><tr><td>
+<?
+$user_face = "/image/user/item/{$_SESSION['user_id']}/1s.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$user_face))$user_face="/design/icon/User_32x32.png";
+if(isset($user_face)){?>
+    <img src="<?=$user_face?>" width="18" border="0">
+<?}else{?>
+    <img src="/design/icon/User_32x32.png" width="18" />
+<?}?>
+
+	</td><td style="padding-left:1px;">
+	<span style="font-size:12px;color:#d91219"><b><a href="#user"><?=$_SESSION['user_login']?></a></b></span>
+    </td><td style="padding-left:10px;padding-right:10px;">
+    <?if($_SESSION['user_level'] >= 9){?>
+    <a href="/cms/phpmyadmin/" target="_blank" title="phpMyAdmin">phpMyAdmin</a>&nbsp;&nbsp;
+    <?}?>	
+	</td><td>
+ 	<a href="?logout" title="Выход">
+	<img src="/design/icon/Shutdown_32x32.png" width="18" /></a>
+	</td><td style="padding-left:7px;">
+	<a href="?logout" title="Выход">Выход</a>
+	</td></tr></table>
+
+</td></tr></table>
+<style>
+#infoPanel a{text-decoration:none;color:#5E84B8}
+#infoPanel a:hover{text-decoration:underline}
+</style>
+</div>
+<div style="width:100%;position:absolute;z-index:1;height:0px;" align="center">
+	<div id="shopMenuList" style="display:none;padding:1px 15px;max-height:500px;overflow:auto;text-align:left;border:10px solid #C21F26;background:#fff;width:800px;" class="r10">
+	<?if(isset($main_menu)){?>
+    <?=$main_menu?>
+    <?}?>
+	</div>
+	<script>$(document).ready(function(){$('#shopMenu').click(function () {$('#shopMenuList').slideToggle(200);});});</script> 
+</div>
+
+<div style="width:100%;position:absolute;z-index:1;height:0px;" align="center">
+	<div id="usersMenuList" style="display:none;padding:1px 15px;max-height:500px;overflow:auto;text-align:left;border:10px solid green;background:#fff;width:800px;" class="r10">
+	<div><a href="?mod=user&type=tag&com=list">Пользователи</a></div>
+<?$conn = substr($_SESSION['user_connect'],1,-1);?>
+    <div><a href="?mod=user&type=item&com=edit&tag=<?=$conn?>&id=<?=$_SESSION['user_id']?>">Личные данные</a></div>
+	</div>
+	<script>$(document).ready(function(){$('#usersMenu').click(function () {$('#usersMenuList').slideToggle(200);});});</script> 
+</div>
+
+<div style="width:100%;position:absolute;z-index:1;height:0px;" align="center">
+<div style="width:1020px;height:0px;" align="left">
+<div id="moneyMenuList" style="display:none;max-height:500px;overflow:auto;text-align:left;border:10px solid #EDCB6F;background:#EDCB6F;width:800px;" class="r10">
+
+<div style="border:10px solid #fff;background:#fff;padding:7px 7px;" class="r10">
+<?/*
+$ye_50 = 50*KURS_USD;
+$ye_100 = 100*KURS_USD;
+$ye_200 = 200*KURS_USD;
+$ye_500 = 500*KURS_USD;
+$ye_1000 = 1000*KURS_USD;
+*/
+?>
+<b>Курсы валют</b>
+<div style="text-align:left;background-color:#fff;border:0px solid #ccc;color:#000">
+<form action="?mod=setting&com=kurs_usd" method="post">
+$1 = <input style="border:1px solid #fff;width:40px" type="text" name="kurs_usd" value="<?=KURS_USD?>" /> <?=CURRENCY?>. 
+<input type="submit" value="Изменить">
+<!--
+<a id="currencyexchange" href="?mod=setting&com=change_kurs_usd"><img  src="/cms/design/icon_change.gif" style="width:10px" /></a>
+-->  
+</form> 
+</div><br>
+<b>Проценты надбавки</b>
+<div style="text-align:left;background-color:#fff;border:1px solid #ccc;color:#000;padding:7px;">
+
+<div style="margin-bottom:7px;">От 0 до 50 у.е.  (0-<?=$ye_50?> грн) - <?=PROCENT_NADBAVKI_0_50?>%</div>
+<div style="margin-bottom:7px;">От 50 до 100 у.е.  (<?=$ye_50?>-<?=$ye_100?> грн) - <?=PROCENT_NADBAVKI_50_100?>%</div>
+<div style="margin-bottom:7px;">От 100 до 200 у.е.  (<?=$ye_100?>-<?=$ye_200?> грн) - <?=PROCENT_NADBAVKI_100_200?>%</div>
+<div style="margin-bottom:7px;">От 200 до 500 у.е.  (<?=$ye_200?>-<?=$ye_500?> грн) - <?=PROCENT_NADBAVKI_200_500?>%</div>
+<div style="margin-bottom:7px;">От 500 до 1000 у.е.  (<?=$ye_500?>-<?=$ye_1000?> грн) - <?=PROCENT_NADBAVKI_500_1000?>%</div>
+<div style="margin-bottom:7px;">Больше 1000 у.е.  (<?=$ye_1000?> грн) - <?=PROCENT_NADBAVKI_1000_?>%</div>
+
+<!--
+<form>
+<input style="border:1px solid #fff;width:30px" type="text" name="__procent_nadbavki" value="<?=PROCENT_NADBAVKI?>" /> %. 
+   <a id="" href="#">
+      <img  src="/cms/design/icon_change.gif" style="width:10px" />
+  </a>   
+</form>
+--> 
+</div><br>
+<b>Минимальная сумма бесплатной доставки</b>
+<div style="text-align:left;background-color:#fff;border:0px solid #ccc;color:#000">                 
+<form action="?mod=setting&com=min_summa_dostavki" method="post">
+<input style="border:1px solid #fff;width:33px;font-weight:bold;" type="text" name="min_summa_dostavki" value="<?=MIN_SUMMA_DOSTAVKI?>" /> грн. 
+<input type="submit" value="Изменить">
+</form> 
+</div>
+
+<?php
+/*
+$file_name    = 'файл для загрузки с путем';
+$ftp_server    = 'your_domain.net';
+$ftp_port    = 21;
+$ftp_file    = 'имя файла с путем на ftp-сервере';
+$ftp_user_name    = 'ftp-user';
+$ftp_user_pass    = 'ftp-pass';
+$error_to    = 'your@email.net'; // E-mail для сообщений об ошибках
+
+$ftp = ftp_connect($ftp_server, $ftp_port, 20);
+ftp_login($ftp, $ftp_user_name, $ftp_user_pass);
+ftp_pasv($ftp, true); // Passive mode
+if(!ftp_put($ftp, $ftp_file, $file_name, FTP_BINARY)){
+
+    // Ошибка загрузки
+    mail($error_to,
+        'FTP-upload error',
+        "There was a problem while uploading {$file_name} to {$ftp_server}.",
+        "From: admin@htmlweb.ru\nContent-Type: text/plain; charset=win-1251");
+}
+ftp_close($ftp);
+*/
+?>                
+</div> 
+
+</div>
+<script>$(document).ready(function(){$('#moneyMenu').click(function () {$('#moneyMenuList').toggle(200);});});</script> 
+</div>
+</div>
+<!------------------------------- InfoPanel ----------------------------------->
+
+
+
+
+
+
+
+<div class="wrap">
+
+    <div style="height:100%;padding-top:0px;" align="left">
+	<table style="width: 100%;height:100px;" cellpadding="0" cellspacing="0">
+	    <tr>
+		<td style="width: 50%;padding-left:12px;">
+		    <div><a href="/cms/" title="На главную Админки"><img alt="<?=SITE_NAME?>" src="/design/img/logo.png" border="0" width="120" /></a></div>
+  
+                 </td>
+		<td>     
+  <div><?include "tpl/inc/block_top_search.tpl.htm";?></div>	      
+                </td>
+		<td style="padding-right:12px;">
+
+		    <div align="right"><a href="/" target="_blank"><img id="kompass" alt="" src="/cms/design/internet.gif" title="На Главную сайта" width="45" /></a></div>
+		</td>
+	    </tr>
+	</table>
+    </div>
+
+    <div style="border-top:1px dashed #DBFFC1;height:100%">
+<table width="100%" cellpadding="0" cellspacing="0" style="min-height:700px;">
+<tr><td width="240" style="border-right:1px dashed #DBFFC1;" valign="top">
+<div style="padding:20px 20px 20px 20px;">
+
+
+<hr>
+<a href="/cms/?mod=art&type=tag&com=list" style="line-height:17px;color:<?if($mod=='art'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Статьи</a><br>
+<br>
+
+<hr>
+<a href="/cms/?mod=gallery&type=tag&com=list" style="line-height:17px;color:<?if($mod=='gallery'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Галлерея</a><br>
+<br>
+
+<hr>
+<a href="/cms/?mod=user&type=tag&com=list" style="line-height:17px;color:<?if($mod=='user'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Персоны</a><br>
+<br>
+
+<hr>
+<a href="/cms/?mod=message&type=tag&com=list" style="line-height:17px;color:<?if($mod=='message'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Сообщения</a><br>
+<br>
+
+<hr>
+<a href="/cms/?mod=banner&type=tag&com=list" style="line-height:17px;color:<?if($mod=='banner'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Баннеры</a><br>
+<br>
+
+<!--
+<hr>
+<a href="/cms/?mod=cart&type=tag&com=list" style="line-height:17px;color:<?if($mod=='cart'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Заказы</a><br>
+<br>
+
+<hr>
+<a href="/cms/?mod=shop&type=tag&com=list" style="line-height:17px;color:<?if($mod=='shop'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Магазин</a><br>
+<br>
+<hr>
+<a href="/cms/?mod=param&type=tag&com=list" style="line-height:17px;color:<?if($mod=='param'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Параметры</a><br>
+<br>
+-->
+<!--
+<hr>
+<a href="/cms/?mod=shop2&com=catalog&category=60&subcategory=71&pg=1&lmt=15&sortby=pricedown" style="line-height:17px;color:<?if($mod=='shop2'){?>green<?}else{?>#5E84B8<?}?>;font-weight:bold;">Магазин</a>
+<br><br>
+<div>$1 = <?=KURS_USD?> грн.</div>
+<div>В базе <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"");?> товаров.</div>
+<div style="color:green">В наличии - <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"`nalichie` = '+'");?> товаров.</div>
+<div style="color:red">Нет в наличии - <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"`nalichie` = '-'");?> товаров.</div>
+<div style="color:grey">В резерве - <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"`nalichie` = 'r'");?> товаров.</div>
+<div style="color:grey">Архивных - <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"`nalichie` = 'arch'");?> товаров.</div>
+<div style="color:green">Добавлено (<?=date("Y-m-d")?>) - <? echo $count_rows = Mysql::countRowsInTable(TABLE_ITEMS,"`date_create` LIKE '".date("Y-m-d")."%'");?> товаров.</div>
+<div><a href="/cms/?mod=shop2&com=view_new_items" target="_blank">Добавленные товары за последние 30 дней</a>.</div> 
+<br>
+-->
+
+<hr>
+</div>
+</td><td valign="top">
+<?
+if(isset($c_cont))
+{
+	if(isset($mod) && $mod == "search")
+	{
+		echo $c_cont['content'];
+    }
+    else
+    {
+		echo $c_cont;
+	}	
+}
+?>
+</td></tr></table>
+
+</div>
+
+
+</div>
+
+
+<!--//----------------------SlimBox------------------------->
+
+<script type="text/javascript" language="JavaScript">
+$(document).ready(function(){
+});
+function onSlimbox(url) {
+$("#slimbox").html('<iframe src="'+url+'&display=tab" style="width:100%;height:100%;overflow:auto;background-color:none;" frameborder="0"></iframe>'); 
+$("#slimfon").show();
+$("#slimboxdiv").show();
+
+}
+function offSlimbox(value) {
+$("#slimfon").hide();
+$("#slimboxdiv").hide();
+}
+
+</script>
+<table id="slimfon" style="position: fixed;z-index: 10;left: 0;top: 0;width: 100%;height: 100%;display:none;" cellspacing="0" cellpadding="0"><tr>
+<td style="background-color: #000;cursor: pointer;opacity: 0.8;">&nbsp;</td>
+<td style="width:900px;background-color:white;" align="center">
+<img src="/design/img/loading<?=rand(1,2)?>.gif" border="0" />
+</td>
+<td style="background-color: #000;cursor: pointer;opacity: 0.8;">&nbsp;</td>
+</tr></table>
+<div id="slimboxdiv" style="display:none;position: fixed;top:0px;left:0px;z-index: 11;height: 100%;width:100%;overflow:" align="center" onClick="javascript:offSlimbox();">
+<div id="slimbox" style="height:100%;width:100%;" onClick="event.cancelBubble = true"></div>
+</div>
+
+<!--//----------------------------------------------------------->
+
+<div id="debug" style="height:1px;position:absolute;z-index:7;top:30px;right:20px;" align="right"><?=$GLOBALS['DEBUG']?></div>
+<div id="debug_sql" style="height:1px;position:absolute;z-index:7;top:30px;left:5px;" align="left"><?=$GLOBALS['DEBUG_SQL']?></div>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<?//SYS::varDump($list_product,__FILE__,__LINE__)?>
+<style>
+.ramka{
+    border:1px solid #ccc;
+    padding:5px;
+    -moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;
+}
+.search_rezult_column{
+    width:49%;margin:2px;
+}
+</style>
+
+<div style="padding:10px;margin:2px;text-align:center">Вы искали <strong>"<?=$_POST['search_input']?>"</strong></div>
+<div id="wrap_page">
+
+<?SYS::varDump($list_product,__FILE__,__LINE__,"List_product")?>
+<?php $val_list_product = $list_product;?> 
+<?php $count_row_list_product = count($val_list_product);?>
+<?if($val_list_product !== 0 && $val_list_product !== NULL){?>
+    <h2>Товары (найдено <?=$count_row_list_product?> позиции)</h2>
+    <div class="left search_rezult_column">   
+<?php $i = 0; {foreach($val_list_product as $row_list_product){?>
+<?$price_roznica = Price::getPrice($row_list_product['postavschik'],$row_list_product['price_roznica'],$row_list_product['price_diler'],$row_list_product['ddp']);?>
+<?$nav_link = Catalog::getNavLinkForProduct("caption",$row_list_product["subcategory"]);?>
+<?//SYS::varDump($nav_link,__FILE__,__LINE__)?>
+<?$nav_link1 = Catalog::getNavLinkForProduct("parent_id",$nav_link["parent_id"]);?>
+
+<?if($row_list_product['nalichie'] == "-"){	$bckgrnd = "#FFE4E1";}elseif($row_list_product['nalichie'] == "arch"){$bckgrnd = "#eee";}elseif($row_list_product['nalichie'] == "r"){$bckgrnd = "#FFFACD";}else{$bckgrnd = "#E6F8E0";}?>
+
+<?$connect_tag=substr($row_list_product['connect'],1,-1);?>
+
+         <p class="ramka" style="background-color:<?=$bckgrnd?>">
+<a href="/cms/?mod=shop&type=item&com=edit&tag=<?=$connect_tag?>&id=<?=$row_list_product['id']?>" target="_blank">
+<!-- <img src="/product-image/<?=$row_list_product['img']?>" style="height:50px;" align="left" /> -->
+<?=$row_list_product['article']?> - <?=$row_list_product['caption']?></a>
+<br />Цена дилер - <?=$row_list_product['price_diler']?> 
+<br />Цена магазина - <?=$price_roznica?> грн.
+<!--
+<br /><a href="?mod=shop2&com=catalog&category=<?=$nav_link['seolink']?>&subcategory=<?=$nav_link['seolink']?>&pg=1&lmt=15&sortby=pricedown&existence=EXISTENCE">
+Товар в общем списка</a> (<?=$row_list_product["category"]?>::<?=$row_list_product["subcategory"]?>::<?=$row_list_product['brand']?>)
+-->
+
+        </p>
+        <div class="br_5"></div>
+<? $i++; if($i%2==0){?>
+    </div>
+    <div class="left search_rezult_column">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+
+<!--------------------------------------
+
+<?php $val_article = $list_article;?> 
+<?php $count_row_article = count($val_article);?>
+<?if($val_article !== 0 && $val_article !== NULL){?>
+    <h2>Новости/Статьи</h2>
+    <div class="left search_rezult_column">    
+<?php $i = 0; {foreach($val_article as $row_article){?>
+       <p class="ramka">
+           <a href="http://mkr.com.ua/Новости/<?=$row_article['id']?>-<?=$row_article['web_link']?>/" target="_blank"><?=$row_article['caption']?></a>
+       </p>
+       <div class="br_5"></div>
+<? $i++; if($i==floor($count_row_article/2+1)){?>
+    </div>
+    <div class="left search_rezult_column">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+-->
+<!--    
+<?php $val_page = $list_page;?> 
+<?php $count_row_page = count($val_page);?>
+<?if($val_page !== 0 && $val_page !== NULL){?>
+    <h2>Страницы сайта</h2>
+    <div class="left search_rezult_column">   
+<?php $i = 0; {foreach($val_page as $row_page){?>
+<?if($row_page['seolink'] == "Главная"){$link = "http://mkr.com.ua/";}else{$link = "http://mkr.com.ua/{$row_page['seolink']}/";}?>
+         <p class="ramka">
+            <a href="<?=$link?>" target="_blank"><?=Text::cutStr($row_page['caption'], 10)?></a>
+        </p>
+        <div class="br_5"></div>
+<? $i++; if($i==floor($count_row_page/2)){?>
+    </div>
+    <div class="left search_rezult_column">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+-->
+<!--
+<?//php $val_items = $list_items;?> 
+<?//php $count_row_items = count($val_items);?>
+<?//if($val_items !== 0 && $val_items !== NULL){?>
+    <h2>Товары</h2>
+    <div class="left search_rezult_column">   
+<?//php $i = 0; {foreach($val_items as $row_items){?>
+<?//$link = "/каталог/{$_SESSION['rub']}/{$row_items['id']}-{$row_items['seolink']}/";?>
+         <p class="ramka">
+            <a href="<?=$link?>"><?//=Text::cutStr($row_items['caption'], 10)?></a>
+        </p>
+        <div class="br_5"></div>
+<?// $i++; if($i==floor($count_row_items/2)){?>
+    </div>
+    <div class="left search_rezult_column">
+<?//}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?//}?>
+-->   
+ 
+</div>

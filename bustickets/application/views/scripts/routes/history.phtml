@@ -1,0 +1,19 @@
+<h4><?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? } ?>
+<div class="table">
+    <table id="id_table_feedback" class="tablesorter">
+        <thead>
+        <tr>
+            <th id="id_sort_rate" class="header" style="width:50px">#</th>
+            <th id="id_sort_date" class="header" style="width:250px">дата</th>
+            <th style="width:150px">Користувач</th>
+            <th style="width:150px">Дія</th>
+        </tr>
+        </thead>
+        <tbody><?=$this->partialLoop('routes/items/historyitem.phtml', $this->list)?></tbody>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?>
+<div class="well">
+	<?=$this->formsskiills?>
+	<div class="clearfix"></div>
+</div>
+
+
+<table id="id_table_sskills" class="table tablesorter">
+    <thead>
+    <tr>
+        <th>Skill</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+<?=$this->partialLoop('partials4adm/sskills.phtml', $this->sskills)?>
+</table>
+<script>reload();
+	$(document).ready(function(){
+        $('#id_table_sskills').tablesorter({headers: { 1: { sorter: false},2: { sorter: false} }});
+    });
+	$('.required').tooltip({title: 'this field is required'});
+</script>

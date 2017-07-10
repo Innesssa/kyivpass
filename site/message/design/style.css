@@ -1,0 +1,85 @@
+/**********All styles feedback_popup**********/
+.feedback_popup {
+padding:5px 15px 15px;
+position:fixed;
+top:200px;
+left:50%;
+display:none;
+overflow:hidden;
+border:1px solid #ccc;
+background:#fff;
+-moz-border-radius:15px;
+-webkit-border-radius:15px;
+border-radius:15px;
+z-index:100;
+behavior: url(PIE.htc);
+}
+.feedback_popup h1 {
+font:bold 20px/32px Arial, san-serif;
+text-align:left;
+}
+.feedback_popup a.feedback_close {
+width:35px;
+height:35px;
+display:block;
+text-indent:-9999px;
+position:absolute;
+top:10px;
+right:5px;
+background:url(/site/design/form_feedback/close.jpg) no-repeat;
+}
+a.feedback_close:hover {
+background: url(/site/design/form_feedback/close_hover_1.jpg) no-repeat; 
+}
+/**********feedback_popup with form**********/
+.feedback_popup {
+margin-left:-200px;
+width:500px;
+}
+.feedback_popup form {
+margin-top:10px;
+}
+
+.feedback_popup input[type=text]{
+margin:0px 15px 10px 15px;
+padding:1px 7px;
+width:90%;
+height:25px;
+font:bold 12px/26px Arial, san-serif;
+border:1px solid #ccc;
+background:#fff;
+}
+
+.feedback_popup textarea {
+margin:0px 15px 10px 15px;
+padding:3px 10px;
+float:right;
+width:90%;
+height:100px;
+background:#fff;
+border:1px solid #ccc;
+font:bold 12px/26px Arial, san-serif;
+position:relative;
+}
+.feedback_popup input[type=submit] {
+padding:5px 20px 5px 20px;
+background-color:#0D4695;
+font:bold 18px Arial, san-serif; color:#fff;
+}
+.feedback_popup input[type=submit]:hover {
+background-color:#001E6D;
+cursor:pointer;
+}
+
+/**********overlay styles**********/
+#overlay {
+width:100%;
+height:100%;
+position:fixed;
+top:0;
+left:0;
+display:none;
+background:#000;
+opacity:.8;
+z-index:21;
+}

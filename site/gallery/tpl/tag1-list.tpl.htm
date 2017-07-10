@@ -1,0 +1,32 @@
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<div class="corn polosa">
+<a href="/">Главная</a> » Фотографии применения POS материалов
+</div>
+
+
+<div align="left" style="padding:0px 12px;margin-bottom:10px;">
+<?if($tag1_list){foreach($tag1_list as $key=>$valb){?>
+
+<style>
+#branch_<?=$valb['seolink']?> span{
+background: url('/design/branch/<?=$valb['seolink']?>.png') no-repeat -6px 0 transparent;
+color:#7B7B7B;
+text-decoration:underline;
+}
+#branch_<?=$valb['seolink']?>:hover  span{
+background: url('/design/branch/<?=$valb['seolink']?>_active.png') no-repeat -6px 0 transparent;
+color:red;
+text-decoration:none;
+
+}
+</style>
+<a href="/<?=$GLOBALS["mod"]?>/<?=$valb["seolink"]?>" id="branch_<?=$valb['seolink']?>">
+<span style="line-height: 55px;padding-left: 50px;display: inline-block;"><?=$valb['caption']?></span></a>&nbsp;&nbsp;&nbsp; 
+
+<?}}?>
+</div>
+
+<br><br><br><br>
+
+
+<br><br><br><br>

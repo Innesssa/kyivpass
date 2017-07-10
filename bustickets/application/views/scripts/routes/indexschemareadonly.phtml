@@ -1,0 +1,17 @@
+<h4><?=$this->title?></h4><h3>Зупинки</h3>
+<div class="table">
+    <table id="id_table_feedback" class="tablesorter">
+        <thead>
+        <tr>
+            <th>Зупинка</th>
+            <th>№</th>
+            <th>Інтервал</th>
+            <th>Тривалість зупинки</th>
+            <th>Відстань</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?=$this->partialLoop('partials/stationlistreadonly.phtml', $this->aStationList)?>
+        </tbody>
+    </table>
+</div>

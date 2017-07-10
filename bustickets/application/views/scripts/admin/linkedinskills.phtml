@@ -1,0 +1,38 @@
+<?php 
+if($this->sMssg) {?><div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sMssg?><br /></div><?php }
+if($this->sError){?><div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><?=$this->sError?><br /></div><?php  }
+?><div class="row">
+	<div class="span9">
+		<table class="table">
+                        <tr>
+                            <td colspan="4"><div class="btn-group"><a id="id_edit_0" class="btn btn-primary" href="#myModal" role="button" data-toggle="modal" >New Skill</a></div></td>
+                            <td style="width:90px"></td>
+                        </tr>
+                        <?=$this->partialLoop('partials4adm/skill.phtml', $this->aSkills)?>	
+		</table>		
+	</div>
+</div>
+<!-- div class="pagination pagination-centered">
+  <ul>
+    <li class="disabled"><a href="#">«</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">»</a></li>
+ </ul>
+</div -->
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+   <div class="modal-body">
+	  <div id="id_form"><img id="id_link_load" src="<?=CDN_URL?>/img/login-loader.gif" alt="" /></div>
+          
+  </div>
+  <div class="modal-footer"> 
+   <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>    
+  </div>
+</div>

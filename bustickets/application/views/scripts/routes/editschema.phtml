@@ -1,0 +1,13 @@
+<h4><?=$this->title?></h4>
+<? if ($this->result) { ?>
+    <div class="alert alert-<?=$this->result?>">
+        <?=$this->message?>
+    </div>
+<? } ?>
+<?=$this->form?>
+<script>
+    $('#myModal #id_btn_save').show();
+    buildDictionaryAutocomplete("station","handbooks_points_view");
+    $('#add_station_to_route').live('click',function(){addStation(); return false;});
+    $('#station').focus();
+</script>

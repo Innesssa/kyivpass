@@ -1,0 +1,90 @@
+<div style="width:1020px;height:35px;background-image:url('/design/img/button-gradient.png');background-position:left center;background-repeat:repeat-x;background-color:#2155AB;border: solid 1px #031873;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">
+
+  <script type="text/javascript">
+
+function showM(id){
+$("#submenu_"+id).css("display","block");
+//$("#"+smenu+" .submenu").fadeIn(300);
+}
+
+function hideM(id){
+$("#submenu_"+id).css("display","none");
+}
+
+</script>
+<style>
+.topsub {
+margin-top: 0px;
+margin-left: 0px;
+}
+.submenu {
+display: none;
+position: absolute;
+z-index: 23;
+min-width: 200px;
+max-width: 300px;
+padding: 15px 25px 15px 17px;
+margin-top: 0px;
+margin-left: -50px;
+background-color: #2155AB;
+border: solid 0px #031873;
+color: #fff;
+text-align: left;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+opacity: 0.95;
+}
+</style>
+  <?
+ $a=0;
+$all_tag_list=Art::tagListShowLevel(); 
+$main_menu=Art::tagListShowLevel(1);
+SYS::varDump($main_menu,__FILE__,__LINE__,"main_menu");
+?>
+
+  <table style="width:1020px;height:32px;margin:2px;" cellpadding="0" cellspacing="0">
+
+    <tr>
+
+      <?if($main_menu!=NULL){foreach($main_menu as $key=>$val){?>
+      <td class="nav_main" style="padding:3px;<?if($a>0){?>border-left:2px solid #E8EFF4;<?}?>" align="center">
+      
+<?if(strncmp ($val["seolink"],'http:',5)==0){?>
+<a class="nav_main" style="color:#fff;" href="<?=$val["seolink"]?>" target="_blank">
+<?}else if(strncmp ($val["seolink"],'#',1)==0){?>
+<a class="nav_main" style="color:#fff;" href="<?=$val["seolink"]?>" id="link_<?=str_replace('#','',$val["seolink"])?>">
+<?}else{?>
+<a class="nav_main" style="color:#fff;" href="/art/<?=$val['seolink']?>" onmouseover="javascript:showM(<?=$val['id']?>)" onmouseout="javascript:hideM(<?=$val['id']?>)">
+<?}?><?=$val['caption']?></a>    
+<?
+$a++;
+$sub_menu1=Art::tagListShowConnect($val['id']);
+?>
+<?if($sub_menu1!=NULL&&count($sub_menu1)>1){?>   
+<div id="submenu_<?=$val['id']?>" class="submenu" onmouseover="javascript:showM(<?=$val['id']?>)" onmouseout="javascript:hideM(<?=$val['id']?>)">
+   
+<div>
+<?foreach($sub_menu1 as $key=>$val){?>
+<div style="margin:10px 10px;">
+<?if(strncmp ($val["seolink"],'http:',5)==0){?>
+<a style="color:#fff;" href="<?=$val["seolink"]?>" target="_blank">
+<?}else if(strncmp ($val["seolink"],'#',1)==0){?>
+<a style="color:#fff;" href="<?=$val["seolink"]?>" id="link_<?=str_replace("#",$val["seolink"]);?>">
+<?}else{?>
+<a style="color:#fff;" href="/art/<?=$all_tag_list[str_replace(";","",$val['connect'])]['seolink']?>/<?=$val["seolink"]?>" title="Подробнее">
+<?}?>
+<?=$val["caption"]?></a></div>    
+ <?}?>              
+</div>	</div>  
+ <?}?> 
+
+    
+</td>       
+     
+     <?}}?>
+    </tr>
+    
+
+  </table>
+</div>

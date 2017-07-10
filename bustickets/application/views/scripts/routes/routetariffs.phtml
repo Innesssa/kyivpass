@@ -1,0 +1,28 @@
+<h4><?=$this->title?></h4><h3>  Тарифні плани</h3>
+<div class="table">
+    <button class="btn btn-primary" id="id_tariff_item_<?=$this->routeID?>_0_">Додати тариф</button>
+    <? if(!empty($this->aTariffsList)) {
+        //trace($this->aTariffsList);
+        ?>
+        <table id="id_table_feedback" class="tablesorter">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Назва</th>
+            <th>Тип послуги</th>
+            <th>Назва тарифу</th>
+            <th>Тип тарифу</th>
+            <th>Ціна за км</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?= $this->partialLoop('partials/routetariffs.phtml', $this->aTariffsList) ?>
+        </tbody>
+        </table>
+        <button class="btn btn-primary" id="id_tariff_item_<?=$this->routeID?>_0">Додати тариф</button><?
+    }
+    ?>
+
+    <script> $('#myModal #id_btn_save').hide();</script>
+</div>

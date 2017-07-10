@@ -1,0 +1,430 @@
+/*
+@import url("blocks/best.propose.css");
+@import url("blocks/objects.css");
+@import url("blocks/branch.css");
+@import url("blocks/selection.css");
+@import url("blocks/detail.css");
+*/
+.tal{
+	text-align:left
+}
+.fl{
+	float:left
+}
+.inl-block{
+    display: inline-block!important;
+    vertical-align: middle;
+    width: 90%;
+}
+.inl{
+    display: inline-block;
+    width:0;
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+.wrap{
+    width: 977px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+.wrap > *{
+    display: block;
+    position: absolute;
+    top: 19px;
+}
+.all .wrap{
+    margin-top: 22px;
+}
+.all .wrap > *{
+    position: static;
+}
+
+.footer{
+    background: url("../images/foot-bg.png") repeat-x 0 0 transparent;
+    width: 100%;
+    height: 145px;
+    margin-top: 27px;
+}
+.footer .contacts{
+    width: 295px;
+    height: 100%;
+}
+.footer .foot-menu{
+    left:365px;
+    display: block;
+    width: 484px;
+}
+.footer .contacts-call{
+    left:136px;
+    position: absolute;
+    height: 115px;
+    width: 484px;
+    top: 49px;
+}
+.footer .foot-menu li{
+    display: inline-block;
+    width: 190px;
+    padding-bottom: 12px;
+}
+.footer span.title {
+    margin-top: 21px;
+    color:#ca3b41;
+}
+
+.header{
+    background: url("../images/title-bg.png") repeat-x 0 0 transparent;
+    width: 100%;
+    height: 99px;
+    margin-top: 27px;
+}
+
+.header .logo{
+    background: url("../images/logo.png") no-repeat 0 0 transparent;
+    width: 213px;
+    height: 62px;
+    left:0;
+}
+.header .search{
+    left:249px;
+    margin: 16px 0 0 18px;
+}
+    .search input[type="text"]{
+       	color: #7B7B7B;
+	    font: 15px Arial;
+	    height: 35px;
+	    padding-left: 10px;
+	    width: 211px;
+    }
+    .search input[type="submit"]{
+    	background: url("/images/search-button.png") no-repeat 0 0 transparent;
+    	width:25px;
+    	height:23px;
+    	cursor:pointer
+    }
+    
+.header .on-line{
+    left:496px;
+    margin: 0 0 0 29px;
+}
+    .on-line span{
+        font: 11px Arial;
+    }
+    .on-line span.phone{
+        font: 18px Arial;
+        color: #c21f26;
+        font-style:italic;
+    }
+    .on-line a.form{
+        font: bold 14px Arial;
+        font-style:italic;
+    }
+
+.header .user-menu{
+    background-color: #ffffff;
+    width: 238px;
+    height: 100%;
+    top:0;
+    left:732px;
+}
+    .user-menu li{
+        margin:10px 0 0 35px; 
+    }
+    .user-menu a{
+        display: block;
+        padding-left: 38px;
+        height:19px;
+    }
+    .user-menu a.cart{
+        background: url("../images/user-menu-cart.png") no-repeat 0 -4px transparent;
+    }.user-menu a.cart:hover,.user-menu a.cart:active{
+        background: url("../images/user-menu-cart-active.png") no-repeat 0 -4px transparent;
+    }
+    .user-menu a.pay{
+        background: url("../images/user-menu-pay.png") no-repeat -5px -4px transparent;
+    }.user-menu a.pay:hover,.user-menu a.pay:active{
+        background: url("../images/user-menu-pay-active.png") no-repeat -5px -4px transparent;
+    }
+    .user-menu a.delivery{
+        background: url("../images/user-menu-delivery.png") no-repeat -1px -4px transparent;
+    }.user-menu a.delivery:hover, .user-menu a.delivery:active{
+        background: url("../images/user-menu-delivery-active.png") no-repeat -1px -4px transparent;
+    }
+
+.menu, .menu ul{
+    width: 236px;
+}
+    .menu a{
+        display: block;
+    }
+    .menu ul{
+        display: none;
+        position: absolute;
+        z-index: 1000000;
+        top: 0;
+        left:236px;
+        -webkit-box-shadow: 4px 4px 6px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    4px 4px 6px rgba(50, 50, 50, 0.75);
+        box-shadow:         4px 4px 6px rgba(50, 50, 50, 0.75);
+    }
+    .menu > li{
+	    background: url("/images/menu-bg.png") repeat-x scroll 0 0 #f1f1f2;
+    }
+    .menu li{
+        position: relative;
+        
+    }
+    .menu > li > a{
+        background: url("/images/menu-arrow.png") no-repeat scroll 210px 13px transparent;
+        height: 40px;
+        border-bottom: 2px dashed #bcbbbc
+    }
+    .menu ul > li{
+    	padding: 0 0 0 42px
+    }
+    .menu ul > li.label{
+    	padding: 23px 0 25px 42px;
+    	color:#c52b32;
+    	font:21px Arial
+    }
+    .menu ul li > a{
+        /*background-color: #f7f6f6;*/
+        
+        height: 29px;
+    }
+    .menu ul li > a:hover, .menu ul li > a:hover span{
+    	color:#ff0000;
+    }
+    .menu ul li > a, .menu ul li > a span{
+    	color:#009cd8;
+        text-decoration: auto;
+    }
+    .menu > li > a:hover, .menu > li > a.active{
+        /*background-color: #f7f6f6;*/
+        background-image: url("/images/menu-arrow-active.png");
+        border-bottom: 2px solid #bcbbbc;
+        width:249px;
+    }
+    .menu > li > a > *{
+        padding-left: 6px;
+        text-decoration: none;
+        color:#7b7b7b;
+    }
+    
+    .menu > li > a:hover > *, .menu > li > a.active > *{
+        color:#ff0000;
+    }
+
+.left-bar{
+    width: 249px;
+    float: left;
+}
+.content{
+    float: left;
+    width: 726px;
+}
+.hidden{
+    display: none;
+}
+.block{
+    width: 104%;
+    margin-bottom: 10px;
+}
+    .block > .title{
+        background: url("../images/title-bg.png") repeat-x 0 0 transparent;
+        width: 100%;
+        height: 30px;
+        border-left: 2px solid #7b7b7b;
+        padding-left: 21px;
+        display: block;
+    }
+
+.catalog{
+	margin-left:13px
+}
+
+.catalog > *{
+	margin-top:20px
+}
+.catalog a{
+	padding-left:50px;
+}
+.catalog a span{
+	color:#ca3b41;
+}
+.catalog .view{
+	display:block;
+	background: url("/images/view_catalog.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}.catalog .view:hover,.catalog .view:active{
+	display:block;
+	background: url("/images/view_catalog-active.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}
+.catalog .download{
+	display:block;
+	background: url("/images/download_catalog.png") no-repeat ;
+	height:27px;
+	
+}
+}.catalog .download:hover,.catalog .download:active{
+	display:block;
+	background: url("/images/download_catalog-active.png") no-repeat scroll -6px -10px transparent;
+	height:32px;
+	
+}
+        
+
+        
+        
+        
+
+ul.block li.item{
+	
+    display: inline-block;
+    height: 275px;
+    margin: 5px;
+    text-align: center;
+    vertical-align: top;
+    width: 205px;
+    padding:10px;
+    position:relative;
+}
+ul.block li.item .image {
+	margin-top:5px;
+	
+	
+}
+
+.ch{
+	text-align:left;
+	position:absolute;
+	bottom:10px;
+}
+.ch span{
+	display:inline;
+	text-align: left;
+}
+
+
+
+
+
+
+#paginator span {
+	background: #C21F26;
+	border-radius: 13px;
+	display: inline-block;
+	height: 21px;
+	margin: 0px 5px;
+	padding-top: 5px;
+	width: 26px;
+	font-weight: 700;
+}
+
+#paginator  {
+	display: table;
+	margin: 0px auto;
+}
+
+#paginator a {
+	color: #575A62;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 700;
+	margin: 0 14px;
+	padding-top: 4px;
+}
+
+#paginator_out {
+	width: 100%;
+}
+
+
+.description .image{
+	margin: 0 15px 15px 0;
+	float:left;
+}
+
+.contacts p{
+	margin:10px 0;
+	clear:both;
+}
+.contacts p img{
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+	margin:0 15px 0 0;
+}
+
+.block.ware.page .image{
+	width:315px;
+	float:left;
+}
+.block.ware.page .descr{
+	width:276px;
+	float:right;
+}
+.block.ware.page .descr > *{
+	margin-top:15px
+}
+.block.ware.page .descr *{
+	color:#000000;
+}
+.block.ware.page .descr .name{
+	font:18px Arial;
+	color:#ff0000;
+}
+
+.block.ware.page .image li{
+	/*width:100px!important;*/
+}
+
+.item.ware > *{
+	
+}
+
+.query{
+	font:normal 18px Arial!important;
+	color:#7b7b7b!important;
+}
+
+ul.contact-page li{
+    color: #7298CC;
+    height: 35px;
+    padding-left: 43px;
+    padding-top: 9px;
+}
+ul.contact-page li.skype{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/skype.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.email{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/mail.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.phone{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/phone.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+ul.contact-page li.mobile{
+	background: url("/xinha/plugins/ExtendedFileManager/demo_images/content/mobile.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.child-inline > *{
+	display:inline-block
+}
+
+.table.cart *{
+	vertical-align:middle
+}
+
+form[name="order"] label{
+	font-size:10px;
+	color:red;
+}
+
+.inner-inline > *{
+	display:inline-block
+}

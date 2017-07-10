@@ -1,0 +1,53 @@
+<?
+// Размер флажков
+// допустимые значения 16, 24, 32
+$flag_weight = "24"; 
+?>
+<style>
+.lang_butt{
+    padding:0px 4px;
+}
+.lang_flag{
+    vertical-align:bottom;
+    padding:0px;
+    width:<?=$flag_weight?>px; height:<?=$flag_weight?>px;
+}
+</style>
+<table>
+    <tr>
+<?
+$site_langs = Lang::getSiteLangs();
+
+SYS::varDump($site_langs,__FILE__,__LINE__,"LANGS");
+
+if($site_langs !== NULL)
+{
+    foreach($site_langs as $key=>$val)
+    {
+        if($_SESSION['lang'] == $val['lang'])
+        {
+            $color="color:#000";
+            $weight="font-weight:bold";
+            $border="border:0px solid #000;"; 
+            $opacity = "";
+        }
+        else
+        {
+            $color="color:#000";
+            $weight="font-weight:normal";
+            $border="";
+            $opacity = "opacity:0.7";
+        }?>
+<!--         
+        <a href="/<?=$val['lang']?>/" style="<?=$border?>;<?=$weight?>;<?=$color?>;text-decoration:none;padding:0px;">
+            <img src="/site/lang/img/<?=$val['lang']?>.png" title="<?=$val['caption']?>" style="width:24px;<?=$opacity?>" /><?//=$val['lang']?>
+        </a> 
+
+-->
+        <td><a href="/<?=$val['lang']?>/" style="<?=$border?>;<?=$weight?>;<?=$color?>;text-decoration:none;padding:0px;"><img src="/site/lang/img/<?=$flag_weight?>/<?=$val['lang']?>.png" class="lang_flag" /></a></td>
+        <td class="lang_butt"><a href="/<?=$val['lang']?>/" style="<?=$border?>;<?=$weight?>;<?=$color?>;text-decoration:none;padding:0px;"><?=$val['lang']?></a></td>
+        <td>&nbsp;&nbsp;</td>
+ <?}
+}?>
+    </tr>
+</table>

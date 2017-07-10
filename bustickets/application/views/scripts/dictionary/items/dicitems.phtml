@@ -1,0 +1,18 @@
+<tr id="id_item_<?=$this->id?>_<?=$this->par_id?>_<?=$this->type?>">
+    <td><?=$this->id?></td>
+    <td><b><small><?php echo $this->title ?></small></b></td>
+    <td>
+        <small><?php echo substr($this->description,0,50)."..." ?></small>
+    </td>
+   <td>
+       <span data-toggle="tooltip" title="<?=htmlspecialchars(str_replace("\r"," ",str_replace("\n"," ",$this->description)),ENT_QUOTES)?>" class="label label-important with-tooltip"><i class="icon icon-question-sign icon-white"></i></span>
+   </td>
+   <td><?=str_replace("[id]",$this->id,str_replace("[action]",$this->partialLoop()->view->sActionName,str_replace("[controller]",$this->partialLoop()->view->sControllerName,Application_Model_Dictionary::getChilds($this->type,1))))?></td>
+   <td><? if (Application_Model_Dictionary::getParent($this->type))  {?><a href='//<?=$this->partialLoop()->view->sActionName?>/type/<?=Application_Model_Dictionary::getParent($this->type)?>/id/<?=$this->par_id?>'><?=Application_Model_Dictionary::getName(Application_Model_Dictionary::getParent($this->type))?></a><? } ?></td>
+   <td class="actions">
+       <div class="btn-group">
+            <a id="id_edit_item_<?=$this->id?>_<?=$this->par_id?>_<?=$this->type?>" class="btn btn-mini edit" href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>
+            <a id="id_del_item_<?=$this->id?>_<?=$this->par_id?>_<?=$this->type?>" class="btn btn-mini delete" href="javascript:void(0);"><i class="icon-remove"></i></a>
+        </div>
+    </td>
+</tr>

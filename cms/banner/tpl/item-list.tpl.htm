@@ -1,0 +1,140 @@
+<?SYS::varDump($item_list,__FILE__,__LINE__,'item_list');?>
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="?mod=<?=$mod?>&type=tag&com=list<?if($display!=""){?>&display=<?=$display?><?}?>"><img src="design/ico_back.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Вернуться к списку тегов" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new&display=<?=$display?>"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить запись с этим тегом" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=add&tag=<?=$tag?>&id=new')"><img src="design/ico_add_artic.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить запись с этим тегом" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+<?}?>
+</td><td align="center" style="padding-left:7px;">
+<a href="<?=SITE_URL."/".$parent_data['seo']."/"?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" width="95%" style="padding-left:7px;">
+
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=MOD_NAME?></span></nobr><br>
+<nobr><span style="color:#444;"></span><?=$tag_list[$tag]['caption']?></nobr>
+</tr>
+</table>
+
+
+<div align="center">
+<div style="padding:0px 0px 0px 12px;width:763px;min-height:500px;">
+<?if ($item_list!=''){?>
+<?$i=1;?>
+<?foreach($item_list as $key=>$val){?>
+<?
+$img1="/image/".$mod."/".$type."/".$val['id']."/1.png";
+if(!file_exists(getenv("DOCUMENT_ROOT").$img1))$img1="/design/img/noimage_450x450.png";
+?>
+<table style="background-color:<?=$val['show']==1?'#F1FFE6':'#FFF1F1'?>;margin:0px 12px 12px 0px;width:98%" cellpadding="0" cellspacing="1" class="r7"><tr>
+
+<td align="left" style="width:250px;overflow:auto;padding:0px 0px 0px 3px;" valign="top">
+<div style="position:relative;margin:9px 5px 5px 5px;height:1px;" >
+<img src="/design/icon/Banner_32x32.png" border="0" width="24" /></div>
+<div style="max-height:100px;overflow:auto;margin-left:15px;"> 
+<div style="margin-bottom:12px;margin-top:-1px;margin-left:22px;"> 
+<!--<a href="?mod=<?=$mod?>&type=<?=$type?>&com=<?=$com?>&tag=<?=$val1?><?if($display!=""){?>&display=<?=$display?><?}?>" style="line-height:17px;color:#5E84B8;font-size:12px;<?if($val1==$tag){?>font-weight:bold;<?}?>"><?=$tag_list[$val1]['caption']?></a>&nbsp; -->
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Редактировать">
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>')" title="Редактировать">
+<?}?>
+
+
+<span style="line-height:14px;color:#0000D7;font-size:14px;font-weight:bold;"><b><?=$val['caption']?></b></span></a>&nbsp;
+
+</div>
+<div style="margin-bottom:12px;font-size:12px;">
+<b>Значение 1:</b> <?=$val["value1"]?>
+</div>
+<div style="margin-bottom:12px;font-size:12px;">
+<b>Значение 2:</b> <?=$val["value2"]?>
+</div>
+
+<?
+$tag_connect=explode(";",$val['connect']);
+//var_dump($tag_connect);
+if($tag_connect!=null){
+foreach($tag_connect as $key1=>$val1){
+?>
+<!--<a href="?mod=<?=$mod?>&type=<?=$type?>&com=<?=$com?>&tag=<?=$val1?><?if($display!=""){?>&display=<?=$display?><?}?>" style="line-height:17px;color:#5E84B8;font-size:12px;<?if($val1==$tag){?>font-weight:bold;<?}?>"><?=$tag_list[$val1]['caption']?></a>&nbsp; -->
+<?
+}}
+?>
+</div>
+</td><td align="center" style="width:150px;padding:0px;">
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>&display=<?=$display?>" title="Редактировать">
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>')" title="Редактировать">
+<?}?>
+<img src="<?=$img1?>?<?=time()?>" border="0" style="max-height:100px;max-width:200px;" />
+</a>
+</td><td align="right" style="" valign="top">
+</td><td align="right" style="width:200px;" valign="top">
+<?
+$imgurl=str_replace(SITE_URL,'',$img1);
+//$imgsize=getimagesize (SITE_URL.$imgurl);
+list($width, $height)=getimagesize (SITE_URL.$imgurl);
+?>
+<div style="margin-top:12px;margin-bottom:7px;font-size:11px;">
+<b>Изображение:</b><br>
+<?=$imgurl?>
+</div>
+<div style="margin-bottom:7px;font-size:11px;">
+<b>Размер:</b><br>
+<?=$width?> x <?=$height?> <br>
+<?if($width>740||$height>740){?>
+<b style="color:red;">Очень большой размер!</b>
+<?}?>
+</div>
+</td><td align="right" style="width:85px;" valign="top">
+<table style="width:50px;height:100px;margin: 0px 0px 0px 0px;" cellpadding="0" cellspacing="0">
+</tr><td align="right" style="font-size:12px;padding:7px 7px 7px 4px;" valign="top">
+<div align="right" style="margin:0px 0px 0px 7px;">
+<?if ($val['show']==1){?>
+<span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+<span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+</span>
+<?if($display=="tab"){?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Редактировать">
+<?}else{?>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&tag=<?=$tag?>&id=<?=$val['id']?>')" title="Редактировать">
+<?}?>
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1" style="margin-bottom:-7px;"></a>
+</div>
+</td></tr>
+<tr><td align="right" valign="middle" style="padding:7px 9px 2px 9px;">
+<nobr>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?>&id=<?=$val['id']?>&event=moveDown" title="Вниз">
+<img src="design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&tag=<?=$tag?>&id=<?=$val['id']?>&event=moveUp" title="Вверх">
+<img src="design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+</td></tr>
+<tr><td align="right" valign="bottom" style="padding:7px 2px 7px 4px;">
+<div style="margin:0px 3px 0px 0px;">
+<nobr>id:<b><?=$val['id']?></b> 
+<a title="Удалить" href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&tag=<?=$tag?>&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить запись?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1" style="margin-bottom:-5px;"></a>	</nobr>
+</div>
+</td></tr></table>
+</td></tr></table>
+
+<?}}?>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+
+
+<div><br><br><br><br><br><br><br></div>
+
+

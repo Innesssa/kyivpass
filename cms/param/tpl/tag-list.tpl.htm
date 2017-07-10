@@ -1,0 +1,103 @@
+<?SYS::varDump($tag_list1,__FILE__,__LINE__,'tag_list1');?>
+<?SYS::varDump($tag_list2,__FILE__,__LINE__,'tag_list2');?>
+<?SYS::varDump(PAGE_URL,__FILE__,__LINE__,'PAGE_URL');?>
+<span style="font-size:1px">&nbsp;</span>
+<table style="width: 98%;margin:7px 0px;" cellpadding="0" cellspacing="0"><tr><td align="left" style="padding-left:15px;">
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=tag&com=add&level=1&id=new<?if($display!=""){?>&display=<?=$display?><?}?>')"><img src="design/ico_add_fold.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить секцию" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" style="padding-left:7px;">
+<a href="<?=SITE_URL."/"?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 0px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#DBFFC1';" onmouseout="this.style.background=''" class="r10" /></a>
+</td><td align="center" width="95%" style="padding-left:7px;">
+
+</td><td class="heading1" align="right" valign="bottom">
+<nobr><span style="color:#e7e7e7;font-size:24px;"><?=MOD_NAME?></span></nobr><br>
+<nobr>Меню категорий</nobr>
+</tr>
+</table>
+
+
+<div align="center">
+<div style="padding:0px 12px 0px 12px;width:763px;min-height:500px;">
+<table class="list-table r5" width="100%" cellpadding="0" cellspacing="0" style="color: white;font: bold 11px verdana;background-color: #587AAE;border:0px solid #EEEFFF;margin-bottom:12px;">
+<tr>
+<td style="padding:7px 15px;">Тег-секция</td>
+<td align="center" width="150" style="padding:7px 15px;">Опции</td>
+</tr></table>
+<?if($tag_list1!=NULL){$id=$_GET['id'];?>
+<?$i=1;?>
+<?foreach($tag_list1 as $key=>$val){?>
+
+<table class="list-table r5" width="100%" cellpadding="0" cellspacing="0" style="background-color:#EEEFFF;border:1px solid #EEEFFF;margin-bottom:12px;">
+
+<tr id="th-<?=$val['id']?>" class="row1<?if ($id==$val['id']){?> sel<?}else{?><?if($i==1){$i=0;?> bg_sky<?}else{?> bg_sky<?}}?>" valign="center" onmouseover="this.style.background='<?if ($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background=''">
+<td width="95%" class="title" style="padding:7px;"><img src="/design/icon/Folder1_32x32.png" alt="Показать все статьи секции" width="20" vspace="0" border="0" hspace="5" align="left" style="margin-right:6px;">
+
+<b style="font-size:13px;line-height: 19px;color:<?=$val['show']!=1?'orangered':'#365C90'?>;"><?=$val['caption']?></b>
+
+</td>
+<td style="padding-right:25px;">
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=add&level=2&parent_tag=<?=$val['id']?>&id=new')" title="Добавить тег в эту секцию">
+<img src="/design/icon/Add_32x32.png" alt="Добавить" border="0" width="20" ></a>
+</td>
+<td class="options" style="width:40px;">
+<nobr>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&id=<?=$val['id']?>&event=moveDown" title="Вниз">
+<img src="design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&id=<?=$val['id']?>&event=moveUp" title="Вверх">
+<img src="design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+</td>
+<td class="options" align="center">
+<table cellpadding="0" cellspacing="0" style="width:50px;"><tr><td>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&level=1&id=<?=$val['id']?>')" title="Редактировать">
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+</td><td style="padding: 2px 1px 1px 12px;">
+<nobr>id:<b><?=$val['id']?></b></nobr>
+</td><td style="padding: 2px 3px 1px 1px;">
+<a title="Удалить" href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить все связи этого тега ?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+</td></tr></table>
+</td>
+</tr>
+
+<?
+$connect_tag=explode(";",substr($val['connect'], 1, -1));$i2=1;
+if($connect_tag[0]!=''){foreach($connect_tag as $key2=>$child_id){
+$val2=$tag_list2[$child_id];
+$id=$_GET['id'];
+?>
+<tr id="tr-<?=$val2['id']?>" class="row1<?if ($id==$val2['id']){?> sel<?}else{?><?if($i2==2){?> bg_grey<?}else{?> bg_white<?}}?>" valign="center" onmouseover="this.style.background='<?if ($id!=$val2['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background=''">
+<td class="title" style="padding:7px 7px 7px 30px;"><img src="/design/icon/ParamFolder2_32x32.png" alt="Показать все" width="20" vspace="0" border="0" hspace="5" align="left" style="margin-right:6px;">
+<a href="?mod=<?=$mod?>&type=item&com=list&tag=<?=$val2['id']?><?if($display!=""){?>&display=<?=$display?><?}?>" title="Открыть категорию">
+<b style="font-size:12px;line-height: 20px;"<?if ($val2['show']!=1){?> class="orangered"<?}?>><?=$val2['caption']?></b></a> <?$countitem=ParamItem::itemCountTag($val2['id']);if($countitem>0){?>(<?=$countitem?>)<?}?>
+</td>
+<td style=""><nobr<?if ($val2['show']!=1){?> class="orangered"<?}?>>&nbsp;</nobr></td>
+<td class="options">
+<nobr>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&id=<?=$val2['id']?>&event=moveDown" title="Вниз">
+<img src="design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=list&id=<?=$val2['id']?>&event=moveUp" title="Вверх">
+<img src="design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+</td>
+<td class="options" align="center">
+<table cellpadding="0" cellspacing="0" style="width:50px;"><tr><td>
+<a href="javascript:onSlimbox('?mod=<?=$mod?>&type=<?=$type?>&com=edit&id=<?=$val2['id']?>')" title="Редактировать">
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+</td><td style="padding: 2px 1px 1px 12px;">
+<nobr>id:<b><?=$val2['id']?></b></nobr>
+</td><td style="padding: 2px 3px 1px 1px;">
+<a title="Удалить" href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&id=<?=$val2['id']?>" onclick="if (confirm('Вы уверены что хотите удалить все связи этого тега ?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+</td></tr></table>
+</td>
+</tr>
+<?if($i2==2){$i2=0;}?>
+<?$i2++;?>
+<?}}?>
+</table>
+<?$i++;?>
+<?}}?>
+
+</div></div>
+
+<br><br><br><br><br><br><br>
